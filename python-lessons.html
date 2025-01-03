@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollable Vertical Sine Curve with Stops</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            height: 100%; /* Full screen height */
+            overflow-y: scroll; /* Allow scrolling */
+        }
+        svg {
+            width: 100%;
+            height: 2000px; /* Increased height for the scrollable area */
+            background-color: #fff;
+            border: 1px solid #ccc;
+            transition: transform 1s ease-in-out; /* Add a smooth zoom-out transition */
+        }
+        path {
+            fill: none;
+            stroke: blue;
+            stroke-width: 2;
+        }
+        .lesson {
+            fill: red;
+            stroke: black;
+            stroke-width: 2;
+            cursor: pointer;
+        }
+        .lesson:hover {
+            fill: green;
+        }
+    </style>
+</head>
+<body>
+
+<svg id="sineCurve">
+    <!-- The path and lesson stops will be drawn here dynamically -->
+</svg>
+
+<script>
+    function createVerticalSineCurve() {
+        const svg = document.getElementById('sineCurve');
+        const width = svg.clientWidth; // Width of the SVG container
+        const height = svg.clientHeight; // Height of the SVG container
+        const amplitude = height / 4; // Amplitude of the sine wave (how tall it goes)
+        const frequency = 0.03; // Frequency (controls the wave's tightness)
+        const numPoints = 500; // Number of points to calculate the sine curve
+        const stops = [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95]; // Stops at various percentages
+        
+        let pathData = `M${width / 2},0`; // Start at the middle of the SVG horizontally (at the top of the page)
+        const points = []; // Array to hold the points
+
+        // Loop through each y value (moving down the page) and calculate the corresponding x value (vertical oscillation)
+        for (let y = 0; y <= height; y++) {
+            const x = Math.sin(frequency * y) * amplitude + width / 2; // x = A * sin(k * y) + center
+            pathData += ` L${x},${y}`; // Line to the next point
+
+            // For each stop, check if we are at that stop's relative position in the path
+            stops.forEach((stop, index) => {
+                if (y / height >= stop && !points[index]) {
+                    points[index] = { x, y }; // Store the first point at each stop
+                }
+            });
+        }
+
+        // Create the sine wave path in the SVG
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute('d', pathData);
+        svg.appendChild(path);
+
+        // Add the lesson stops (interactive points)
+        points.forEach((point, index) => {
+            const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute('cx', point.x);
+            circle.setAttribute('cy', point.y);
+            circle.setAttribute('r', 6); // Size of the stop
+            circle.setAttribute('class', 'lesson');
+            circle.setAttribute('data-lesson', index + 1);
+            circle.addEventListener('click', () => completeLesson(index + 1));
+            svg.appendChild(circle);
+        });
+    }
+
+    // Function to handle lesson completion and zoom-out effect
+    function completeLesson(lessonNumber) {
+        // Apply the zoom-out effect by scaling the SVG
+        const svg = document.getElementById('sineCurve');
+        svg.style.transform = 'scale(0.2)'; // Shrink the SVG to 20% of its size
+        
+        // Wait for the animation to complete (1 second duration)
+        setTimeout(() => {
+            // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+            window.location.href = `goToEvaluation.html`; // Navigate to the new lesson page
+        }, 1000); // 1000ms (1 second) delay to match the zoom-out duration
+    }
+
+    // Call the function to create the sine curve when the page loads
+    window.onload = createVerticalSineCurve;
+</script>
+
+</body>
+</html>

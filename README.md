@@ -10,7 +10,7 @@ While this may work in the short term, I believe that as solution-driven individ
 
 My vision is simple: Prioritize verbal communications.
 
-When we collaborate, we must prioritize clear and specific verbal communication. This will enable us to arrive at solutions faster and work more efficiently. During interviews, we should be able to express our ideas with confidence, conciseness, and precision, showcasing our technical stealth mastery of the tools and languages we use.
+When we collaborate, we must prioritize clear and specific verbal communication. This will enable us to arrive at solutions faster and work more efficiently. During interviews, we should be able to express our ideas with confidence, conciseness, and precision, showcasing our technical, stealth mastery of the tools and languages we use.
 
 To address this, I envision a system where we can practice articulating our thoughts under pressure. This tool will present randomly selected questions and answers from a set of categories, display them on screen, and read them aloud. A timer will start once the question is read, allowing us 15 seconds to formulate a response. After we provide our verbal answer, the system will use speech-to-text technology to transcribe our response and then evaluate the answer using machine learning.
 

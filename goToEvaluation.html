@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read Instructions</title>
+    <link rel="stylesheet" href="/css/eval-style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Instructions</h1>
+        <div class="instructions">
+            <h2>Instructions:</h2>
+            <ul id="instructions-list">
+                <li>You will be evaluated based on your verbal answers.</li>
+                <li>Press the <strong>Start</strong> button to start the evaluation.</li>
+                <li>Within 15 seconds of hearing the question, you must press the <strong>Answer</strong> button.</li>
+                <li>Answer the question verbally as you would in an interview. (Use full sentences.)</li>
+                <li>You must answer <strong>95%</strong> of the questions correctly to skip the next lesson.</li>
+                <li>After answering the question, press the <strong>Submit</strong> button.</li>
+                <li>Your verbal response will be automatically analyzed to determine if it's <strong>correct</strong> or <strong>incorrect</strong>.</li>
+                <li>Your score will be displayed after each question and the next question will be given.</li>
+                <li>If you wish, you can <strong>Restart</strong> the evaluation, but you won't receive the same questions again.</li>
+                <li><strong>The expected answer will not be provided</strong>.</li>
+                <li>Take a deep breath...and...Good Luck! You got this!</li>
+            </ul>
+        </div>
+
+        <div class="button-container">
+            <button id="read-instructions-button" class="button"> Read Instructions</button>
+        </div>
+        <div class="button-container">
+            <button class="button" onclick="StartEvaluation()">Start Evaluation</button>
+        </div>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script src="/javascript/evaluation_datatypes.js"></script>
+
+</body>
+</html>
