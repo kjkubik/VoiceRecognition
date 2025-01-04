@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .question-container {
+            display: none; /* Hidden initially */
+            width: 60%;
+            height: 60%;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .question-container h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .question-container p {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .question-container .answer {
+            font-size: 1.2rem;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+
+<div class="button-container">
+        <button class="button" onclick="StartEvaluation()">Start Evaluation</button>
+</div>
+
+<div class="question-container" id="questionContainer">
+    <h2 id="categoryTitle"></h2>
+    <p id="questionText"></p>
+    <p class="answer" id="answerText"></p>
+</div>
+        <div class="button-container">
+            <button class="button" onclick="StartEvaluation()">Start Evaluation</button>
+        </div>
+
+<script>
+    function StartEvaluation() {
+        // Fetch the JSON data from the file
+        fetch('/javascript/datatypedata.js')
+            .then(response => response.json())
+            .then(data => {
+                // Randomly pick a question from the data
+                const randomIndex = Math.floor(Math.random() * data.length);
+                const questionData = data[randomIndex];
+
+                // Display the question in the question container
+                document.getElementById('categoryTitle').textContent = `Category: ${questionData.category}`;
+                document.getElementById('questionText').textContent = questionData.question;
+                //document.getElementById('answerText').textContent = `Answer: ${questionData.answer}`;
+
+                // Show the question container
+                document.getElementById('questionContainer').style.display = 'block';
+            })
+            .catch(error => console.error('Error fetching the data:', error));
+    }
+</script>
+
+</body>
+</html>

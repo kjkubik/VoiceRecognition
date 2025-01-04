@@ -88,3 +88,26 @@ window.speechSynthesis.onvoiceschanged = function() {
     // Ensure that voices are loaded but don't start reading immediately
     loadVoices();
 };
+
+function StartEvaluation() {
+    // Fetch the JSON data from the file
+    fetch('/javascript/datatypedata.json')  // Ensure the file path is correct
+        .then(response => response.json())
+        .then(data => {
+            // Randomly pick a question from the data
+            const randomIndex = Math.floor(Math.random() * data.length);
+            const questionData = data[randomIndex];
+
+            // Display the question in the question container
+            document.getElementById('categoryTitle').textContent = `Category: ${questionData.category}`;
+            document.getElementById('questionText').textContent = questionData.question;
+            //document.getElementById('answerText').textContent = `Answer: ${questionData.answer}`;
+
+            // Show the question container
+            document.getElementById('questionContainer').style.display = 'block';
+
+            // Enable the speak button
+            document.getElementById('speakButton').addEventListener('click', startSpeechRecognition);
+        })
+        .catch(error => console.error('Error fetching the data:', error));
+}
