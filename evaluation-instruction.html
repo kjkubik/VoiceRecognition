@@ -15,7 +15,7 @@
         /* Body Styling */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f4f8;
+            background-color: #414242;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,14 +26,14 @@
 
         h1 {
             font-size: 2.5em;
-            color: #4caf50;
+            color: #2f488b;
             margin-bottom: 20px;
             text-align: center;
         }
 
         /* Main Container */
         .container {
-            background-color: white;
+            background-color: rgb(0, 0, 0);
             padding: 30px 40px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -46,13 +46,13 @@
             font-size: 1.2em;
             text-align: center;
             margin-bottom: 20px;
-            color: #555;
+            color: #ffffff;
         }
 
         /* Answer Button */
         #answer-button {
             padding: 15px 30px;
-            background-color: #4caf50;
+            background-color: #2d419b;
             color: white;
             border: none;
             border-radius: 5px;
@@ -63,7 +63,7 @@
         }
 
         #answer-button:hover {
-            background-color: #45a049;
+            background-color: #3883a5;
             transform: scale(1.05);
         }
 
@@ -78,7 +78,7 @@
 
         .progress {
             height: 100%;
-            background-color: #4caf50;
+            background-color: #2df82d;
             width: 0;
             border-radius: 5px;
             transition: width 0.5s ease;
@@ -89,7 +89,7 @@
             text-align: center;
             font-size: 1.3em;
             margin-top: 20px;
-            color: #333;
+            color: #eeeded;
         }
 
         /* Status Message */
@@ -137,9 +137,10 @@
         let correctAnswers = 0;
         let totalQuestions = 0;
         let questionCount = 0;
+        progress = 85
         let questions = [];
 
-        // Fetch questions from datatypedata.json
+        // Fetch questions 
         function loadQuestions() {
             fetch('javascript/datatypedata.json')  // Path to your JSON file
                 .then(response => response.json())
@@ -152,6 +153,72 @@
                     console.error('Error fetching the data:', error);
                     document.getElementById('question-container').innerText = 'Failed to load questions. Please try again later.';
                 });
+        }
+
+        // Display a random question
+        function showRandomQuestion() {
+            if (questions.length === 0) {
+                console.error('No questions available.');
+                return;
+            }
+            // Randomly pick a question from the available questions
+            const randomIndex = Math.floor(Math.random() * questions.length);
+            const currentQuestion = questions[randomIndex];
+
+            // Display the question
+            document.getElementById('question-container').innerText = currentQuestion.question;
+            document.getElementById('answer-button').dataset.correctAnswer = currentQuestion.answer;
+
+            // story: The user needs the question read every time a question is displayed. This is not happening the first time. FIX
+            // Read the question aloud
+            readQuestionAloud(currentQuestion.question);
+
+            //story: start timer and display it on the screen 
+            //story: read out loud: "you have 15 seconds to press the answer button." 
+        }
+
+        // Read the question aloud using SpeechSynthesis API
+        function readQuestionAloud(question) {
+            const utterance = new SpeechSynthesisUtterance(question);
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Check user answer
+        function checkAnswer(userAnswer) {
+            const correctAnswer = document.getElementById('answer-button').dataset.correctAnswer;
+
+            if (compareAnswers(userAnswer, correctAnswer)) {
+                correctAnswers++;
+            }
+            totalQuestions++;
+
+            updateProgress();
+
+            if (totalQuestions > 8 && (correctAnswers / totalQuestions) < 0.85) {
+                document.getElementById('status').innerText = "Your score is below 85%. Going to lesson. See you there!";
+                text = "Your score is below 85%. Going to lesson. See you there!"
+                readTextAloud(text)
+                // story: zoom in lesson page
+                // story: display "These were your answers and display all users answer on screen
+                correctAnswers = 0;
+                totalQuestions = 0;
+            } else {
+                if (correctAnswers >= 20) {
+                    // story: give some kind of animation for celebrating success. 
+                    document.getElementById('status').innerText = "Congratulations! You passed!";
+                    // story: display catchingfish.jpeg for 3 seconds  
+                    // story: display "Going to the next evaluation. See you there!"
+                    // story: zoom in to next evaluation page, evaluation-hot-keys.
+                }
+            }
+
+            document.getElementById('score-container').innerText = `Correct: ${correctAnswers}/${totalQuestions}`;
+        }
+
+        // Read the text aloud using SpeechSynthesis API
+        function readTextAloud(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(utterance);
         }
 
         // Compare user answer with correct answer using NLP
@@ -168,59 +235,9 @@
             return matchRatio >= 0.6;  // Match ratio threshold for correctness (60%)
         }
 
-        // Display a random question
-        function showRandomQuestion() {
-            if (questions.length === 0) {
-                console.error('No questions available.');
-                return;
-            }
-
-            // Randomly pick a question from the available questions
-            const randomIndex = Math.floor(Math.random() * questions.length);
-            const currentQuestion = questions[randomIndex];
-
-            // Display the question
-            document.getElementById('question-container').innerText = currentQuestion.question;
-            document.getElementById('answer-button').dataset.correctAnswer = currentQuestion.answer;
-
-            // Read out the question using SpeechSynthesis
-            readQuestionAloud(currentQuestion.question);
-        }
-
-        // Function to read the question aloud using SpeechSynthesis API
-        function readQuestionAloud(question) {
-            const speech = new SpeechSynthesisUtterance(question);
-            speech.lang = 'en-US';
-            window.speechSynthesis.speak(speech);
-        }
-
-        // Check user answer
-        function checkAnswer(userAnswer) {
-            const correctAnswer = document.getElementById('answer-button').dataset.correctAnswer;
-
-            if (compareAnswers(userAnswer, correctAnswer)) {
-                correctAnswers++;
-            }
-            totalQuestions++;
-
-            updateProgress();
-
-            if (totalQuestions > 0 && (correctAnswers / totalQuestions) < 0.5) {
-                document.getElementById('status').innerText = "You need to try again! Your score is below 50%.";
-                correctAnswers = 0;
-                totalQuestions = 0;
-            } else {
-                if (correctAnswers >= 20) {
-                    document.getElementById('status').innerText = "Congratulations! You've passed to the next lesson!";
-                }
-            }
-
-            document.getElementById('score-container').innerText = `Correct: ${correctAnswers}/${totalQuestions}`;
-        }
-
         // Update the progress bar
         function updateProgress() {
-            const progress = (correctAnswers / totalQuestions) * 100;
+            const progress = (correctAnswers / 20) * 100;
             document.getElementById('progress').style.width = `${progress}%`;
         }
 
@@ -233,10 +250,11 @@
         recognition.onresult = function(event) {
             const userAnswer = event.results[0][0].transcript;
             console.log('User Answer:', userAnswer);
+            // story: display user answer on screen
             checkAnswer(userAnswer);
             questionCount++;
-
-            if (questionCount < 20) {
+            //story: stop random question read once user has failed.
+            if (questionCount < 40 && progress >= 85) {
                 showRandomQuestion();
             }
         };
