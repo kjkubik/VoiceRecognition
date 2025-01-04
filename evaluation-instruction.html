@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamified Question Evaluation</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #4caf50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Main Container */
+        .container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* Question Display */
+        #question-container {
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Answer Button */
+        #answer-button {
+            padding: 15px 30px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+
+        #answer-button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 15px;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #4caf50;
+            width: 0;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        /* Score and Status */
+        .score-container {
+            text-align: center;
+            font-size: 1.3em;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Status Message */
+        #status {
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            #answer-button {
+                font-size: 1.1em;
+                padding: 12px 25px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verbal Evaluation Game</h1>
+        <div id="question-container">Loading question...</div>
+        <button id="answer-button">Answer</button>
+        <div class="progress-bar">
+            <div id="progress" class="progress"></div>
+        </div>
+        <div id="score-container" class="score-container"></div>
+        <div id="status"></div>
+    </div>
+
+    <script src="https://unpkg.com/compromise"></script>
+    <script>
+        let correctAnswers = 0;
+        let totalQuestions = 0;
+        let questionCount = 0;
+        let questions = [];
+
+        // Fetch questions from datatypedata.json
+        function loadQuestions() {
+            fetch('javascript/datatypedata.json')  // Path to your JSON file
+                .then(response => response.json())
+                .then(data => {
+                    questions = data;
+                    console.log('Questions loaded:', questions);
+                    showRandomQuestion();
+                })
+                .catch(error => {
+                    console.error('Error fetching the data:', error);
+                    document.getElementById('question-container').innerText = 'Failed to load questions. Please try again later.';
+                });
+        }
+
+        // Compare user answer with correct answer using NLP
+        function compareAnswers(userAnswer, correctAnswer) {
+            const userDoc = nlp(userAnswer);  // Process user answer using compromise
+            const correctDoc = nlp(correctAnswer);  // Process correct answer using compromise
+
+            const userTokens = userDoc.nouns().out('array').concat(userDoc.verbs().out('array'));
+            const correctTokens = correctDoc.nouns().out('array').concat(correctDoc.verbs().out('array'));
+
+            const commonTokens = userTokens.filter(token => correctTokens.includes(token));
+            const matchRatio = commonTokens.length / correctTokens.length;
+
+            return matchRatio >= 0.6;  // Match ratio threshold for correctness (60%)
+        }
+
+        // Display a random question
+        function showRandomQuestion() {
+            if (questions.length === 0) {
+                console.error('No questions available.');
+                return;
+            }
+
+            // Randomly pick a question from the available questions
+            const randomIndex = Math.floor(Math.random() * questions.length);
+            const currentQuestion = questions[randomIndex];
+
+            // Display the question
+            document.getElementById('question-container').innerText = currentQuestion.question;
+            document.getElementById('answer-button').dataset.correctAnswer = currentQuestion.answer;
+
+            // Read out the question using SpeechSynthesis
+            readQuestionAloud(currentQuestion.question);
+        }
+
+        // Function to read the question aloud using SpeechSynthesis API
+        function readQuestionAloud(question) {
+            const speech = new SpeechSynthesisUtterance(question);
+            speech.lang = 'en-US';
+            window.speechSynthesis.speak(speech);
+        }
+
+        // Check user answer
+        function checkAnswer(userAnswer) {
+            const correctAnswer = document.getElementById('answer-button').dataset.correctAnswer;
+
+            if (compareAnswers(userAnswer, correctAnswer)) {
+                correctAnswers++;
+            }
+            totalQuestions++;
+
+            updateProgress();
+
+            if (totalQuestions > 0 && (correctAnswers / totalQuestions) < 0.5) {
+                document.getElementById('status').innerText = "You need to try again! Your score is below 50%.";
+                correctAnswers = 0;
+                totalQuestions = 0;
+            } else {
+                if (correctAnswers >= 20) {
+                    document.getElementById('status').innerText = "Congratulations! You've passed to the next lesson!";
+                }
+            }
+
+            document.getElementById('score-container').innerText = `Correct: ${correctAnswers}/${totalQuestions}`;
+        }
+
+        // Update the progress bar
+        function updateProgress() {
+            const progress = (correctAnswers / totalQuestions) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+        }
+
+        // Speech Recognition Setup
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        recognition.onresult = function(event) {
+            const userAnswer = event.results[0][0].transcript;
+            console.log('User Answer:', userAnswer);
+            checkAnswer(userAnswer);
+            questionCount++;
+
+            if (questionCount < 20) {
+                showRandomQuestion();
+            }
+        };
+
+        recognition.onerror = function(event) {
+            console.error('Speech Recognition Error:', event.error);
+        };
+
+        // Start Speech Recognition when button is clicked
+        document.getElementById('answer-button').addEventListener('click', function() {
+            recognition.start();
+        });
+
+        window.onload = loadQuestions;
+    </script>
+</body>
+</html>

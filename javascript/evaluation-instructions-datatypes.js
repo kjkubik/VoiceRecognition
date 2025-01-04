@@ -7,7 +7,6 @@ function loadVoices() {
     voices = speechSynthesis.getVoices();
     console.log("Available voices:", voices); // Log available voices in console
 
-    // Select a specific voice (you can change this if you want another voice)
     const voiceSelected = voices.find(voice => voice.name === "Microsoft Zira - English(United States)") || voices[4];
 
     if (voiceSelected) {
@@ -18,7 +17,7 @@ function loadVoices() {
 
     // Proceed to read instructions only after voices are loaded
     if (voices.length > 0) {
-        // Ensure reading starts after button press
+        // Ensure reading starts automatically once the page loads
         startReadingInstructions(voiceSelected);
     } else {
         // Retry loading voices if the voices array is empty
@@ -27,7 +26,7 @@ function loadVoices() {
 }
 
 // Function to read the instructions aloud with the selected voice
-function readInstructions(voiceSelected) {
+function startReadingInstructions(voiceSelected) {
     if (currentInstruction < instructions.length) {
         // Get the current instruction text
         const instructionText = instructions[currentInstruction].innerText;
@@ -47,11 +46,15 @@ function readInstructions(voiceSelected) {
             // Remove the highlight from the current instruction
             instructions[currentInstruction].classList.remove('highlight');
 
-            // Move to the next instruction
+            // Move to the next instruction after a small delay
             currentInstruction++; 
 
-            // Recursively read the next instruction
-            readInstructions(voiceSelected); 
+            if (currentInstruction < instructions.length) {
+                // Delay the reading of the next instruction to ensure the previous one finishes
+                setTimeout(function() {
+                    startReadingInstructions(voiceSelected);
+                }, 500); // Small delay before moving to the next instruction
+            }
         };
 
         // Start speaking the current instruction
@@ -59,20 +62,8 @@ function readInstructions(voiceSelected) {
     }
 }
 
-// Trigger speech synthesis only after a user interaction (e.g., when the "Read Instructions" button is clicked)
-function startReadingInstructions(voiceSelected) {
-    // Reset the currentInstruction so the reading starts from the first instruction
-    currentInstruction = 0;
-
-    // Proceed to read instructions only if voices are available
-    if (voiceSelected) {
-        readInstructions(voiceSelected);
-    }
-}
-
-// Add an event listener to the "Read Instructions" button to begin the instructions
-document.querySelector('#read-instructions-button').addEventListener('click', function() {
-    console.log("Button clicked!"); // Debugging: Confirm button click
+// Trigger speech synthesis to start reading instructions automatically after the page loads
+document.addEventListener('DOMContentLoaded', function() {
     // Ensure voices are loaded before starting to read instructions
     if (speechSynthesis.getVoices().length > 0) {
         loadVoices(); // Proceed to read instructions after voices are available
@@ -85,29 +76,36 @@ document.querySelector('#read-instructions-button').addEventListener('click', fu
 // We don't want speech synthesis to run as soon as the page loads
 // So, we ensure no reading is triggered on page load
 window.speechSynthesis.onvoiceschanged = function() {
-    // Ensure that voices are loaded but don't start reading immediately
     loadVoices();
 };
 
+
 function StartEvaluation() {
-    // Fetch the JSON data from the file
-    fetch('/javascript/datatypedata.json')  // Ensure the file path is correct
-        .then(response => response.json())
+    // Check if the necessary HTML elements exist
+    const categoryTitleElement = document.getElementById('categoryTitle');
+    const questionTextElement = document.getElementById('questionText');
+    const questionContainer = document.getElementById('questionContainer');
+
+    if (!categoryTitleElement || !questionTextElement || !questionContainer) {
+        console.error('Missing HTML elements. Please ensure "categoryTitle", "questionText", and "questionContainer" are present in the HTML.');
+        return;
+    }
+
+    fetch('javascript/datatypedata.json')
+        .then(response => response.json())  // Parse the JSON data
         .then(data => {
             // Randomly pick a question from the data
             const randomIndex = Math.floor(Math.random() * data.length);
             const questionData = data[randomIndex];
 
-            // Display the question in the question container
-            document.getElementById('categoryTitle').textContent = `Category: ${questionData.category}`;
-            document.getElementById('questionText').textContent = questionData.question;
-            //document.getElementById('answerText').textContent = `Answer: ${questionData.answer}`;
+            // Display the question and category
+            categoryTitleElement.textContent = `Category: ${questionData.category}`;
+            questionTextElement.textContent = questionData.question;
 
             // Show the question container
-            document.getElementById('questionContainer').style.display = 'block';
+            questionContainer.style.display = 'block';
 
-            // Enable the speak button
-            document.getElementById('speakButton').addEventListener('click', startSpeechRecognition);
+            // Optionally, you could show additional elements or initiate other actions here
         })
         .catch(error => console.error('Error fetching the data:', error));
 }
