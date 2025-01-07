@@ -5,242 +5,322 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gamified Question Evaluation</title>
     <style>
-        /* Basic Reset */
+   /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body Styling */
+        /* Body */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #414242;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            color: #333;
         }
 
-        h1 {
-            font-size: 2.5em;
-            color: #2f488b;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        /* Main Container */
+        /* Container */
         .container {
-            background-color: rgb(0, 0, 0);
-            padding: 30px 40px;
+            background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
+            padding: 20px;
+            width: 80%;
             max-width: 600px;
-        }
-
-        /* Question Display */
-        #question-container {
-            font-size: 1.2em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-bottom: 20px;
-            color: #ffffff;
         }
 
-        /* Answer Button */
-        #answer-button {
-            padding: 15px 30px;
-            background-color: #2d419b;
-            color: white;
+        /* Header */
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Question Container */
+        #question-container {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Timer */
+        #timer-container {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        #timer {
+            font-weight: bold;
+            color: #d9534f; /* Red */
+        }
+
+        /* Buttons */
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            font-size: 1.2em;
+            font-size: 1rem;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            width: 100%;
+            transition: background-color 0.3s ease;
+            margin: 10px;
         }
 
-        #answer-button:hover {
-            background-color: #3883a5;
-            transform: scale(1.05);
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
 
-        /* Progress Bar */
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+
+        /* Score Container */
+        #score-container {
+            font-size: 1.2rem;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        /* Status Message */
+        #status {
+            font-size: 1.5rem;
+            color: #d9534f;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Progress Bar (if used) */
         .progress-bar {
             width: 100%;
-            height: 15px;
             background-color: #f3f3f3;
             border-radius: 5px;
             margin-top: 20px;
         }
 
         .progress {
-            height: 100%;
-            background-color: #2df82d;
+            height: 10px;
             width: 0;
+            background-color: #007bff;
             border-radius: 5px;
-            transition: width 0.5s ease;
         }
 
-        /* Score and Status */
-        .score-container {
-            text-align: center;
-            font-size: 1.3em;
-            margin-top: 20px;
-            color: #eeeded;
+        /* Next Button */
+        #next-button {
+            background-color: #28a745;
+            color: #fff;
+            font-size: 1.2rem;
         }
 
-        /* Status Message */
-        #status {
-            text-align: center;
-            font-size: 1.2em;
-            margin-top: 10px;
-            font-weight: bold;
-            color: #e74c3c;
+        #next-button:hover:not(:disabled) {
+            background-color: #218838;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-                width: 90%;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            #answer-button {
-                font-size: 1.1em;
-                padding: 12px 25px;
-            }
+        /* Animation Placeholder */
+        .confetti {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            display: none;
         }
-
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Verbal Evaluation Game</h1>
-        <div id="question-container">Loading question...</div>
+        <div id="question-container">Press the <strong>Start Evaluation</strong> button to begin.</div>
+        <button id="start-button">Start Evaluation</button>
+        <button id="next-button" disabled>Next Question</button>
         <button id="answer-button">Answer</button>
-        <div class="progress-bar">
-            <div id="progress" class="progress"></div>
-        </div>
-        <div id="score-container" class="score-container"></div>
+        <div id="timer-container">Time Left: <span id="timer">5</span> seconds</div>
         <div id="status"></div>
+        <div id="score-container"></div>
+        <div id="answer-container"> </div>
+    </div>
+    <div id="answers-list-container">
+        <h3>Your Answers:</h3>
+        <ul id="answers-list"></ul>
     </div>
 
     <script src="https://unpkg.com/compromise"></script>
     <script>
-        let correctAnswers = 0;
-        let totalQuestions = 0;
-        let questionCount = 0;
-        progress = 85
-        let questions = [];
-
-        // Fetch questions 
-        function loadQuestions() {
-            fetch('javascript/datatypedata.json')  // Path to your JSON file
+        // Global Variables
+        let testQuestions = [];
+        let questionsAlreadyAsked = [];
+        let questionAnswerPicked = [];
+        let firstTimeFlag = true;
+        let thresholdScore = 60;
+        let perfectScore = 100;
+        let score = 0;
+        let countdown = 0;
+        let expectedSeconds = 15;
+        let timeLeft = 0;
+        let expectedCorrectAnswers = 20;
+        let answersCorrect = 0;
+        let questionsAsked = 0;
+        let needNextQuestionFlag = false;
+        let isRunning = false;
+        let allAnswers = [];
+        let isTestLoaded = false;
+        
+        // Speech Recognition setup
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        
+        // Elements
+        const startButton = document.getElementById('start-button');
+        const nextButton = document.getElementById('next-button');
+        const timerDisplay = document.getElementById('timer');
+        const answerButton = document.getElementById('answer-button');
+        const questionContainer = document.getElementById('question-container');
+        const answerContainer = document.getElementById('answer-container');
+        const statusContainer = document.getElementById('status');
+        const scoreContainer = document.getElementById('score-container');
+        
+        // Start Button Event Listener
+        document.getElementById('start-button').addEventListener('click', function() {
+            TakeExam();  // Load questions from the file and start the process
+            this.disabled = true;  // Disable the start button after it's clicked
+        });
+        
+        async function TakeExam() {
+            fetch('resources/json/testdatatype.json')
                 .then(response => response.json())
                 .then(data => {
-                    questions = data;
-                    console.log('Questions loaded:', questions);
-                    showRandomQuestion();
+                    testQuestions = data;
+                    console.log('Questions loaded:', testQuestions);
+                    isTestLoaded = true;  // Mark the test as loaded
+                    getQuestionReady(testQuestions); // Call getQuestionReady after the data is loaded
+                    
                 })
                 .catch(error => {
-                    console.error('Error fetching the data:', error);
-                    document.getElementById('question-container').innerText = 'Failed to load questions. Please try again later.';
+                    console.error("Error loading questions:", error);
                 });
         }
-
-        // Display a random question
-        function showRandomQuestion() {
-            if (questions.length === 0) {
-                console.error('No questions available.');
-                return;
+        
+        function getQuestionReady(testQuestions) {
+            if (!isTestLoaded || testQuestions.length === 0) {
+                console.error("Questions are not loaded or empty.");
+                return; // If questions are not loaded, return early to prevent errors
             }
-            // Randomly pick a question from the available questions
-            const randomIndex = Math.floor(Math.random() * questions.length);
-            const currentQuestion = questions[randomIndex];
-
-            // Display the question
-            document.getElementById('question-container').innerText = currentQuestion.question;
-            document.getElementById('answer-button').dataset.correctAnswer = currentQuestion.answer;
-
-            // story: The user needs the question read every time a question is displayed. This is not happening the first time. FIX
-            // Read the question aloud
-            readQuestionAloud(currentQuestion.question);
-
-            //story: start timer and display it on the screen 
-            //story: read out loud: "you have 15 seconds to press the answer button." 
+        
+            // Are we here for the first time?
+            if (firstTimeFlag) {
+                // pick random question and store in questionAnswerPicked
+                const randomIndex = Math.floor(Math.random() * testQuestions.length);
+                const randomQuestion = testQuestions[randomIndex];
+                questionAnswerPicked = [randomQuestion.question, randomQuestion.answer];
+        
+                // Add question to questionAlreadyAsked
+                questionsAlreadyAsked.push(randomQuestion);
+        
+                // Display the question and answer
+                questionContainer.innerText = randomQuestion.question;
+                answerContainer.innerText = randomQuestion.answer;
+        
+                // Read the question aloud
+                readQuestionAloud(randomQuestion.question);
+                
+                // Increment questions asked
+                questionsAsked++;
+        
+                // First time flag off
+                firstTimeFlag = false;
+        
+                // The user could have pressed the next question button
+                //needNextQuestionFlag = false;
+            } else {
+                // Not first time, pick a new random question not asked already
+                let randomQuestion;
+        
+                do {
+                    const randomIndex = Math.floor(Math.random() * testQuestions.length);
+                    randomQuestion = testQuestions[randomIndex];
+                } while (questionsAlreadyAsked.includes(randomQuestion));
+        
+                questionAnswerPicked = [randomQuestion.question, randomQuestion.answer];
+                questionsAlreadyAsked.push(randomQuestion);
+        
+                questionContainer.innerText = randomQuestion.question;
+                readQuestionAloud(randomQuestion.question);
+        
+                // Increment questions asked
+                questionsAsked++;
+        
+                // The user could have pressed the next question button
+                //needNextQuestionFlag = false;
+            }
         }
-
-        // Read the question aloud using SpeechSynthesis API
+        
         function readQuestionAloud(question) {
             const utterance = new SpeechSynthesisUtterance(question);
+            
+            // Set up an event listener for when the speech has finished
+            utterance.onend = function() {
+                // Start the timer after the question is read aloud
+                getTimerReady();
+            };
+        
             window.speechSynthesis.speak(utterance);
         }
-
-        // Check user answer
-        function checkAnswer(userAnswer) {
-            const correctAnswer = document.getElementById('answer-button').dataset.correctAnswer;
-
-            if (compareAnswers(userAnswer, correctAnswer)) {
-                correctAnswers++;
-            }
-            totalQuestions++;
-
-            updateProgress();
-
-            if (totalQuestions > 8 && (correctAnswers / totalQuestions) < 0.85) {
-                document.getElementById('status').innerText = "Your score is below 85%. Going to lesson. See you there!";
-                text = "Your score is below 85%. Going to lesson. See you there!"
-                readTextAloud(text)
-                // story: zoom in lesson page
-                // story: display "These were your answers and display all users answer on screen
-                correctAnswers = 0;
-                totalQuestions = 0;
-            } else {
-                if (correctAnswers >= 20) {
-                    // story: give some kind of animation for celebrating success. 
-                    document.getElementById('status').innerText = "Congratulations! You passed!";
-                    // story: display catchingfish.jpeg for 3 seconds  
-                    // story: display "Going to the next evaluation. See you there!"
-                    // story: zoom in to next evaluation page, evaluation-hot-keys.
+        
+        function getTimerReady() {
+            timeLeft = expectedSeconds;
+            document.getElementById('timer').innerText = timeLeft;  // Display initial time
+        
+            // Start timer countdown
+            countdown = setInterval(function() {
+                if (timeLeft >= 1) {
+                    timeLeft--;
+                    document.getElementById('timer').innerText = timeLeft;
+                } else {
+                    // Time's up, stop the timer and show the message
+                    clearInterval(countdown);
+                    statusContainer.innerText = "Time's up! Press 'Next Question' to continue.";
+                    nextButton.disabled = false; // Enable the Next button after the timer finishes
                 }
+            }, 1000);
+        
+            // Add event listener for the answer button
+            answerButton.addEventListener('click', handleAnswer);
+        }
+        
+        function handleAnswer() {
+            // Stop the timer when the answer button is pressed
+            clearInterval(countdown);
+        
+            // TODO: Implement listening logic for the answer, if necessary
+            // e.g., start speech recognition or validate the answer
+        
+            // Once the answer is processed, you can call nextQuestion() to move to the next question
+            nextQuestion()
+            //nextButton.disabled = false;  // Enable the Next button to proceed
+        }
+        
+        // Next Question Handling
+        function nextQuestion() {
+            if (!isTestLoaded || testQuestions.length === 0) {
+                console.error("Questions are not loaded or empty.");
+                return; // Prevent calling next question if questions are not loaded
             }
-
-            document.getElementById('score-container').innerText = `Correct: ${correctAnswers}/${totalQuestions}`;
+        
+            //nextButton.disabled = true; // Disable the Next button again to prevent multiple clicks
+            getQuestionReady(testQuestions); // Get next question
+            //getTimerReady(); // Start timer for the next question
         }
-
-        // Read the text aloud using SpeechSynthesis API
-        function readTextAloud(text) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            window.speechSynthesis.speak(utterance);
-        }
-
-        // Compare user answer with correct answer using NLP
-        function compareAnswers(userAnswer, correctAnswer) {
-            const userDoc = nlp(userAnswer);  // Process user answer using compromise
-            const correctDoc = nlp(correctAnswer);  // Process correct answer using compromise
-
-            const userTokens = userDoc.nouns().out('array').concat(userDoc.verbs().out('array'));
-            const correctTokens = correctDoc.nouns().out('array').concat(correctDoc.verbs().out('array'));
-
-            const commonTokens = userTokens.filter(token => correctTokens.includes(token));
-            const matchRatio = commonTokens.length / correctTokens.length;
-
-            return matchRatio >= 0.6;  // Match ratio threshold for correctness (60%)
-        }
-
-        // Update the progress bar
-        function updateProgress() {
-            const progress = (correctAnswers / 20) * 100;
-            document.getElementById('progress').style.width = `${progress}%`;
-        }
-
+        
         // Speech Recognition Setup
         const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         recognition.lang = 'en-US';
@@ -249,9 +329,10 @@
 
         recognition.onresult = function(event) {
             const userAnswer = event.results[0][0].transcript;
+            
             console.log('User Answer:', userAnswer);
-            // story: display user answer on screen
-            checkAnswer(userAnswer);
+            
+            //checkAnswer(userAnswer);
             questionCount++;
             //story: stop random question read once user has failed.
             if (questionCount < 40 && progress >= 85) {
@@ -263,12 +344,73 @@
             console.error('Speech Recognition Error:', event.error);
         };
 
-        // Start Speech Recognition when button is clicked
+        // Start Speech Recognition when answer button is clicked
         document.getElementById('answer-button').addEventListener('click', function() {
             recognition.start();
         });
 
-        window.onload = loadQuestions;
+        function nextQuestionRoutine() {
+            nextButton.disabled = false;
+
+            nextButton.addEventListener('click', () => {
+                nextButton.disabled = true;
+                getQuestionReady();
+                
+                //evaluateAnswer();
+            });
+        }
+
+
+/*
+        function evaluateAnswer() {
+            // When the user answers, this will capture the response
+            recognition.onresult = function(event) {
+                const userAnswer = event.results[0][0].transcript;
+                document.getElementById('status').innerText = `You said: ${userAnswer}`;
+            
+                // Store the user's answer in the allAnswers array
+                allAnswers.push(userAnswer);
+                displayAnswersList();  // Update the answers list
+            };
+            // Handle errors during speech recognition
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+            };
+            
+            let isCorrect = false;
+
+            // Compare the user's answer with the picked answer
+            if (userAnswer.toLowerCase() === questionAnswerPicked[1].toLowerCase()) {
+                isCorrect = true;
+                answersCorrect++;
+            }
+
+            // Display user answer and evaluate score
+            scoreContainer.innerText = `Score: ${(answersCorrect / questionsAsked) * 100}%`;
+
+            // Check if the user passed the exam
+            if (score >= expectedCorrectAnswers) {
+                confettiAnimation();
+                statusContainer.innerText = "You passed! Going to the next exam.";
+            } else if (questionsAsked > 10) {
+                if ((score / questionsAsked) * 100 >= thresholdScore) {
+                    nextQuestionRoutine();
+                } else {
+                    statusContainer.innerText = "We're going to the next lesson. Here's your list of answers.";
+                }
+            } else {
+                nextQuestionRoutine();
+            }
+        }
+
+        function confettiAnimation() {
+            // Placeholder for confetti animation code
+            console.log("Confetti!");
+        }
+
+        
+         */
+
     </script>
 </body>
 </html>

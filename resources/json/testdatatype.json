@@ -1,0 +1,26 @@
+[
+    {
+        "question": "How do you check if a variable is of type bool?",
+        "answer": "use is instance with variable and bool in parentheses"
+    },
+    {
+        "question": "What are the boolean values?",
+        "answer": "the boolean values are true and false"
+    },
+    {
+        "question": "What does the bool() function do?",
+        "answer": "converts a value to its boolean equivalent"
+    },
+    {
+        "question": "What is the output of True + False?",
+        "answer": "true plus false is one therefore the output is one"
+    },
+    {
+        "question": "What numeric value represents False when using the bool() function?",
+        "answer": "the numeric value representing false is zero"
+    },
+    {
+        "question": "What value (or values) represent True when using the bool() function?",
+        "answer": "any non-zero number or non-empty string or list is true"
+    }
+]

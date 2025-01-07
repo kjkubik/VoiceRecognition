@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamified Question Evaluation</title>
+    <style>
+   /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Header */
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Question Container */
+        #question-container {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Timer */
+        #timer-container {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        #timer {
+            font-weight: bold;
+            color: #d9534f; /* Red */
+        }
+
+        /* Buttons */
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+
+        /* Score Container */
+        #score-container {
+            font-size: 1.2rem;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        /* Status Message */
+        #status {
+            font-size: 1.5rem;
+            color: #d9534f;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Progress Bar (if used) */
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .progress {
+            height: 10px;
+            width: 0;
+            background-color: #007bff;
+            border-radius: 5px;
+        }
+
+        /* Next Button */
+        #next-button {
+            background-color: #28a745;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        #next-button:hover:not(:disabled) {
+            background-color: #218838;
+        }
+
+        /* Animation Placeholder */
+        .confetti {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verbal Evaluation Game</h1>
+        <div id="question-container">Press the <strong>Start Evaluation</strong> button to begin.</div>
+        <button id="start-button">Start Evaluation</button>
+        <button id="next-button" disabled>Next Question</button>
+        <button id="answer-button">Answer</button>
+        <div id="timer-container">Time Left: <span id="timer">5</span> seconds</div>
+        <div id="status"></div>
+        <div id="score-container"></div>
+        <div id="answer-container"> </div>
+    </div>
+    <div id="answers-list-container">
+        <h3>Your Answers:</h3>
+        <ul id="answers-list"></ul>
+    </div>
+
+    <script src="https://unpkg.com/compromise"></script>
+    <script>
+        let testQuestions = [];                 // where all input question/answers are put
+        let isTestLoaded = false;               // flag for input file load errors
+        let firstTimeFlag = true;               // first entering getQuestionReady
+        let questionAnswerPicked = [];          // random question picked 
+        let questionsAlreadyAsked = [];         // store questions already asked (so we don't ask again)
+        let questionsAsked = 0;                 // number of questions asked
+        let timeLeft = 0;                       // don't want to destroy expectedSeconds, used for de-incrementation
+        let expectedSeconds = 15;               // amount of time user has to press the answer button, a stressor to help create stress (so user learns to answer questions under pressure)
+        let countdown = 0;                      // used to set timer, after question is read, user only has 15 seconds to start answer question
+        let needNextQuestion = false;
+        let userAnswer = '';
+        let allAnswers = [];                    // collecting all users answers temporarily
+        let answersCorrect = 0;                 // number of answers user got correct
+        let score = 0;                          // calculate score, displayed on screen
+        let expectedCorrectAnswers = 20;        // required number user must get right
+        let expectedConsecutiveCorrect = 10;    // required 
+        let thresholdScore = 80;                // lowest possible score user can have to move on
+        let perfectScore = 100;                 // used to check if user has perfect score
+        
+        
+        
+        
+        
+        
+        
+        let isRunning = false;
+        
+        
+        
+        // Speech Recognition setup
+        //const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        //recognition.lang = 'en-US';
+        //recognition.interimResults = false;
+        //recognition.maxAlternatives = 1;
+        
+        // Elements
+        const questionContainer = document.getElementById('question-container');
+        const answerContainer = document.getElementById('answer-container');
+        const scoreContainer = document.getElementById('score-container');
+        const timerDisplay = document.getElementById('timer');
+        const statusContainer = document.getElementById('status');
+        const startButton = document.getElementById('start-button');
+        const nextButton = document.getElementById('next-button');
+        const answerButton = document.getElementById('answer-button');
+        
+        // Start Button Event Listener
+        document.getElementById('start-button').addEventListener('click', function() {
+            TakeExam();  
+            this.disabled = true;  
+        });
+        
+        async function TakeExam() {
+            fetch('resources/json/testdatatype.json')
+                .then(response => response.json())
+                .then(data => {
+                    testQuestions = data;
+                    console.log('Questions loaded:', testQuestions);
+                    isTestLoaded = true;  // Mark the test as loaded
+                    getQuestionReady(testQuestions); // Call getQuestionReady after the data is loaded
+                    
+                })
+                .catch(error => {
+                    console.error("Error loading questions:", error);
+                });
+        }
+        
+        function getQuestionReady(testQuestions) {
+            
+            if (!isTestLoaded){
+                console.error("Questions are not loaded.");
+                return; // If questions are not loaded, return early to prevent errors
+            } else {
+                if (testQuestions.length === 0) {
+                    console.error("The question file is empty.");
+                    return; // If questions are not loaded, return early to prevent errors
+                }    
+            }
+            
+            // Are we here for the first time?
+            if (firstTimeFlag) {
+                
+                // First time flag off
+                firstTimeFlag = false;
+                // Pick random quesiton from testQuestions
+                getRandomQuestion(testQuestions)                
+                // Increment questions asked
+                questionsAsked++;
+            }
+        } // end getQuestionReady
+         
+        function getRandomQuestion(testQuestions) {
+            // Pick random question and store in questionAnswerPicked
+            const randomIndex = Math.floor(Math.random() * testQuestions.length);
+            const randomQuestion = testQuestions[randomIndex];
+            questionAnswerPicked = [randomQuestion.question, randomQuestion.answer];
+    
+            // Add question to questionsAlreadyAsked
+            questionsAlreadyAsked.push(randomQuestion);
+    
+            // Display the question and answer
+            questionContainer.innerText = randomQuestion.question;
+            answerContainer.innerText = randomQuestion.answer; // TODO: Comment out when done testing
+    
+            // Read the question aloud
+            readTextAloud(randomQuestion.question);
+        } // end getRandomQuestion
+
+        function readTextAloud(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            // Event listener for when speech has finished
+            utterance.onend = function() {
+            
+            // Start timer AFTER question is read aloud
+            getTimerReady();
+            };
+        
+            window.speechSynthesis.speak(utterance);
+        } // end readQuestionAloud
+
+        function getTimerReady() {
+            timeLeft = expectedSeconds;
+            if(!needNextQuestion){
+                document.getElementById('timer').innerText = timeLeft;  // Display initial time
+                startTimer(timeLeft);
+            } else { 
+                // needNextQuestion = true
+                getQuestionReady(testQuestions);
+                startTimer(timeLeft);
+
+            }   
+        } // end getTimerReady
+
+        function startTimer(timeLeft){
+            // start timer countdown
+            countdown = setInterval(function() {
+                if (timeLeft >= 1) {
+                    timeLeft--;
+                    document.getElementById('timer').innerText = timeLeft;
+
+                    // listen for user to press Answer button, then change speech to string
+                    startListening();
+                
+                    // evaluate answer
+                    evaluateAnswer(userAnswer, randomQuestion.answer)
+                    
+                } else {
+                    clearInterval(countdown); 
+                    statusContainer.innerText = "Time's up! Press 'Next Question' to continue.";
+                    needNextQuestion = true;
+                    getTimerReady();
+                } 
+            }, 1000);   
+        }            
+                    // not sure if I need these here
+                                     //nextButton.disabled = true;
+                                    //getQuestionReady();
+         // end startTimer
+
+         function startListening(){
+            // Speech Recognition Setup
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onresult = function(event) {
+            userAnswer = event.results[0][0].transcript;
+            console.log('User Answer:', userAnswer);
+            };    
+            recognition.onerror = function(event) {
+                console.error('Speech Recognition Error:', event.error);
+            };
+
+            // if button has been pressed, we stop timer, start listening
+            answerButton.addEventListener('click', () => {
+                clearInterval(countdown);
+                
+                // Start Speech Recognition when button is clicked
+            //    document.getElementById('answer-button').addEventListener('click', function() {
+                recognition.start();
+            });
+
+        }
+
+        function evaluateAnswer(userResponse, actualAnswer){
+            //did the user say anything?
+                // save the answer off into allAnswers (tuple)
+                // display users answer on the screen
+                // evaluateAnswer()
+                    // close to the actualAnswer?
+                        // yes - ++answersCorrect 
+                        // score = Correct Answers * 100 /Questions Asked
+                        // display the score
+                        // Does answersCorrect = expectedCorrectAnswers?
+                            // yes - confetti celebration
+                            //Display "You Passed. Going to next exam. See you there!"
+                        // else answersCorrect = expectedCorrectAnswers
+                            // has user answered 10 questions?
+                                // yes - is it a perfect score?
+                                if (score = perfectScore) {
+                                    // yes - confetti celebration
+                                    // Display "You have mastered X concepts. Going to next exam. See you there!"
+                                    // no - nextQuestion()
+                                } else{// no - Is score >= thresholdScore?
+                                    if (score >= thresholdScore) { 
+                                        // yes - the user can continue - nextQuestion
+                                        // no - All user answers will be displayed - STORY - used to evaluate part of lesson X needing focus and practice
+                                        // no - Display "More practice is needed. We'll get you there! We're going to X Lesson."
+                                    }  
+                                }
+
+
+
+                        let expectedCorrectAnswers = 20;        // required number user must get right
+        let expectedConsecutiveCorrect = 10;    // required 
+
+
+
+        }
+
+         /* else {
+                // Not first time, pick a new random question not asked already
+                let randomQuestion;
+        
+                do {
+                    const randomIndex = Math.floor(Math.random() * testQuestions.length);
+                    randomQuestion = testQuestions[randomIndex];
+                } while (questionsAlreadyAsked.includes(randomQuestion));
+        
+                questionAnswerPicked = [randomQuestion.question, randomQuestion.answer];
+                questionsAlreadyAsked.push(randomQuestion);
+        
+                questionContainer.innerText = randomQuestion.question;
+                readQuestionAloud(randomQuestion.question);
+        
+                // Increment questions asked
+                questionsAsked++;
+        
+                // The user could have pressed the next question button
+                //needNextQuestionFlag = false;
+            }
+        } // End GetQuestionReady 
+        
+        */
+
+//})        
+        
+
+    </script>
+</body>
+</html>

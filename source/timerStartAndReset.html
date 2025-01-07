@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer with start and reset button</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .timer {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Timer</h1>
+        <div id="timer-container">Time Left: <span id="timer">5</span> seconds</div>
+        <button id="start-button">Start Game</button>
+        <button id="reset-button" disabled>reset(Next Question)</button>
+        <div id="status"></div>
+    </div>    
+<script>
+    let countdown; // Declare the timer globally
+    let expectedSeconds = 5
+    let timeLeft = expectedSeconds;  // Initialize the time limit
+    let isRunning = false;
+
+    // Get elements from the DOM
+    const timerDisplay = document.getElementById('timer');
+    const startButton = document.getElementById('start-button');
+    const resetButton = document.getElementById('reset-button');   
+    
+    // Start button event listener
+    startButton.addEventListener('click', function() {
+        if (!isRunning) {
+            startTimer();
+        }
+    });
+
+    // Reset button event listener
+    resetButton.addEventListener('click', function() {
+        resetTimer();
+    });
+    
+    // Function to start the timer countdown
+    function startTimer() {
+        isRunning = true;
+        startButton.disabled = true;  // Disable the Start button while timer is running
+        resetButton.disabled = false; // Enable the Reset button
+
+        countdown = setInterval(function() {
+            if (timeLeft >=1){
+                timeLeft--;
+                document.getElementById('timer').innerText = timeLeft;
+            }
+            else{  
+                clearInterval(timer); // Stop the timer when it reaches zero
+                document.getElementById('status').innerText = "Time's up!";
+                //readTextAloud("Time's up!");
+            }
+        }, 1000);//update timer every second
+    }
+    // Function to reset the timer
+    function resetTimer() {
+        clearInterval(countdown);  // Clear any existing timer
+        timeLeft = expectedSeconds;  // Reset the timer to 5 seconds for each new question
+        startButton.disabled = false;  // Enable the Start button
+        resetButton.disabled = true;  // Disable the Reset button
+        isRunning = false;
+        document.getElementById('timer').innerText = timeLeft;  // Display the reset timer on screen
+        startTimer()
+        document.getElementById('status').innerText = "             ";
+    }
+    
+</script>    
+</body>
+</html>
