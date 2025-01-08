@@ -152,8 +152,43 @@
         <h3>Your Answers:</h3>
         <ul id="answers-list"></ul>
     </div>
+    
+    <!-- <script src="https://unpkg.com/compromise"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/node-nlp@4.12.0/dist/nlp.min.js" onload="initNLP()"></script>
 
-    <script src="https://unpkg.com/compromise"></script>
+    <script>
+        // Function to initialize NLP.js and ensure the library is loaded before using it
+        function initNLP() {
+            // Wait for the library to be loaded and check if NlpManager is available
+            if (window.nlpjs && window.nlpjs.NlpManager) {
+                const { NlpManager } = window.nlpjs; // Now you can access NlpManager
+                const manager = new NlpManager({ languages: ['en'] });
+                console.log(manager);
+            } else {
+                // Retry loading after a delay if nlpjs is not loaded yet
+                setTimeout(initNLP, 100); // Retry after 100ms
+            }
+        }
+
+        // Initialize NLP
+        initNLP();
+
+        async function evaluateAnswer(userResponse, actualAnswer) {
+            // Ensure NLP Manager is available
+            const { NlpManager } = window.nlpjs;
+            const manager = new NlpManager({ languages: ['en'] });
+
+            await manager.addDocument('en', actualAnswer, 'correct.answer');
+            await manager.addDocument('en', userResponse, 'user.response');
+            
+            await manager.train();
+
+            const response = await manager.process('en', userResponse);
+            if (response.intent === 'correct.answer' && response.score > 0.5) {
+                console.log("Correct!");
+            }
+        }
+    </script>
     <script>
         let testQuestions = [];                 // where all input question/answers are put
         let isTestLoaded = false;               // flag for input file load errors
@@ -188,11 +223,7 @@
         
         
         
-        // Speech Recognition Setup
-        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        recognition.lang = 'en-US';
-        recognition.interimResults = false;
-        recognition.maxAlternatives = 1;
+    
         
         // Elements
         const questionContainer = document.getElementById('question-container');
@@ -203,6 +234,8 @@
         const startButton = document.getElementById('start-button');
         const nextButton = document.getElementById('next-button');
         const answerButton = document.getElementById('answer-button');
+
+        //const natural = require('natural'); // Import the Natural.js Library
         
         // Start Button Event Listener
         document.getElementById('start-button').addEventListener('click', function() {
@@ -246,6 +279,22 @@
                 getRandomQuestion(testQuestions);                
                 // Increment questions asked
                 questionsAsked++;
+            } else {
+                // not first time
+                getRandomQuestion(testQuestions);   
+
+                if (questionsAlreadyAsked.includes(currentQuestion)) {
+                    // currentQuestion is already in questionsAlreadyAsked
+                    console.log("This question has already been asked.");
+                    
+                } else {
+                    // currentQuestion is not in questionsAlreadyAsked
+                    console.log("This is a new question.");
+                    getQuestionReady();
+                    questionsAsked++;
+                    needNextQuestion = false; 
+                }
+
             }
         } // end getQuestionReady
 
@@ -258,7 +307,7 @@
             currentAnswer = randomQuestion.answer;
         
     
-            // Add question to questionsAlreadyAsked
+            // Add current question to questionsAlreadyAsked
             questionsAlreadyAsked.push(randomQuestion);
     
             // Display the question and answer
@@ -284,10 +333,12 @@
             if(!needNextQuestion){
                 document.getElementById('timer').innerText = timeLeft;  // Display initial time
                 startTimer(timeLeft);
+                
             } else { 
                 // needNextQuestion = true
                 getQuestionReady(testQuestions);
                 startTimer(timeLeft);
+                needNextQuestion = true; 
 
             }   
         } // end getTimerReady
@@ -301,10 +352,6 @@
 
                     // listen for user to press Answer button, then change speech to string
                     startListening();
-                
-                    // evaluate answer
-                    //evaluateAnswer(userAnswer, currentAnswer)
-                    
                 } else {
                     clearInterval(countdown); 
                     statusContainer.innerText = "Time's up! Press 'Next Question' to continue.";
@@ -325,8 +372,16 @@
                 answerButton.disabled = true;
                 clearInterval(countdown); //restart the countdown
 
+                // Speech Recognition Setup
+                const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.lang = 'en-US';
+                recognition.interimResults = false;
+                recognition.maxAlternatives = 1;
+
+
                 // if recognition is running, stop it (before starting a new one)
                 if (recognition.recognizing) {
+                    console.log("turning off Speech Recognition")
                     recognition.stop(); // Stop recognition if it's currently running
                 } 
                 
@@ -340,7 +395,7 @@
                     // Continue listening until the user provides a valid answer
                     if (userAnswer.length > 0) {
                         console.log("Answer received: ", userAnswer);
-                        evaluateAnswer(userAnswer, currentAnswer);  // Evaluate the answer when it's received
+                        stageAnswer(userAnswer, currentAnswer);  // Evaluate the answer when it's received
                         recognition.stop();  // Stop listening after receiving the answer
                     } 
                 };
@@ -351,9 +406,7 @@
             });
         }
 
-        function evaluateAnswer(userResponse, actualAnswer){
-            questionsAsked = 10;
-            score = 100;
+        function stageAnswer(userResponse, actualAnswer){
             
             console.log("Questions Asked: ", questionsAsked);
             console.log("Score: ", score);
@@ -362,46 +415,143 @@
             console.log("Perfect Score: ", perfectScore);
             console.log("expectedConsecutiveCorrect:", expectedConsecutiveCorrect);
             
-                /* can I use this? Do I want to? 
-            // Evaluate the answer
-            if (userResponse.toLowerCase() === actualAnswer.toLowerCase()) {
-                // If the answer is correct, increment the score
-                answersCorrect++;
-                score = (answersCorrect * 100) / questionsAsked; */
-
-
             //did the user say anything?
+                // Convert both to lowercase for case-insensitive comparison
+                userResponse = userResponse.toLowerCase();
+                actualAnswer = actualAnswer.toLowerCase();
+                
                 // save the answer off into allAnswers (tuple)
+                allAnswers.push(userResponse);
+                console.log(allAnswers);
+                
                 // display users answer on the screen
-                // evaluateAnswer()
-                    // close to the actualAnswer?
-                        // yes - ++answersCorrect 
-                        // score = Correct Answers * 100 /Questions Asked
-                        // display the score
-                        // Does answersCorrect = expectedCorrectAnswers?
-                            // yes - confetti celebration
-                            //Display "You Passed. Going to next exam. See you there!"
-                        // else answersCorrect = expectedCorrectAnswers
-                            // has user answered 10 questions?
-                            if (questionsAsked === expectedConsecutiveCorrect){
-                                // yes - is it a perfect score?
-                                if (score === perfectScore) {
-                                    // yes - confetti celebration
-                                    CALLconfetti();
-                                    // Display "You have mastered X concepts. Going to next exam. See you there!"
-                                    // no - nextQuestion()
-                                } else{// no - Is score >= thresholdScore?
-                                    if (score >= thresholdScore) { 
-                                        // yes - the user can continue - nextQuestion
-                                        // no - All user answers will be displayed - STORY - used to evaluate part of lesson X needing focus and practice
-                                        // no - Display "More practice is needed. We'll get you there! We're going to X Lesson."
-                                    }  
-                                }
-                            }
+                answerContainer.innerText = "This was your answer: " + userResponse + ".";
 
+                // check answer
+                evaluateAnswer(userResponse, actualAnswer);
         }
 
-        function CALLconfetti() {
+        // Example usage with NLP.js
+async function evaluateAnswer(userResponse, actualAnswer) {
+    const { NlpManager } = window.nlpjs;
+
+    // Create a new NLP manager
+    const manager = new NlpManager({ languages: ['en'] });
+
+    // Add documents to the NLP manager
+    await manager.addDocument('en', actualAnswer, 'correct.answer');
+    await manager.addDocument('en', userResponse, 'user.response');
+
+    // Train the model
+    await manager.train();
+
+    // Process and compare responses
+    const response = await manager.process('en', userResponse);
+
+    // If the response is similar to the answer (based on confidence level)
+    if (response.intent === 'correct.answer' && response.score > 0.5) {
+        console.log("Correct!");
+        
+        answersCorrect++;  // Increment the number of correct answers
+        score = (answersCorrect * 100) / questionsAsked;  // Calculate the score
+        console.log("Updated score:", {score});
+
+        // Display the score
+        let scoreContainer = document.getElementById('scoreContainer');
+        scoreContainer.innerText = `Score: ${score}%`;
+
+        // Check if the user has answered enough questions correctly
+        if (answersCorrect === expectedConsecutiveCorrect) {
+            triggerConfetti();
+            let statusContainer = document.getElementById('statusContainer');
+            statusContainer.innerText = "You Passed. Going to next exam. See you there!";
+        } else {
+            // Has the user answered 10 questions correctly?
+            if (questionsAsked === expectedConsecutiveCorrect) {
+                if (score === perfectScore) {
+                    triggerConfetti();
+                    let statusContainer = document.getElementById('statusContainer');
+                    statusContainer.innerText = "You have mastered X concepts. Going to next exam. See you there!";
+                } else {
+                    if (score >= thresholdScore) {
+                        nextQuestion();  // Proceed to the next question
+                    } else {
+                        // Display all answers and notify the user they need more practice
+                        let answerContainer = document.getElementById('answerContainer');
+                        answerContainer.innerText = "Here are all your answers: " + allAnswers.join(', ') + ".";
+                        let statusContainer = document.getElementById('statusContainer');
+                        statusContainer.innerText = "More practice is needed. We'll get you there! We're going to X Lesson.";
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/*        ----
+        // Example usage with nlp.js
+        const { NlpManager } = window.nlpjs;
+
+        // Create a new NLP manager
+        const manager = new NlpManager({ languages: ['en'] });
+
+        async function evaluateAnswer(userResponse, actualAnswer) {
+            await manager.addDocument('en', actualAnswer, 'correct.answer');
+            await manager.addDocument('en', userResponse, 'user.response');
+            
+            // Train the model
+            await manager.train();
+
+            // Process and compare responses
+            const response = await manager.process('en', userResponse);
+            
+            // If the response is similar to the answer (based on confidence level)
+            if (response.intent === 'correct.answer' && response.score > 0.5) {
+                console.log("Correct!");
+                
+                answersCorrect++;
+                score = (answersCorrect * 100) / questionsAsked; 
+                //display the score
+                scoreContainer.innerText = `Score: ${score}%`;
+
+                // Does answersCorrect = expectedCorrectAnswers?
+                if (answersCorrect === expectedCorrectAnswers){
+                    triggerConfetti();
+                    statusContainer.innerText = "You Passed. Going to next exam. See you there!";
+                } else {
+                    // has user answered 10 questions?
+                    if (questionsAsked === expectedConsecutiveCorrect){
+                        if (score === perfectScore) {
+                            triggerConfetti();
+                            statusContainer.innerText = "You have mastered X concepts. Going to next exam. See you there!";
+                            needNextQuestion = no; 
+                        } else{// no - Is score >= thresholdScore?
+                            if (score >= thresholdScore) { 
+                                // yes - the user can continue - nextQuestion
+                                nextQuestion();
+                            } else {
+                                // no - All user answers will be displayed - STORY - used to evaluate part of lesson X needing focus and practice
+                                answerContainer.innerText = "Here are all your answers: " + allAnswers.join(', ') + ".";
+                                // no - Display "More practice is needed. We'll get you there! We're going to X Lesson."
+                                statusContainer.innerText = "More practice is needed. We'll get you there! We're going to X Lesson.";
+                            }    
+                        }
+                    }
+                }
+            }
+        }
+*/
+        function nextQuestionRoutine() {
+            nextButton.disabled = false; // READY TO PRESS
+
+            nextButton.addEventListener('click', () => {
+                nextButton.disabled = true; // CANNOT PRESS
+                getQuestionReady();
+            });
+        }
+
+        function triggerConfetti() {
             // do this for 5 seconds
             var duration = .2 * 1000;
             var end = Date.now() + duration;
@@ -470,35 +620,6 @@
             }());
         }
         
-
-         /* else {
-                // Not first time, pick a new random question not asked already
-                let randomQuestion;
-        
-                do {
-                    const randomIndex = Math.floor(Math.random() * testQuestions.length);
-                    randomQuestion = testQuestions[randomIndex];
-                } while (questionsAlreadyAsked.includes(randomQuestion));
-        
-                questionAnswerPicked = [randomQuestion.question, randomQuestion.answer];
-                questionsAlreadyAsked.push(randomQuestion);
-        
-                questionContainer.innerText = randomQuestion.question;
-                readQuestionAloud(randomQuestion.question);
-        
-                // Increment questions asked
-                questionsAsked++;
-        
-                // The user could have pressed the next question button
-                //needNextQuestionFlag = false;
-            }
-        } // End GetQuestionReady 
-        
-        */
-
-//})        
-        
-
     </script>
 </body>
 </html>

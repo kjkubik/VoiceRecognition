@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NLP Test</title>
+</head>
+<body>
+
+  <script src="https://cdn.jsdelivr.net/npm/node-nlp@4.12.0/dist/nlp.min.js" onload="initNLP()"></script>
+
+  <script>
+    function initNLP() {
+      if (window.nlpjs && window.nlpjs.NlpManager) {
+        const { NlpManager } = window.nlpjs; // Now you can access NlpManager
+        const manager = new NlpManager({ languages: ['en'] });
+        console.log(manager);
+      } else {
+        console.error("NlpManager is not available.");
+      }
+    }
+  </script>
+
+</body>
+</html>
