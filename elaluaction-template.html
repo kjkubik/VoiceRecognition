@@ -134,6 +134,7 @@
             display: none;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -157,7 +158,7 @@
         let testQuestions = [];                 // where all input question/answers are put
         let isTestLoaded = false;               // flag for input file load errors
         let firstTimeFlag = true;               // first entering getQuestionReady
-        //let questionAnswerPicked = [];          // random question picked 
+        let questionAnswerPicked = [];          // random question picked 
         let currentQuestion;
         let currentAnswer;
         let questionsAlreadyAsked = [];         // store questions already asked (so we don't ask again)
@@ -167,7 +168,6 @@
         let countdown = 0;                      // used to set timer, after question is read, user only has 15 seconds to start answer question
         let needNextQuestion = false;
 
-        let isAnswerReceived = false;           // Flag to ensure that we don't keep calling evaluateAnswer until the user answers
 
         let userAnswer = '';
         let allAnswers = [];                    // collecting all users answers temporarily
@@ -243,12 +243,12 @@
                 // First time flag off
                 firstTimeFlag = false;
                 // Pick random quesiton from testQuestions
-                getRandomQuestion(testQuestions)                
+                getRandomQuestion(testQuestions);                
                 // Increment questions asked
                 questionsAsked++;
             }
         } // end getQuestionReady
-         
+
         function getRandomQuestion(testQuestions) {
             // Pick random question and store in questionAnswerPicked
             const randomIndex = Math.floor(Math.random() * testQuestions.length);
@@ -298,7 +298,7 @@
         function startTimer(timeLeft){
             // start timer countdown
             countdown = setInterval(function() {
-                if (timeLeft >= 1 && !isAnswerReceived) {
+                if (timeLeft >= 1) {
                     timeLeft--;
                     document.getElementById('timer').innerText = timeLeft;
 
@@ -306,7 +306,7 @@
                     startListening();
                 
                     // evaluate answer
-                    evaluateAnswer(userAnswer, currentAnswer)
+                    //evaluateAnswer(userAnswer, currentAnswer)
                     
                 } else {
                     clearInterval(countdown); 
@@ -329,20 +329,30 @@
             recognition.maxAlternatives = 1;
 
             recognition.onresult = function(event) {
-            userAnswer = event.results[0][0].transcript;
-            console.log('User Answer:', userAnswer);
+                userAnswer = event.results[0][0].transcript;
+                console.log('User Answer:', userAnswer);
+
+                // Continue listening until the user provides a valid answer
+                if (userAnswer.length > 0) {
+                    console.log("Answer received: ", userAnswer);
+                    evaluateAnswer(userAnswer, currentAnswer);  // Evaluate the answer when it's received
+                    recognition.stop();  // Stop listening after receiving the answer
+                } else {
+                    // If no answer was given, keep listening
+                    console.log("No answer received yet, listening again...");
+                    recognition.start();
+                }
             };    
+
             recognition.onerror = function(event) {
                 console.error('Speech Recognition Error:', event.error);
             };
 
-            // if button has been pressed, we stop timer, start listening
+            // When user pressed Answer button, we disable the answer button, stop timer, start listening for answer
             answerButton.addEventListener('click', () => {
+                answerButton.disabled = true;
                 clearInterval(countdown);
-                
-                // Start Speech Recognition when button is clicked
-            //    document.getElementById('answer-button').addEventListener('click', function() {
-                recognition.start();
+                recognition.start(); //Speech Recognition
             });
 
         }
@@ -356,6 +366,15 @@
             console.log("User Response: ", userResponse);
             console.log("Actual Answer: ", actualAnswer);
             console.log("Perfect Score: ", perfectScore);
+            console.log("expectedConsecutiveCorrect:", expectedConsecutiveCorrect);
+            
+                /* can I use this? Do I want to? 
+            // Evaluate the answer
+            if (userResponse.toLowerCase() === actualAnswer.toLowerCase()) {
+                // If the answer is correct, increment the score
+                answersCorrect++;
+                score = (answersCorrect * 100) / questionsAsked; */
+
 
             //did the user say anything?
                 // save the answer off into allAnswers (tuple)
@@ -374,7 +393,7 @@
                                 // yes - is it a perfect score?
                                 if (score === perfectScore) {
                                     // yes - confetti celebration
-                                    confetti();
+                                    CALLconfetti();
                                     // Display "You have mastered X concepts. Going to next exam. See you there!"
                                     // no - nextQuestion()
                                 } else{// no - Is score >= thresholdScore?
@@ -388,13 +407,73 @@
 
         }
 
-        function confetti() {
-            // Simple confetti effect with canvas-confetti library
-            canvasConfetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { x: 0.5, y: 0.5 }
+        function CALLconfetti() {
+            // do this for 5 seconds
+            var duration = 5 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+            // launch a few confetti from the left edge
+            confetti({
+                particleCount: 7,
+                angle: 60,
+                spread: 300,
+                origin: { x: .1 }
             });
+            confetti({
+                particleCount: 7,
+                angle: 60,
+                spread: 300,
+                origin: { x: .2 }
+            });
+            confetti({
+                particleCount: 7,
+                angle: 60,
+                spread: 300,
+                origin: { x: .3 }
+            });
+            confetti({
+                particleCount: 7,
+                angle: 60,
+                spread: 300,
+                origin: { x: .4 }
+            });
+            confetti({
+                particleCount: 7,
+                angle: 60,
+                spread: 300,
+                origin: { x: .5 }
+            });
+            confetti({
+                particleCount: 7,
+                angle: 60,
+                spread: 300,
+                origin: { x: .6}
+            });
+            confetti({
+                particleCount: 7,
+                angle: 60,
+                spread: 300,
+                origin: { x: .7 }
+            });
+            confetti({
+                particleCount: 7,
+                angle: 60,
+                spread: 300,
+                origin: { x: .8 }
+            });
+            confetti({
+                particleCount: 7,
+                angle: 60,
+                spread: 300,
+                origin: { x: .9 }
+            });
+
+            // keep going until we are out of time
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+            }());
         }
         
 
@@ -427,6 +506,5 @@
         
 
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.0/dist/confetti.browser.min.js"></script>
 </body>
 </html>

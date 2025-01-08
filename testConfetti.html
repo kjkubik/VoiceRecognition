@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Confetti Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <button onclick="triggerConfetti()">Celebrate!</button>
+    <script>
+        // do this for 30 seconds
+        var duration = 10 * 1000;
+        var end = Date.now() + duration;
+
+        (function frame() {
+        // launch a few confetti from the left edge
+        confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 300,
+            origin: { x: .1 }
+        });
+        confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 300,
+            origin: { x: .2 }
+        });
+        confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 300,
+            origin: { x: .3 }
+        });
+        confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 300,
+            origin: { x: .4 }
+        });
+        confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 300,
+            origin: { x: .5 }
+        });
+        confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 300,
+            origin: { x: .6}
+        });
+        confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 300,
+            origin: { x: .7 }
+        });
+        confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 300,
+            origin: { x: .8 }
+        });
+        confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 300,
+            origin: { x: .9 }
+        });
+
+        // keep going until we are out of time
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+        }());
+    </script>
+</body>
+</html>
