@@ -157,13 +157,18 @@
         let testQuestions = [];                 // where all input question/answers are put
         let isTestLoaded = false;               // flag for input file load errors
         let firstTimeFlag = true;               // first entering getQuestionReady
-        let questionAnswerPicked = [];          // random question picked 
+        //let questionAnswerPicked = [];          // random question picked 
+        let currentQuestion;
+        let currentAnswer;
         let questionsAlreadyAsked = [];         // store questions already asked (so we don't ask again)
         let questionsAsked = 0;                 // number of questions asked
         let timeLeft = 0;                       // don't want to destroy expectedSeconds, used for de-incrementation
         let expectedSeconds = 15;               // amount of time user has to press the answer button, a stressor to help create stress (so user learns to answer questions under pressure)
         let countdown = 0;                      // used to set timer, after question is read, user only has 15 seconds to start answer question
         let needNextQuestion = false;
+
+        let isAnswerReceived = false;           // Flag to ensure that we don't keep calling evaluateAnswer until the user answers
+
         let userAnswer = '';
         let allAnswers = [];                    // collecting all users answers temporarily
         let answersCorrect = 0;                 // number of answers user got correct
@@ -249,6 +254,9 @@
             const randomIndex = Math.floor(Math.random() * testQuestions.length);
             const randomQuestion = testQuestions[randomIndex];
             questionAnswerPicked = [randomQuestion.question, randomQuestion.answer];
+            currentQuestion = randomQuestion.question;
+            currentAnswer = randomQuestion.answer;
+        
     
             // Add question to questionsAlreadyAsked
             questionsAlreadyAsked.push(randomQuestion);
@@ -290,7 +298,7 @@
         function startTimer(timeLeft){
             // start timer countdown
             countdown = setInterval(function() {
-                if (timeLeft >= 1) {
+                if (timeLeft >= 1 && !isAnswerReceived) {
                     timeLeft--;
                     document.getElementById('timer').innerText = timeLeft;
 
@@ -298,7 +306,7 @@
                     startListening();
                 
                     // evaluate answer
-                    evaluateAnswer(userAnswer, randomQuestion.answer)
+                    evaluateAnswer(userAnswer, currentAnswer)
                     
                 } else {
                     clearInterval(countdown); 
@@ -340,6 +348,15 @@
         }
 
         function evaluateAnswer(userResponse, actualAnswer){
+            questionsAsked = 10;
+            score = 100;
+            
+            console.log("Questions Asked: ", questionsAsked);
+            console.log("Score: ", score);
+            console.log("User Response: ", userResponse);
+            console.log("Actual Answer: ", actualAnswer);
+            console.log("Perfect Score: ", perfectScore);
+
             //did the user say anything?
                 // save the answer off into allAnswers (tuple)
                 // display users answer on the screen
@@ -353,9 +370,11 @@
                             //Display "You Passed. Going to next exam. See you there!"
                         // else answersCorrect = expectedCorrectAnswers
                             // has user answered 10 questions?
+                            if (questionsAsked === expectedConsecutiveCorrect){
                                 // yes - is it a perfect score?
-                                if (score = perfectScore) {
+                                if (score === perfectScore) {
                                     // yes - confetti celebration
+                                    confetti();
                                     // Display "You have mastered X concepts. Going to next exam. See you there!"
                                     // no - nextQuestion()
                                 } else{// no - Is score >= thresholdScore?
@@ -365,15 +384,19 @@
                                         // no - Display "More practice is needed. We'll get you there! We're going to X Lesson."
                                     }  
                                 }
-
-
-
-                        let expectedCorrectAnswers = 20;        // required number user must get right
-        let expectedConsecutiveCorrect = 10;    // required 
-
-
+                            }
 
         }
+
+        function confetti() {
+            // Simple confetti effect with canvas-confetti library
+            canvasConfetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { x: 0.5, y: 0.5 }
+            });
+        }
+        
 
          /* else {
                 // Not first time, pick a new random question not asked already
@@ -404,5 +427,6 @@
         
 
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.0/dist/confetti.browser.min.js"></script>
 </body>
 </html>
