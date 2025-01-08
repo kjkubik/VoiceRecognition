@@ -188,11 +188,11 @@
         
         
         
-        // Speech Recognition setup
-        //const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        //recognition.lang = 'en-US';
-        //recognition.interimResults = false;
-        //recognition.maxAlternatives = 1;
+        // Speech Recognition Setup
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
         
         // Elements
         const questionContainer = document.getElementById('question-container');
@@ -274,11 +274,8 @@
             
             // Event listener for when speech has finished
             utterance.onend = function() {
-            
-            // Start timer AFTER question is read aloud
-            getTimerReady();
+                getTimerReady();
             };
-        
             window.speechSynthesis.speak(utterance);
         } // end readQuestionAloud
 
@@ -322,39 +319,36 @@
          // end startTimer
 
          function startListening(){
-            // Speech Recognition Setup
-            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-            recognition.lang = 'en-US';
-            recognition.interimResults = false;
-            recognition.maxAlternatives = 1;
 
-            recognition.onresult = function(event) {
-                userAnswer = event.results[0][0].transcript;
-                console.log('User Answer:', userAnswer);
-
-                // Continue listening until the user provides a valid answer
-                if (userAnswer.length > 0) {
-                    console.log("Answer received: ", userAnswer);
-                    evaluateAnswer(userAnswer, currentAnswer);  // Evaluate the answer when it's received
-                    recognition.stop();  // Stop listening after receiving the answer
-                } else {
-                    // If no answer was given, keep listening
-                    console.log("No answer received yet, listening again...");
-                    recognition.start();
-                }
-            };    
-
-            recognition.onerror = function(event) {
-                console.error('Speech Recognition Error:', event.error);
-            };
-
-            // When user pressed Answer button, we disable the answer button, stop timer, start listening for answer
+            //When user presses Answer button, we disable the answer button, stop timer, start listening for answer
             answerButton.addEventListener('click', () => {
                 answerButton.disabled = true;
-                clearInterval(countdown);
-                recognition.start(); //Speech Recognition
-            });
+                clearInterval(countdown); //restart the countdown
 
+                // if recognition is running, stop it (before starting a new one)
+                if (recognition.recognizing) {
+                    recognition.stop(); // Stop recognition if it's currently running
+                } 
+                
+                recognition.start(); //Speech Recognition
+                
+
+                recognition.onresult = function(event) {
+                    userAnswer = event.results[0][0].transcript;
+                    console.log('User Answer:', userAnswer);
+    
+                    // Continue listening until the user provides a valid answer
+                    if (userAnswer.length > 0) {
+                        console.log("Answer received: ", userAnswer);
+                        evaluateAnswer(userAnswer, currentAnswer);  // Evaluate the answer when it's received
+                        recognition.stop();  // Stop listening after receiving the answer
+                    } 
+                };
+
+                recognition.onerror = function(event) {
+                    console.error('Speech Recognition Error:', event.error);
+                };
+            });
         }
 
         function evaluateAnswer(userResponse, actualAnswer){
@@ -409,7 +403,7 @@
 
         function CALLconfetti() {
             // do this for 5 seconds
-            var duration = 5 * 1000;
+            var duration = .2 * 1000;
             var end = Date.now() + duration;
 
             (function frame() {
