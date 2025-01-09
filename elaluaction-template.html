@@ -255,25 +255,32 @@
             if (firstTimeFlag) {
                 firstTimeFlag = false;
                 getRandomQuestion(testQuestions);                
-                questionsAsked++;
+                
             } else { // not first time
+                let questionFound = false;
                 getRandomQuestion(testQuestions);   
-                questionsAsked++;
-
-                if (questionsAlreadyAsked.includes(currentQuestion)) {
-                    // currentQuestion is already in questionsAlreadyAsked
-                    console.log("This question has already been asked.");
-                    getRandomQuestion(testQuestions);
-                    questionsAsked++
-                } else {
-                    // currentQuestion is not in questionsAlreadyAsked
-                    console.log("This is a new question.");
-                    getQuestionReady(testQuestions);
-                    questionsAsked++;
-                    needNextQuestion = false; 
+                
+                // Keep trying to get a new random question that hasn't been asked
+                while (!questionFound) {
+                    getRandomQuestion(testQuestions);  // Pick a random question
+                
+                    if (!questionsAlreadyAsked.includes(currentQuestion)) {
+                        console.log("This is a new question.");
+                        // Add current question to questionsAlreadyAsked
+                        questionsAlreadyAsked.push(currentQuestion);
+                        questionFound = true;
+                        questionsAsked++;
+                    } else {
+                        // currentQuestion is already in questionsAlreadyAsked
+                        console.log("This question has already been asked.");
+                    }
                 }
-
             }
+                // Check if there are more questions left
+                if (questionsAsked >= testQuestions.length) {
+                    console.log("All questions have been asked.");
+                    return; // Stop if all questions have been asked
+                }
         } // end getQuestionReady
 
         function getRandomQuestion(testQuestions) {
@@ -287,13 +294,13 @@
         
     
             // Add current question to questionsAlreadyAsked
-            questionsAlreadyAsked.push(randomQuestion);
+            //questionsAlreadyAsked.push(randomQuestion);
     
             // Display the question and answer
             questionContainer.innerText = randomQuestion.question;
             answerContainer.innerText = randomQuestion.answer; // TODO: Comment out when done testing
     
-            // Read the question aloud
+            // Read question aloud
             readTextAloud(randomQuestion.question);
         } // end getRandomQuestion
 
@@ -311,16 +318,16 @@
         function getTimerReady() {
             console.log("getTimerReady()");
             timeLeft = expectedSeconds;
-            if(!needNextQuestion){
+            if(needNextQuestion){
+                needNextQuestion = false; // this is where i want to set needNextQuestion to false because 
+                // NOTE: getQuestionReady(testQuestions); you call nextQuestion() which calls getQuestionReady => getRandomQuestion => readTextAloud => getTimerReady 
+                // so all you have to do is startTimer()
                 document.getElementById('timer').innerText = timeLeft;  // Display initial time
                 startTimer(timeLeft);
-                
-            } else { 
-                // needNextQuestion = true
-                getQuestionReady(testQuestions);
-                startTimer(timeLeft);
-                //needNextQuestion = true; 
 
+            } else { 
+                document.getElementById('timer').innerText = timeLeft;  // Display initial time
+                startTimer(timeLeft);
             }   
         } // end getTimerReady
 
@@ -335,13 +342,14 @@
                     // listen for user to press Answer button, then change speech to string
                     startListening();
                 } else {
+    
+                    console.log("Time has ran down and we need user to press 'Next Question'.");
                     clearInterval(countdown); 
                     statusContainer.innerText = "Time's up! Press 'Next Question' to continue.";
                     needNextQuestion = true;
-                    console.log("This is a new question.");
-                    getQuestionReady(testQuestions);
-                    questionsAsked++;
-                    needNextQuestion = false;
+                    nextButton.disabled = false; // Enable the next question button
+                    //getQuestionReady(testQuestions);
+                    //questionsAsked++;
                 } 
             }, 1000);   
         }            
@@ -419,11 +427,12 @@
             
             // Is the answer correct? (returns Boolean value)
             if (checkAnswer(userResponse, correctAnswer)) {
+                
                 answersCorrect++;  // Increment the number of correct answers
                 userScore = (answersCorrect * 100) / questionsAsked;
-                
-                // Display the score
+                                // Display the score
                 document.getElementById('score-container').innerText = `Correct: ${answersCorrect}/${questionsAsked}`;
+                updateProgress();
 
                 console.log("questionsAsked:", questionsAsked);
                 console.log("answersCorrect: ", answersCorrect);
@@ -462,6 +471,8 @@
                         console.log("TEST: 10 questions have not been asked yet");
                         if (userScore >= thresholdScore) {
                             console.log("TEST: the student's score is high enough to continue.");
+                            statusContainer.innerText = "Press Next Question.";
+                            needNextQuestion = true; 
                             nextQuestion();  // Proceed to the next question
                         } else {
                             console.log("TEST: the student's score is not high enough to continue.");
@@ -473,12 +484,15 @@
                     }
                 }
             } else {
+                updateProgress();
                 // Has the user answered 10 questions correctly?
                 if (questionsAsked === expectedConsecutiveCorrect) {
                     console.log("TEST: the student has answered 10 questions.");
 
                     if (userScore >= thresholdScore) {
                         console.log("TEST: the student's score is high enough to continue.");
+                        statusContainer.innerText = "Press Next Question.";
+                        needNextQuestion = true; 
                         nextQuestion();  // Proceed to the next question
                     } else {
                         console.log("TEST: the student's score is not high enough to continue.");
@@ -490,7 +504,7 @@
                 }    
                 console.log("TEST: question is wrong.");
             } 
-            updateProgress();
+            
         }
 
         // Compare user answer with correct answer using NLP
@@ -524,16 +538,31 @@
             document.getElementById('progress').style.width = `${progress}%`;
         }
 
+        // handle nextButton
         function nextQuestion() {
             console.log("nextQuestion()");
-            nextButton.disabled = false; // READY TO PRESS
+            
+            if (needNextQuestion){
 
-            nextButton.addEventListener('click', () => {
-                nextButton.disabled = true; // CANNOT PRESS
-                answerButton.disabled = false; // CAN PRESS
+                // Disable the next button to prevent multiple clicks
+                nextButton.disabled = true;
+
+                // Reset flag and load next question
+                needNextQuestion = false;
+                
+                // Proceed to the next question
                 getQuestionReady(testQuestions);
-                //                getTimerReady();
-            });
+
+                //nextButton.disabled = false; // READY TO PRESS
+               // nextButton.addEventListener('click', () => {
+                    //nextButton.disabled = true; // CANNOT PRESS
+                    //answerButton.disabled = false; // CAN PRESS
+                    
+               //     getQuestionReady(testQuestions);
+                    
+               // });
+            }
+            
         }
 
         function triggerConfetti() {
