@@ -195,7 +195,7 @@
         let userAnswer = '';                    // answer recorded using Speech Recognition
         let allAnswers = [];                    // collecting all users answers temporarily
         let answersCorrect = 0;                 // number of answers user got correct
-        let score = 0;                          // calculate score, displayed on screen
+        let userScore = 0;                          // calculate score, displayed on screen
         let expectedCorrectAnswers = 20;        // required number user must get right
         let expectedConsecutiveCorrect = 10;    // required 
         let thresholdScore = 80;                // lowest possible score user can have to move on
@@ -203,6 +203,7 @@
         let isRunning = false;
         let manager; // Declare a global variable for the NLP manager   
         
+
         // Elements
         const questionContainer = document.getElementById('question-container');
         const answerContainer = document.getElementById('answer-container');
@@ -212,22 +213,24 @@
         const startButton = document.getElementById('start-button');
         const nextButton = document.getElementById('next-button');
         const answerButton = document.getElementById('answer-button');
-        const answersList = document.getElementById ('answers-list')
+        const answersList = document.getElementById ('answers-list');
+        const progressBar = document.getElementById ('progress')
         
         // Start Button Event Listener
         document.getElementById('start-button').addEventListener('click', function() {
-            TakeExam();  
+            takeExam();  
             this.disabled = true;  
         });
         
-        async function TakeExam() {
+        async function takeExam() {
+            console.log("takeExam()");
             fetch('resources/json/testdatatype.json')
                 .then(response => response.json())
                 .then(data => {
                     testQuestions = data;
                     console.log('Questions loaded:', testQuestions);
-                    isTestLoaded = true;  // Mark the test as loaded
-                    getQuestionReady(testQuestions); // Call getQuestionReady after the data is loaded
+                    isTestLoaded = true;
+                    getQuestionReady(testQuestions);
                     
                 })
                 .catch(error => {
@@ -236,6 +239,7 @@
         }
         
         function getQuestionReady(testQuestions) {
+            console.log("getQuestionReady()");
             
             if (!isTestLoaded){
                 console.error("Questions are not loaded.");
@@ -249,25 +253,22 @@
             
             // Are we here for the first time?
             if (firstTimeFlag) {
-                
-                // First time flag off
                 firstTimeFlag = false;
-                // Pick random quesiton from testQuestions
                 getRandomQuestion(testQuestions);                
-                // Increment questions asked
                 questionsAsked++;
-            } else {
-                // not first time
+            } else { // not first time
                 getRandomQuestion(testQuestions);   
+                questionsAsked++;
 
                 if (questionsAlreadyAsked.includes(currentQuestion)) {
                     // currentQuestion is already in questionsAlreadyAsked
                     console.log("This question has already been asked.");
-                    
+                    getRandomQuestion(testQuestions);
+                    questionsAsked++
                 } else {
                     // currentQuestion is not in questionsAlreadyAsked
                     console.log("This is a new question.");
-                    getQuestionReady();
+                    getQuestionReady(testQuestions);
                     questionsAsked++;
                     needNextQuestion = false; 
                 }
@@ -276,6 +277,7 @@
         } // end getQuestionReady
 
         function getRandomQuestion(testQuestions) {
+            console.log("getRandomQuestion()");
             // Pick random question and store in questionAnswerPicked
             const randomIndex = Math.floor(Math.random() * testQuestions.length);
             const randomQuestion = testQuestions[randomIndex];
@@ -296,6 +298,7 @@
         } // end getRandomQuestion
 
         function readTextAloud(text) {
+            console.log("readTextAloud()");
             const utterance = new SpeechSynthesisUtterance(text);
             
             // Event listener for when speech has finished
@@ -306,6 +309,7 @@
         } // end readQuestionAloud
 
         function getTimerReady() {
+            console.log("getTimerReady()");
             timeLeft = expectedSeconds;
             if(!needNextQuestion){
                 document.getElementById('timer').innerText = timeLeft;  // Display initial time
@@ -315,25 +319,29 @@
                 // needNextQuestion = true
                 getQuestionReady(testQuestions);
                 startTimer(timeLeft);
-                needNextQuestion = true; 
+                //needNextQuestion = true; 
 
             }   
         } // end getTimerReady
 
         function startTimer(timeLeft){
+            console.log("startTimer()");
             // start timer countdown
             countdown = setInterval(function() {
                 if (timeLeft >= 1) {
                     timeLeft--;
                     document.getElementById('timer').innerText = timeLeft;
-
+                    answerButton.disabled = false;
                     // listen for user to press Answer button, then change speech to string
                     startListening();
                 } else {
                     clearInterval(countdown); 
                     statusContainer.innerText = "Time's up! Press 'Next Question' to continue.";
                     needNextQuestion = true;
-                    getTimerReady();
+                    console.log("This is a new question.");
+                    getQuestionReady(testQuestions);
+                    questionsAsked++;
+                    needNextQuestion = false;
                 } 
             }, 1000);   
         }            
@@ -343,7 +351,7 @@
          // end startTimer
 
          function startListening(){
-
+            console.log("startListening()");
             //When user presses Answer button, we disable the answer button, stop timer, start listening for answer
             answerButton.addEventListener('click', () => {
                 answerButton.disabled = true;
@@ -367,11 +375,9 @@
 
                 recognition.onresult = function(event) {
                     userAnswer = event.results[0][0].transcript;
-                    console.log('User Answer:', userAnswer);
-    
-                    // did the user say anything?
+                    
+                    // has question been answered verbally?
                     if (userAnswer.length > 0) {
-                        console.log("Answer received: ", userAnswer);
                         stageAnswer(userAnswer, correctAnswer);  // Evaluate the answer when it's received
                         recognition.stop();  // Stop listening after receiving the answer
                     } 
@@ -384,11 +390,12 @@
         }
 
         function stageAnswer(userResponse, correctAnswer){
-            
+            console.log("stageAnswer()");
+
             console.log("Questions Asked: ", questionsAsked);
-            console.log("Score: ", score);
-            console.log("User Response: ", userResponse);
-            console.log("Actual Answer: ", correctAnswer);
+            console.log("userScore: ", userScore);
+            
+            
             console.log("Perfect Score: ", perfectScore);
             console.log("expectedConsecutiveCorrect:", expectedConsecutiveCorrect);
             
@@ -408,106 +415,129 @@
         }
         
         function evaluateAnswer(userResponse, correctAnswer) {
-            console.log("evaluateAnswer: ", userResponse);
-
-            if (compareAnswers(userResponse, correctAnswer)) {
-                //const correctAnswer = document.getElementById('answer-button').dataset.correctAnswer;
+            console.log("evaluateAnswer()");
+            
+            // Is the answer correct? (returns Boolean value)
+            if (checkAnswer(userResponse, correctAnswer)) {
                 answersCorrect++;  // Increment the number of correct answers
-                score = (answersCorrect * 100) / questionsAsked;  // Calculate the score
-                console.log("Score:", score);
-
+                userScore = (answersCorrect * 100) / questionsAsked;
+                
                 // Display the score
                 document.getElementById('score-container').innerText = `Correct: ${answersCorrect}/${questionsAsked}`;
-                //scoreContainer.innerText = `Score: ${score}%`;
 
-                console.log("right before if statment ");
+                console.log("questionsAsked:", questionsAsked);
                 console.log("answersCorrect: ", answersCorrect);
                 console.log("expectedConsecutiveCorrect: ", expectedConsecutiveCorrect);
+                console.log("userScore: ", userScore);
+                console.log("thresholdScore: ", thresholdScore);
 
                 // Check if the user has answered enough questions correctly
                 if (answersCorrect === expectedConsecutiveCorrect) {
-                    console.log("if statement");
+                    console.log("TEST: the student has answered enough questions to move to next exam.");
                     triggerConfetti();
                     statusContainer.innerText = "You Passed. Going to next exam. See you there!";
                 } else {
-                    console.log("else statement");
-                    console.log("questionsAsked:", questionsAsked);
-                    console.log("expectedConsecutiveCorrect: ", expectedConsecutiveCorrect);
-
+                    console.log("TEST: the student has not answer enough questions to move to next exam.");
                     // Has the user answered 10 questions correctly?
                     if (questionsAsked === expectedConsecutiveCorrect) {
-                        console.log("this question asked")
-                        if (score === perfectScore) {
-                            console.log("the user answered all questions right.")
+                        console.log("TEST: the student has answered 10 questions.");
+                        if (userScore === perfectScore) {
+                            console.log("TEST: the student has a perfect score.");
                             triggerConfetti();
                             statusContainer.innerText = "You have mastered X concepts. Going to next exam. See you there!";
                         } else {
-                            console.log("getting ready to check if score is above the lowest acceptable score.");
-                            console.log("score: ", score);
-                            console.log("thresholdScore: ", thresholdScore);
-                            if (score >= thresholdScore) {
-                                
-
+                            console.log("TEST: the student does not have a perfect score.");
+                            if (userScore >= thresholdScore) {
+                                console.log("TEST: the student's score is high enough to continue.");
                                 nextQuestion();  // Proceed to the next question
                             } else {
-                                // Display all answers and notify the user they need more practice
+                                console.log("TEST: the student's score is not high enough to continue.");
                                 
+                                // Display all answers and notify the user they need more practice
                                 answersList.innerText = "Here are all your answers: " + allAnswers.join(', ') + ".";
                                 statusContainer.innerText = "More practice is needed. We'll get you there! We're going to X Lesson.";
                             }
                         }
                     } else {
-                        console.log("the questions asked aren't up to 10 yet")
-                        // Has the user answered 10 questions correctly?
-                        if (questionsAsked === expectedConsecutiveCorrect) {
-                            console.log("this question asked")
+                        console.log("TEST: 10 questions have not been asked yet");
+                        if (userScore >= thresholdScore) {
+                            console.log("TEST: the student's score is high enough to continue.");
+                            nextQuestion();  // Proceed to the next question
+                        } else {
+                            console.log("TEST: the student's score is not high enough to continue.");
                             
-                            if (score >= thresholdScore) {
-                                nextQuestion();  // Proceed to the next question
-                            } else {
-                                // Display all answers and notify the user they need more practice
-                                
-                                answersList.innerText = "Here are all your answers: " + allAnswers.join(', ') + ".";
-                                statusContainer.innerText = "More practice is needed. We'll get you there! We're going to X Lesson.";
-                            }
+                            // Display all answers and notify the user they need more practice
+                            answersList.innerText = "Here are all your answers: " + allAnswers.join(', ') + ".";
+                            statusContainer.innerText = "More practice is needed. We'll get you there! We're going to X Lesson.";
                         }
                     }
                 }
             } else {
-                console.log("else: answer was wrong")
-            }
-            questionsAsked++;
+                // Has the user answered 10 questions correctly?
+                if (questionsAsked === expectedConsecutiveCorrect) {
+                    console.log("TEST: the student has answered 10 questions.");
+
+                    if (userScore >= thresholdScore) {
+                        console.log("TEST: the student's score is high enough to continue.");
+                        nextQuestion();  // Proceed to the next question
+                    } else {
+                        console.log("TEST: the student's score is not high enough to continue.");
+                        
+                        // Display all answers and notify the user they need more practice
+                        answersList.innerText = "Here are all your answers: " + allAnswers.join(', ') + ".";
+                        statusContainer.innerText = "More practice is needed. We'll get you there! We're going to X Lesson.";
+                    }
+                }    
+                console.log("TEST: question is wrong.");
+            } 
             updateProgress();
         }
 
         // Compare user answer with correct answer using NLP
-        function compareAnswers(userResponse, correctAnswer) {
+        function checkAnswer(userResponse, correctAnswer) {
+            console.log("checkAnswer()");
+            console.table({ userResponse, correctAnswer });
+
+            // Is the answer correct?
             const userDoc = nlp(userResponse);  // Process user answer using compromise
             const correctDoc = nlp(correctAnswer);  // Process correct answer using compromise
+            
             const userTokens = userDoc.nouns().out('array').concat(userDoc.verbs().out('array'));
+            console.log("NLP resulting userTokens: ", userTokens);
             const correctTokens = correctDoc.nouns().out('array').concat(correctDoc.verbs().out('array'));
+            console.log("NLP resulting correctTokens: ", correctTokens);
             const commonTokens = userTokens.filter(token => correctTokens.includes(token));
+            console.log("NLP resulting commonTokens: ", commonTokens);
             const matchRatio = commonTokens.length / correctTokens.length;
+            console.log("NLP resulting Ratio: ", matchRatio);
+
+            // returns Boolean value
             return matchRatio >= 0.6;  // Match ratio threshold for correctness (60%)
+            
+            
         }
 
         // Update the progress bar
         function updateProgress() {
+            console.log("updateProgress()");
             const progress = (answersCorrect / questionsAsked) * 100;
             document.getElementById('progress').style.width = `${progress}%`;
         }
 
         function nextQuestion() {
-            console.log("In nextQuestion()");
+            console.log("nextQuestion()");
             nextButton.disabled = false; // READY TO PRESS
 
             nextButton.addEventListener('click', () => {
                 nextButton.disabled = true; // CANNOT PRESS
-                getQuestionReady();
+                answerButton.disabled = false; // CAN PRESS
+                getQuestionReady(testQuestions);
+                //                getTimerReady();
             });
         }
 
         function triggerConfetti() {
+            console.log("triggerConfetti()");
             // do this for 5 seconds
             var duration = .2 * 1000;
             var end = Date.now() + duration;

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer with start and reset button</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .timer {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Timer</h1>
+        <div id="timer-container">Time Left: <span id="timer">45</span> minutes</div>
+        <button id="start-button">Start Game</button>
+        
+        <div id="status"></div>
+    </div>    
+    <script>
+        let countdown; // Declare the timer globally
+        let expectedMinutes = 45; // 45 minutes for the first cycle (27000 seconds)
+        let expectedMinutes2 = 15; // 15 minutes for the second cycle (900 seconds)
+        let whichSeconds = 0;
+        let timeLeftInSeconds = 0;  // Initialize the time limit in seconds
+        
+        // Get elements from the DOM
+        const timerDisplay = document.getElementById('timer');
+        const startButton = document.getElementById('start-button');
+        const statusContainer = document.getElementById('status'); 
+        
+        // Start button event listener
+        startButton.addEventListener('click', function() {
+                startTimer();
+        });
+    
+        // Function to start the timer countdown
+        function startTimer() {
+            timeLeftInSeconds = expectedMinutes * 60;  // Convert minutes to seconds
+            whichSeconds = 1;
+            console.log("startTimer()");
+            console.log("whichSeconds: ", whichSeconds);
+            isRunning = true;
+            startButton.disabled = true;  // Disable the Start button while timer is running
+            countdown = setInterval(function() {
+                if (timeLeftInSeconds >= 1){
+                    timeLeftInSeconds--;
+                    updateTimerDisplay();  // Update the display each second
+                }
+                else {  
+                    if (whichSeconds === 1) {
+                        const text = "Time's up! You are done coding!";
+                        statusContainer.innerText = text;
+                        whichSeconds = 2;
+                        timeLeftInSeconds = expectedMinutes2 * 60; // Switch to the second time cycle (in seconds)
+                    } else {
+                        const text = "Time's up! You are done cleaning!";
+                        statusContainer.innerText = text; 
+                        whichSeconds = 1; 
+                        timeLeftInSeconds = expectedMinutes * 60; // Switch back to the first cycle (in seconds)
+                    }
+                    readTextAloud(text); 
+                    clearInterval(countdown); // Stop the timer when it reaches zero
+                    startTimer(); // Start the next cycle with the new time
+                }
+                
+            }, 1000); // Update timer every second
+        }
+        
+        // Function to update the timer display in MM:SS format
+        function updateTimerDisplay() {
+            let minutes = Math.floor(timeLeftInSeconds / 60);  // Convert seconds to minutes
+            let seconds = timeLeftInSeconds % 60;  // Get the remaining seconds
+            
+            // Display in MM:SS format, ensure two digits for seconds
+            timerDisplay.innerText = `${formatTime(minutes)}:${formatTime(seconds)}`;
+        }
+        
+        // Function to format time to always show two digits (e.g., 05 for 5)
+        function formatTime(time) {
+            return time < 10 ? '0' + time : time;
+        }
+    
+        // Function to read the text aloud
+        function readTextAloud(text) {
+            console.log("readTextAloud()");
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            window.speechSynthesis.speak(utterance);
+        } // end readTextAloud
+    </script>
+    
+</body>
+</html>

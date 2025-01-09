@@ -5,7 +5,7 @@
     },
     {
         "question": "What are the boolean values?",
-        "answer": "the boolean values are true and false"
+        "answer": "true and false"
     },
     {
         "question": "What does the bool() function do?",
@@ -13,7 +13,7 @@
     },
     {
         "question": "What is the output of True + False?",
-        "answer": "true plus false is one therefore the output is one"
+        "answer": "the output is one"
     },
     {
         "question": "What numeric value represents False when using the bool() function?",
