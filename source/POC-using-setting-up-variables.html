@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title"></title>
+</head>
+<body>
+    <h1 id="heading"></h1>
+    <div id="data-container"></div>
+
+    <script>
+        // Sample variables
+        const title = "Verbal Evaluation - DataTypes";
+        const jsonUrl = 'resources/json/testdatatype.json';
+
+        // Dynamically set title
+        document.getElementById('title').textContent = title;
+
+        // Fetch data from JSON
+        fetch(jsonUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Dynamically set the heading and populate data container with JSON data
+                document.getElementById('heading').textContent = data.heading;
+                document.getElementById('data-container').textContent = JSON.stringify(data, null, 2);
+            })
+            .catch(error => console.error('Error loading the JSON data:', error));
+    </script>
+</body>
+</html>
