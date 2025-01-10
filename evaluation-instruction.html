@@ -350,10 +350,10 @@
         });
 
         function nextQuestionRoutine() {
-            nextButton.disabled = false;
+            nextButton.disabled = false; // user can presse
 
             nextButton.addEventListener('click', () => {
-                nextButton.disabled = true;
+                nextButton.disabled = true; 
                 getQuestionReady();
                 
                 //evaluateAnswer();

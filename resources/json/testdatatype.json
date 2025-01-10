@@ -5,7 +5,7 @@
     },
     {
         "question": "What are the boolean values?",
-        "answer": "true and false"
+        "answer": "the boolean values are true and false"
     },
     {
         "question": "What does the bool() function do?",
@@ -24,51 +24,43 @@
         "answer": "any non-zero number or non-empty string or list is true"
     },
     {
-        "question": "How do you check if a variable is of type bool?",
-        "answer": "use is instance with variable and bool in parentheses"
+        "question": "How do you replace a substring in a string?",
+        "answer": "Use replace()."
     },
     {
-        "question": "What are the boolean values?",
-        "answer": "true and false"
+        "question": "How do you check if a string is an integer?",
+        "answer": "Use isdigit method."
     },
     {
-        "question": "What does the bool() function do?",
-        "answer": "converts a value to its boolean equivalent"
+        "question": "How do you convert a string to lowercase?",
+        "answer": "Use lower method."
     },
     {
-        "question": "What is the output of True + False?",
-        "answer": "the output is one"
+        "question": "How do you convert a string to uppercase?",
+        "answer": "Use upper method."
     },
     {
-        "question": "What numeric value represents False when using the bool() function?",
-        "answer": "the numeric value representing false is zero"
+        "question": "How do you find the ASCII value of a character?",
+        "answer": "Use ord function."
     },
     {
-        "question": "What value (or values) represent True when using the bool() function?",
-        "answer": "any non-zero number or non-empty string or list is true"
+        "question": "How do you get the character from an ASCII value?",
+        "answer": "Use chr function."
     },
     {
-        "question": "How do you check if a variable is of type bool?",
-        "answer": "use is instance with variable and bool in parentheses"
+        "question": "How do you format a string with a specific number of decimals?",
+        "answer": "Use f-strings within curly braces, place the string followed by a colon, then the number of decimal points with the letter f."
     },
     {
-        "question": "What are the boolean values?",
-        "answer": "true and false"
+        "question": "How do you join multiple strings with a separator?",
+        "answer": "Use separator\".join(list_of_strings).\""
     },
     {
-        "question": "What does the bool() function do?",
-        "answer": "converts a value to its boolean equivalent"
+        "question": "How do you join multiple strings within a list or tuple using a separator?",
+        "answer": "use a separator with the join method."
     },
     {
-        "question": "What is the output of True + False?",
-        "answer": "the output is one"
-    },
-    {
-        "question": "What numeric value represents False when using the bool() function?",
-        "answer": "the numeric value representing false is zero"
-    },
-    {
-        "question": "What value (or values) represent True when using the bool() function?",
-        "answer": "any non-zero number or non-empty string or list is true"
+        "question": "What does `max()` do when applied to a list of strings?",
+        "answer": "It returns the lexicographically largest string."
     }
 ]
