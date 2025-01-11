@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verbal Evaluation - DataTypes</title>
+    <title>Verbal Evaluation</title>
     <style>
    /* General Reset */
         * {
@@ -156,7 +156,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Verbal Evaluation Game</h1>
+        <h1>Verbal Evaluation</h1>
         <div id="question-container">Press the <strong>Start Evaluation</strong> button to begin.</div>
         <button id="start-button">Start Evaluation</button>
         <button id="next-button" disabled>Next Question</button>
@@ -262,16 +262,6 @@
         function getQuestionReady(testQuestions) {
             console.log("getQuestionReady()");
             
-            if (!isTestLoaded){
-                console.error("Questions are not loaded.");
-                return; // If questions are not loaded, return early to prevent errors
-            } else {
-                if (testQuestions.length === 0) {
-                    console.error("The question file is empty.");
-                    return; // If questions are not loaded, return early to prevent errors
-                }    
-            }
-
             // Are we here for the first time?
             if (firstTimeFlag) {
                 firstTimeFlag = false;
