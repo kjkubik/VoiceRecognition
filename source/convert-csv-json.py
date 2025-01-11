@@ -2,14 +2,14 @@ import csv
 import json
 
 # Open the CSV file and read it
-with open('resources/csv/testdatatype.csv', mode='r', newline='', encoding='utf-8') as file:
+with open('resources/csv/string_question_and_answers.csv', mode='r', newline='', encoding='utf-8') as file:
     reader = csv.DictReader(file)
     
     # Prepare a list to store the filtered questions and answers
     filtered_data = []
 
     # Define the categories we are interested in
-    valid_categories = ["boolean", "string", "number"]
+    valid_categories = ["string"]
     
     # Loop through each row and check the category
     for row in reader:
@@ -21,7 +21,7 @@ with open('resources/csv/testdatatype.csv', mode='r', newline='', encoding='utf-
             })
     
     # Write the filtered data to a JSON file
-    with open('resources/json/testdatatype.json', mode='w', encoding='utf-8') as json_file:
+    with open('resources/json/string_questions_and_answers.json', mode='w', encoding='utf-8') as json_file:
         json.dump(filtered_data, json_file, indent=4)
 
 print("Data filtered and saved to filtered_data.json")

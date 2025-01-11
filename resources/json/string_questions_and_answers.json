@@ -1,0 +1,150 @@
+[
+    {
+        "question": "What function would you used to convert a string to an int?",
+        "answer": "the int function"
+    },
+    {
+        "question": "How do you access the first character of the string 'Python'?",
+        "answer": "use index 0 of the python"
+    },
+    {
+        "question": "How do you check if a string contains only digits?",
+        "answer": "use the string is digit method"
+    },
+    {
+        "question": "How do you check if a substring exists in a string?",
+        "answer": "you can use the in operator the find method the index method or regular expression search"
+    },
+    {
+        "question": "When using the plus operator to concatenate two strings, what needs to be considered?",
+        "answer": "if you want spaces in between strings"
+    },
+    {
+        "question": "How do you convert a string to a list of words?",
+        "answer": "use the split method"
+    },
+    {
+        "question": "How do you convert an integer to a string?",
+        "answer": "using the string method"
+    },
+    {
+        "question": "When declaring a string, what characters are used to enclose the string?",
+        "answer": "single or double quotes"
+    },
+    {
+        "question": "How do you get a character from an ASCII value?",
+        "answer": "use the chr function"
+    },
+    {
+        "question": "How do you get the ASCII value of a character?",
+        "answer": "use the ord function"
+    },
+    {
+        "question": "What is the purpose of the strip() method?",
+        "answer": "The strip() method removes leading and trailing whitespace from a string"
+    },
+    {
+        "question": "What is the result of using the plus sign between two strings you are printing?",
+        "answer": "\"the two strings are placed side by side with no space between them\""
+    },
+    {
+        "question": "What function would you used with one = '1' and two = '2' to get output 3?",
+        "answer": "the int function"
+    },
+    {
+        "question": "What would you use to get a string to go to uppercase?",
+        "answer": "\"use strings upper method\""
+    },
+    {
+        "question": "What happens if you attempt to apply the method lowercase to a string with numbers in it?",
+        "answer": "\"the characters in the string are only changed to lowercase"
+    },
+    {
+        "question": "How is name = 'Bob' and NAME = 'Bob'?",
+        "answer": "\"there value is the same"
+    },
+    {
+        "question": "How do you get the memory location of a variable",
+        "answer": "\"use the function id"
+    },
+    {
+        "question": "Is a string a mutable or immutable object?",
+        "answer": "\"immutable\""
+    },
+    {
+        "question": "What is a variable name that is only uses capital letters?",
+        "answer": "a constant"
+    },
+    {
+        "question": "Is there any difference between the treatment of a constant and a variable in Python?",
+        "answer": "\"no"
+    },
+    {
+        "question": "Can we use reserved keywords as a variable name?",
+        "answer": "\"no\""
+    },
+    {
+        "question": "How do you create a string literal?",
+        "answer": "\"by either using single or double quotes\""
+    },
+    {
+        "question": "What is used to create a multi-line strings?",
+        "answer": "\"triple quotes or double quotes\""
+    },
+    {
+        "question": "How do you find the type of an object?",
+        "answer": "\"use the type function\""
+    },
+    {
+        "question": "What is the function used to capitalize strings?",
+        "answer": "\"capitalize\""
+    },
+    {
+        "question": "What is the function used to capitalize every first letter of each word in a string?",
+        "answer": "\"title\""
+    },
+    {
+        "question": "What is the 'str' in the 'str.join()' method?",
+        "answer": "\"it is the separator used between elements in the iterable\""
+    },
+    {
+        "question": "If you use the 'str.join()' method on a set, what will the results be?",
+        "answer": "\"sets are unordered collections you cannot guarantee the resulting string\""
+    },
+    {
+        "question": "How do you reverse a string?",
+        "answer": "use slicing the reverse function or a loop"
+    },
+    {
+        "question": "What does string.replace('old', 'new') do?",
+        "answer": "it replaces all occurrences of the old sting with the new string in a string"
+    },
+    {
+        "question": "What is slicing strings?",
+        "answer": "slicing in strings allows extracting a part of the string"
+    },
+    {
+        "question": "What is the difference between + and join() when combining strings?",
+        "answer": "The + operator concatenates strings, while join is more efficient at joining multiple strings in a sequence"
+    },
+    {
+        "question": "What is the result of Python\" * 3?\"",
+        "answer": "the string python python python"
+    },
+    {
+        "question": "What is the result of len(Python\")?\"",
+        "answer": "it returns the number six"
+    },
+    {
+        "question": "How do you check if a string is a palindrome?",
+        "answer": "compare the string with its reverse"
+    },
+    {
+        "question": "How do you convert a string to lowercase?",
+        "answer": "use string lower method"
+    },
+    {
+        "question": "What does `max()` do when applied to a list of strings?",
+        "answer": "it returns the lexicographically largest string"
+    }
+]

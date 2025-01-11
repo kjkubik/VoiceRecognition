@@ -25,42 +25,266 @@
     },
     {
         "question": "How do you replace a substring in a string?",
-        "answer": "Use replace()."
+        "answer": "Use replace()"
     },
     {
         "question": "How do you check if a string is an integer?",
-        "answer": "Use isdigit method."
+        "answer": "Use isdigit method"
     },
     {
         "question": "How do you convert a string to lowercase?",
-        "answer": "Use lower method."
+        "answer": "Use lower method"
     },
     {
         "question": "How do you convert a string to uppercase?",
-        "answer": "Use upper method."
+        "answer": "Use upper method"
     },
     {
         "question": "How do you find the ASCII value of a character?",
-        "answer": "Use ord function."
+        "answer": "Use ord function"
     },
     {
         "question": "How do you get the character from an ASCII value?",
-        "answer": "Use chr function."
+        "answer": "Use chr function"
     },
     {
         "question": "How do you format a string with a specific number of decimals?",
-        "answer": "Use f-strings within curly braces, place the string followed by a colon, then the number of decimal points with the letter f."
+        "answer": "Use f-strings within curly braces, place the string followed by a colon, then the number of decimal points with the letter f"
     },
     {
         "question": "How do you join multiple strings with a separator?",
-        "answer": "Use separator\".join(list_of_strings).\""
+        "answer": "Use separator\"join(list_of_strings)\""
     },
     {
         "question": "How do you join multiple strings within a list or tuple using a separator?",
-        "answer": "use a separator with the join method."
+        "answer": "use a separator with the join method"
     },
     {
         "question": "What does `max()` do when applied to a list of strings?",
-        "answer": "It returns the lexicographically largest string."
+        "answer": "It returns the lexicographically largest string"
+    },
+    {
+        "question": "How do you check if a variable is of type bool?",
+        "answer": "Using isinstance placing the variable and bool within parenthesis, separated by a comma"
+    },
+    {
+        "question": "What are the boolean values?",
+        "answer": "True and False"
+    },
+    {
+        "question": "What does the bool() function do?",
+        "answer": "changes a value to its boolean equivalent"
+    },
+    {
+        "question": "What is the output of True + False?",
+        "answer": "One"
+    },
+    {
+        "question": "What is the output of boolean({1,2,3,4})?",
+        "answer": "True"
+    },
+    {
+        "question": "What numeric value represents False when using the bool() function?",
+        "answer": "zero"
+    },
+    {
+        "question": "What is the result of bool(None)?",
+        "answer": "False"
+    },
+    {
+        "question": "What is the output of `type(314)`?",
+        "answer": "class float"
+    },
+    {
+        "question": "How do you convert a float to an integer?",
+        "answer": "Using int"
+    },
+    {
+        "question": "How do you find the absolute value of a number?",
+        "answer": "Use abs"
+    },
+    {
+        "question": "How do you find the square root of a number?",
+        "answer": "use the square root function found in math library"
+    },
+    {
+        "question": "What is the difference between an integer and a float?",
+        "answer": "Float has a decimal point"
+    },
+    {
+        "question": "What is the output of `divmod(8, 3)`?",
+        "answer": "two comma two"
+    },
+    {
+        "question": "What is the result of 3 + 50?",
+        "answer": "eight point zero"
+    },
+    {
+        "question": "What is the result of int(384)?",
+        "answer": "three"
+    },
+    {
+        "question": "What will be the output of type(3)?",
+        "answer": "class 'int'"
+    },
+    {
+        "question": "What is the output of 2**3?",
+        "answer": "eight"
+    },
+    {
+        "question": "What is the result of int('10')?",
+        "answer": "ten represented as a number"
+    },
+    {
+        "question": "What is the result of int('1a')?",
+        "answer": "a Value Error"
+    },
+    {
+        "question": "How do you round a floating-point number to 2 decimal places?",
+        "answer": "use the round function"
+    },
+    {
+        "question": "How do you check if a number is even or odd?",
+        "answer": "use the modulus operator"
+    },
+    {
+        "question": "Can a string be used as a number?",
+        "answer": "No, not unless the string has a numeric value"
+    },
+    {
+        "question": "How do you access the first character of a string?",
+        "answer": "Use indexing The zero index of the string"
+    },
+    {
+        "question": "How do you change the case of a string (to uppercase)?",
+        "answer": " use the upper() method"
+    },
+    {
+        "question": "How do you check if a string contains only digits?",
+        "answer": "Use the isdigit method"
+    },
+    {
+        "question": "How do you check if a substring exists in a string?",
+        "answer": "use the in operator"
+    },
+    {
+        "question": "How do you concatenate two strings?",
+        "answer": "using the + operator"
+    },
+    {
+        "question": "Can you use the join method to concatenate two strings?",
+        "answer": "yes"
+    },
+    {
+        "question": "How do you convert a string to a list of words?",
+        "answer": "Use split method"
+    },
+    {
+        "question": "How do you convert an integer to a string?",
+        "answer": "using the string function"
+    },
+    {
+        "question": "How do you declare a string?",
+        "answer": "using a variable, place the string in single or double quotes"
+    },
+    {
+        "question": "How do you format a string using f-strings?",
+        "answer": "begin string with the letter f, then double quotes for all string values you need to add and curly brasses for any variable you need displayed"
+    },
+    {
+        "question": "How do you get a character from an ASCII value?",
+        "answer": "Use the chr() function"
+    },
+    {
+        "question": "How do you get the ASCII value of a character?",
+        "answer": "using the ord() function"
+    },
+    {
+        "question": "How do you join a list of strings into a single string?",
+        "answer": "use the join method"
+    },
+    {
+        "question": "How do you reverse a string?",
+        "answer": "Use slicing with a colon colon minus 1"
+    },
+    {
+        "question": "How do you split a string into a list?",
+        "answer": "use the split() method"
+    },
+    {
+        "question": "What does stringreplace('old', 'new') do?",
+        "answer": "replaces all occurrences of 'old' with 'new' in a string"
+    },
+    {
+        "question": "What is slicing strings used for?",
+        "answer": "extracting a part of the string"
+    },
+    {
+        "question": "What is the difference between + and join() when combining strings?",
+        "answer": "join is faster with large concatenations allocates memory once and a separator can be used"
+    },
+    {
+        "question": "Can a list contain any datatype?",
+        "answer": "Yes"
+    },
+    {
+        "question": "What is the purpose of the strip() method?",
+        "answer": "It removes leading and trailing whitespace from a string"
+    },
+    {
+        "question": "What is the result of Python times (*) 3?",
+        "answer": "a string with three Pythons"
+    },
+    {
+        "question": "What is the result of len('Python')?",
+        "answer": "six"
+    },
+    {
+        "question": "How do you check if a string is a palindrome?",
+        "answer": "Compare the string with its reverse"
+    },
+    {
+        "question": "How do you split a string into a list of words?",
+        "answer": "Use split() method"
+    },
+    {
+        "question": "How do you replace a substring in a string?",
+        "answer": "Use replace()"
+    },
+    {
+        "question": "How do you check if a string is an integer?",
+        "answer": "Use isdigit method"
+    },
+    {
+        "question": "How do you convert a string to lowercase?",
+        "answer": "Use lower method"
+    },
+    {
+        "question": "How do you convert a string to uppercase?",
+        "answer": "Use upper method"
+    },
+    {
+        "question": "How do you find the ASCII value of a character?",
+        "answer": "Use ord function"
+    },
+    {
+        "question": "How do you get the character from an ASCII value?",
+        "answer": "Use chr function"
+    },
+    {
+        "question": "How do you format a string with a specific number of decimals?",
+        "answer": "Use f-strings within curly braces, place the string followed by a colon, then the number of decimal points with the letter f"
+    },
+    {
+        "question": "How do you join multiple strings with a separator?",
+        "answer": "Use separator\"join(list_of_strings)\""
+    },
+    {
+        "question": "How do you join multiple strings within a list or tuple using a separator?",
+        "answer": "use a separator with the join method"
+    },
+    {
+        "question": "What does `max()` do when applied to a list of strings?",
+        "answer": "It returns the lexicographically largest string"
     }
 ]
