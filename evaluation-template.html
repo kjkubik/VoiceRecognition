@@ -230,22 +230,34 @@
             getQuestionReady(testQuestions);  // Load the next question
         });
 
-        
         async function takeExam() {
             console.log("takeExam()");
-            fetch('resources/json/testdatatype.json')
-                .then(response => response.json())
-                .then(data => {
+
+            // Get the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const fileName = urlParams.get('file'); // Get the file name from the URL
+            
+            console.log("urlParams: ", urlParams);
+            console.log("fileName: ", fileName);
+        
+            if (fileName){
+                // Now you have the file name, you can load the JSON file
+                try {
+                    const response = await fetch(`resources/json/${fileName}`);
+                    const data = await response.json();
+                    
                     testQuestions = data;
                     console.log('Questions loaded:', testQuestions);
-                    isTestLoaded = true;
+
                     getQuestionReady(testQuestions);
-                    
-                })
-                .catch(error => {
+                } catch (error) {
                     console.error("Error loading questions:", error);
-                });
+                }
+            } else {
+                console.error("No file parameter provided.");
+            }
         }
+    
         
         function getQuestionReady(testQuestions) {
             console.log("getQuestionReady()");

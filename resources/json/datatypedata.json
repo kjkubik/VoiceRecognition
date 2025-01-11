@@ -2,6 +2,7 @@
   {
       "question": "What is this number's datatype: 3.2?",
       "answer": "float "
+    
   },
   {
       "question": "What function do we use to find the datatype of a value?",

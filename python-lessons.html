@@ -81,6 +81,10 @@
             circle.setAttribute('cy', point.y);
             circle.setAttribute('r', 6); // Size of the stop
             circle.setAttribute('class', 'lesson');
+             // Assign the lesson number based on index
+            const lessonNumber = index + 1;
+            console.log("lessonNumber:", lessonNumber);
+
             circle.setAttribute('data-lesson', index + 1);
             circle.addEventListener('click', () => completeLesson(index + 1));
             svg.appendChild(circle);
@@ -92,11 +96,102 @@
         // Apply the zoom-out effect by scaling the SVG
         const svg = document.getElementById('sineCurve');
         svg.style.transform = 'scale(0.2)'; // Shrink the SVG to 20% of its size
+
+
+
         
         // Wait for the animation to complete (1 second duration)
         setTimeout(() => {
-            // After the zoom-out, navigate to a new page (e.g., lesson1.html)
-            window.location.href = `evaluation-instruction.html`; // Navigate to the new lesson page
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 2){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'string_questions_and_answers.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
+            if (lessonNumber === 1){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
+                window.location.href = `evaluation-template.html`; // Navigate to the new lesson page
+            }
         }, 1000); // 1000ms (1 second) delay to match the zoom-out duration
     }
 
