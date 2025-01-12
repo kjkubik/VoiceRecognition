@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verbal Evaluation</title>
+    <title>String Datatype Evaluation</title>
     <style>
    /* General Reset */
         * {
@@ -156,7 +156,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 id="title-given"></h1>
+        <h1>Verbal Evaluation Game</h1>
         <div id="question-container">Press the <strong>Start Evaluation</strong> button to begin.</div>
         <button id="start-button">Start Evaluation</button>
         <button id="next-button" disabled>Next Question</button>
@@ -204,13 +204,6 @@
         let isRunning = false;
         let manager; // Declare a global variable for the NLP manager   
         
-        let voices = []; // Declare voices globally so you can reuse them
-
-        // Event listener to update the voices list once they are loaded
-        window.speechSynthesis.onvoiceschanged = function() {
-            voices = speechSynthesis.getVoices();
-            console.log("Available voices:", voices); // Log available voices for debugging
-        }
 
         // Elements
         const questionContainer = document.getElementById('question-container');
@@ -223,23 +216,7 @@
         const answerButton = document.getElementById('answer-button');
         const answersList = document.getElementById ('answers-list');
         const progressBar = document.getElementById ('progress')
-        const titleGiven = document.getElementById ('title-given')
         
-        // Get the URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const fileName = urlParams.get('file'); // Get the file name from the URL
-        const titleToGive = urlParams.get('title'); 
-
-        console.log("urlParams: ", urlParams);
-        console.log("fileName: ", fileName);
-        console.log("titleToGive: ", titleToGive);
-
-        // If title is provided, set it to the <h1> element
-        if (titleToGive) {
-            document.getElementById('title-given').textContent = titleToGive;
-        }
-        
-
         // Start Button Event Listener
         document.getElementById('start-button').addEventListener('click', function() {
             takeExam();  
@@ -253,37 +230,36 @@
             getQuestionReady(testQuestions);  // Load the next question
         });
 
+        
         async function takeExam() {
             console.log("takeExam()");
-
-            // Get the URL parameters
-            //const urlParams = new URLSearchParams(window.location.search);
-            //const fileName = urlParams.get('file'); // Get the file name from the URL
-            
-            //console.log("urlParams: ", urlParams);
-            //console.log("fileName: ", fileName);
-        
-            if (fileName){
-                // Now you have the file name, you can load the JSON file
-                try {
-                    const response = await fetch(`resources/json/${fileName}`);
-                    const data = await response.json();
-                    
+            fetch('resources/json/string_questions_and_answers.json')
+                .then(response => response.json())
+                .then(data => {
                     testQuestions = data;
                     console.log('Questions loaded:', testQuestions);
-
+                    isTestLoaded = true;
                     getQuestionReady(testQuestions);
-                } catch (error) {
+                    
+                })
+                .catch(error => {
                     console.error("Error loading questions:", error);
-                }
-            } else {
-                console.error("No file parameter provided.");
-            }
+                });
         }
-    
+        
         function getQuestionReady(testQuestions) {
             console.log("getQuestionReady()");
             
+            if (!isTestLoaded){
+                console.error("Questions are not loaded.");
+                return; // If questions are not loaded, return early to prevent errors
+            } else {
+                if (testQuestions.length === 0) {
+                    console.error("The question file is empty.");
+                    return; // If questions are not loaded, return early to prevent errors
+                }    
+            }
+
             // Are we here for the first time?
             if (firstTimeFlag) {
                 firstTimeFlag = false;
@@ -338,19 +314,7 @@
 
         function readTextAloud(text) {
             console.log("readTextAloud()");
-            //voices = speechSynthesis.getVoices();
-            const voiceSelected = voices.find(voice => voice.name === "Microsoft Zira - English (United States)"); //|| voices[2];
-
-            if (voiceSelected) {
-                console.log("Selected voice:", voiceSelected.name); // Log the selected voice
-            } else {
-                console.log("No suitable voice found.");
-            }
-        
             const utterance = new SpeechSynthesisUtterance(text);
-
-            // Explicitly set the selected voice for the utterance
-            utterance.voice = voiceSelected; // This should come after creating the utterance
             
             // Event listener for when speech has finished
             utterance.onend = function() {
@@ -597,8 +561,6 @@
 
         function triggerConfetti() {
             console.log("triggerConfetti()");
-
-            clearInterval(countdown);  // Stop the timer when the answer button is clicked
             // do this for 5 seconds
             var duration = .2 * 1000;
             var end = Date.now() + duration;

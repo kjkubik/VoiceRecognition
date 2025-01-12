@@ -1,0 +1,58 @@
+[
+    {
+        "question": "What is the output of 'type(3.14)'?",
+        "answer": "class 'float'"
+    },
+    {
+        "question": "How do you convert a float to an integer?",
+        "answer": "using the int() function"
+    },
+    {
+        "question": "How do you find the absolute value of a number?",
+        "answer": "Use abs function."
+    },
+    {
+        "question": "How do you find the square root of a number?",
+        "answer": "Use maths square root function or the exponentiation operator"
+    },
+    {
+        "question": "What is the difference between an integer and a float?",
+        "answer": "An integer is a whole number. A float is a number with a decimal point."
+    },
+    {
+        "question": "What is the output of 'divmod(8, 3)'?",
+        "answer": "It returns two comma two the quotient and the remainder."
+    },
+    {
+        "question": "What is the result of 3 + 5.5?",
+        "answer": "The result is eight point five python will convert three to a float"
+    },
+    {
+        "question": "What is the result of 'int(3.14)'?",
+        "answer": "three the decimal part is truncated."
+    },
+    {
+        "question": "What will be the output of 'type(3)'?",
+        "answer": "class 'int'."
+    },
+    {
+        "question": "What is the output of 2**3?",
+        "answer": "eight"
+    },
+    {
+        "question": "What is the result of 'int(''10'')'",
+        "answer": "integer 10."
+    },
+    {
+        "question": "How do you round a floating-point number to 2 decimal places?",
+        "answer": "Use the round function."
+    },
+    {
+        "question": "How do you check if a number is even or odd?",
+        "answer": "comparing the number using modulo 2 by zero for even and the number using modulo 2 != 0 for odd."
+    },
+    {
+        "question": "What is the exponentiation operator used for?",
+        "answer": "It is used to raise a number to a power."
+    }
+]

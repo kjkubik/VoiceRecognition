@@ -74,21 +74,37 @@
         path.setAttribute('d', pathData);
         svg.appendChild(path);
 
-        // Add the lesson stops (interactive points)
         points.forEach((point, index) => {
             const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
             circle.setAttribute('cx', point.x);
             circle.setAttribute('cy', point.y);
-            circle.setAttribute('r', 6); // Size of the stop
+            circle.setAttribute('r', 50); // Size of the stop
             circle.setAttribute('class', 'lesson');
-             // Assign the lesson number based on index
+        
+            // Assign the lesson number based on index
             const lessonNumber = index + 1;
             console.log("lessonNumber:", lessonNumber);
-
-            circle.setAttribute('data-lesson', index + 1);
-            circle.addEventListener('click', () => completeLesson(index + 1));
+        
+            // Create a text element to show the lesson number inside the circle
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute('x', point.x);  // Same x as circle
+            text.setAttribute('y', point.y);  // Same y as circle
+            text.setAttribute('text-anchor', 'middle'); // Center the text horizontally
+            text.setAttribute('dy', '5'); // Adjust vertical position slightly to center the text inside the circle
+            text.setAttribute('fill', 'black'); // Text color
+        
+            // Set the lesson number as the text content
+            text.textContent = lessonNumber;
+        
+            // Add event listener to the circle
+            circle.setAttribute('data-lesson', lessonNumber);
+            circle.addEventListener('click', () => completeLesson(lessonNumber));
+        
+            // Append the circle and text to the SVG container
             svg.appendChild(circle);
+            svg.appendChild(text);  // Ensure the text is appended separately
         });
+        
     }
 
     // Function to handle lesson completion and zoom-out effect
@@ -104,6 +120,18 @@
                 // After the zoom-out, navigate to a new page (e.g., lesson1.html)
                 const fileName = 'testdatatype.json'; // You can dynamically change this based on user input
                 const titleToGive = 'Testing Data Type'
+                window.location.href = `evaluation-template.html?file=${fileName}&title=${titleToGive}`; // Pass the file name as a query parameter
+            }
+            if (lessonNumber === 2){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'string_questions_and_answers.json'; // You can dynamically change this based on user input
+                const titleToGive = 'String Data Type'
+                window.location.href = `evaluation-template.html?file=${fileName}&title=${titleToGive}`; // Pass the file name as a query parameter
+            }
+            if (lessonNumber === 3){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'numeric_questions_and_answers.json'; // You can dynamically change this based on user input
+                const titleToGive = 'Numeric Data Types'
                 window.location.href = `evaluation-template.html?file=${fileName}&title=${titleToGive}`; // Pass the file name as a query parameter
             }
             

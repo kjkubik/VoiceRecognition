@@ -5,7 +5,7 @@
     },
     {
         "question": "How do you access the first character of the string Python?",
-        "answer": "use index 0 of the python"
+        "answer": "use index 0 of the string python"
     },
     {
         "question": "How do you check if a string contains only digits?",
@@ -41,7 +41,7 @@
     },
     {
         "question": "What is the purpose of the strip() method?",
-        "answer": "the strip method removes leading and trailing whitespace from a string"
+        "answer": "the strip method removes any spaces at the beginning or end of a string"
     },
     {
         "question": "What is the result of using the plus sign between two strings you are printing?",
@@ -60,8 +60,8 @@
         "answer": "the characters in the string are only changed to lowercase"
     },
     {
-        "question": "How is name = 'Bob' and NAME = 'Bob'?",
-        "answer": "there value is the same"
+        "question": "Differentiate between name = 'Bob' and NAME = 'Bob'?",
+        "answer": "there value will be the same, they may even occupy the same memory"
     },
     {
         "question": "How do you get the memory location of a variable",
@@ -72,15 +72,15 @@
         "answer": "immutable"
     },
     {
-        "question": "What is a variable name that is only uses capital letters?",
+        "question": "What is a variable name called that only uses capital letters?",
         "answer": "a constant"
     },
     {
-        "question": "Is there any difference between the treatment of a constant and a variable in Python?",
+        "question": "Yes or No. Is there any difference between the treatment of a constant and a variable in Python?",
         "answer": "no"
     },
     {
-        "question": "Can we use reserved keywords as a variable name?",
+        "question": "Yes or no. Can we use reserved keywords as a variable name?",
         "answer": "no"
     },
     {
@@ -88,8 +88,8 @@
         "answer": "by either using single or double quotes"
     },
     {
-        "question": "What is used to create a multi-line strings?",
-        "answer": "triple quotes or double quotes"
+        "question": "What is used at the beginning and end of multi-line strings?",
+        "answer": "triple quotes or triple double quotes"
     },
     {
         "question": "How do you find the type of an object?",
@@ -117,34 +117,34 @@
     },
     {
         "question": "What does string.replace('old', 'new') do?",
-        "answer": "it replaces all occurrences of the old sting with the new string in a string"
+        "answer": "it replaces all occurrences of the old string with the new string in a string"
     },
     {
         "question": "What is slicing strings?",
-        "answer": "slicing in strings allows extracting a part of the string"
+        "answer": "slicing strings allows the extraction of part of a string"
     },
     {
-        "question": "What is the difference between + and join() when combining strings?",
-        "answer": "the plus operator concatenates strings, while join is more efficient at joining multiple strings in a sequence"
+        "question": "What is the difference between + and str.join() when combining strings?",
+        "answer": "the plus operator does not have any way of separating strings join does"
     },
     {
         "question": "What is the result of Python times three?",
         "answer": "the string python python python"
     },
     {
-        "question": "What is the result of len(Python)",
-        "answer": "it returns the number six"
+        "question": "What is the value returned of len('Python')",
+        "answer": "six"
     },
     {
         "question": "How do you check if a string is a palindrome?",
-        "answer": "compare the string with its reverse"
+        "answer": "reverse the string then compare it to the original string"
     },
     {
         "question": "How do you convert a string to lowercase?",
-        "answer": "use string lower method"
+        "answer": "use strings lower method"
     },
     {
         "question": "What does `max()` do when applied to a list of strings?",
-        "answer": "it returns the lexicographically largest string"
+        "answer": "it looks through the list and finds the string alphabetically to be last"
     }
 ]

@@ -108,14 +108,18 @@
 # print(string.lower())
 
 #5)
-# name = "Bob"
-# NAME = "Bob"
+name = "Bob"
+NAME = "Bob"
 # NAME = "Sue"
 # print (name, NAME)
 
-# if name == NAME :
-#     print(type(name))
-#     print(type(NAME))
+if name == NAME :
+    
+    print(name)
+    print(NAME)
+    print(type(name))
+    print(type(NAME))
+
 
 #6)
 # print("Memory location of 'NAME':", id(NAME))
@@ -146,23 +150,23 @@
 # print (while)
 
 
-"What is the result of using the plus sign between two strings you are printing?", "the two strings are placed side by side with no space between them" 
-"What function would you used with one = '1' and two = '2' to get output 3?","the int function" 
-"What would you use to get a string to go to uppercase?", "use the upper method"
-"What happens if you attempt to apply the method lowercase to a string with numbers in it?", "the characters in the string are only changed to lowercase, numbers are not" 
-"How is name = 'Bob' and NAME = 'Bob'?", "there value is the same, they have the same memory location" 
-"How do you get the memory location of a variable", "use the function id, the identity of an object, its memory address"
-"Is a string a mutable or immutable object?", "immutable"
-"What is a variable name that is only uses capital letters?","a constant"
-"Is there any difference between the treatment of a constant and a variable in Python?", "no, it is up to the programmer how the constant is used"
-"Can we use reserved keywords as a variable name?", "no" 
-"How do you create a string literal?", "By either using single or double quotes"
-"What is used to create a multi-line strings?", "triple quotes or double quotes"
-"How do you find the type of an object?", "use the type function"
-"What is the function used to capitalize strings?", "capitalize"
-"What is the function used to capitalize every first letter of each word in a string?", "title"
-"What is the 'str' in the 'str.join()' method?", "it is the separator used between elements in the iterable"
-"If you use the 'str.join()' method on a set, what will the results be?", "sets are unordered collections you cannot guarantee the resulting string"
+# "What is the result of using the plus sign between two strings you are printing?", "the two strings are placed side by side with no space between them" 
+# "What function would you used with one = '1' and two = '2' to get output 3?","the int function" 
+# "What would you use to get a string to go to uppercase?", "use the upper method"
+# "What happens if you attempt to apply the method lowercase to a string with numbers in it?", "the characters in the string are only changed to lowercase, numbers are not" 
+# "How is name = 'Bob' and NAME = 'Bob'?", "there value is the same, they have the same memory location" 
+# "How do you get the memory location of a variable", "use the function id, the identity of an object, its memory address"
+# "Is a string a mutable or immutable object?", "immutable"
+# "What is a variable name that is only uses capital letters?","a constant"
+# "Is there any difference between the treatment of a constant and a variable in Python?", "no, it is up to the programmer how the constant is used"
+# "Can we use reserved keywords as a variable name?", "no" 
+# "How do you create a string literal?", "By either using single or double quotes"
+# "What is used to create a multi-line strings?", "triple quotes or double quotes"
+# "How do you find the type of an object?", "use the type function"
+# "What is the function used to capitalize strings?", "capitalize"
+# "What is the function used to capitalize every first letter of each word in a string?", "title"
+# "What is the 'str' in the 'str.join()' method?", "it is the separator used between elements in the iterable"
+# "If you use the 'str.join()' method on a set, what will the results be?", "sets are unordered collections you cannot guarantee the resulting string"
 
 # book = "How The West Was Won"
 # print(book.capitalize())
@@ -172,7 +176,7 @@
 # string2 = "a mind of"
 # string3 = "my own."
 
-# result = ', '.join([string1, string2, string3])
+# result = ''.join([string1, string2, string3])
 # print(result)
 
 # result = ', '.join({string1, string2, string3})
@@ -189,69 +193,74 @@
 # print(number1)
 # print(number2)
 
-string = "12345"
-print(string.isdigit())  
+# string = "12345"
+# print(string.isdigit())  
 
-string = "a1b2c3"
-print(string.isdigit())  
+# string = "a1b2c3"
+# print(string.isdigit())  
 
-string = "abcde"
-print(string.isdigit())  
+# string = "abcde"
+# print(string.isdigit())  
 
-string = "12.34"
-print(string.isdigit())
+# string = "12.34"
+# print(string.isdigit())
 
-string = "-123"
-print(string.isdigit()) 
+# string = "-123"
+# print(string.isdigit()) 
 
-# the 'in' operator: 
-main_string = "Hello, world!"
-substring = "world"
+# # the 'in' operator: 
+# main_string = "Hello, world!"
+# substring = "world"
 
-# Check if substring exists in the main string
-if substring in main_string:
-    print("Substring found!")
-else:
-    print("Substring not found.")
+# # Check if substring exists in the main string
+# if substring in main_string:
+#     print("Substring found!")
+# else:
+#     print("Substring not found.")
     
-#Using the find() Method
-main_string = "Hello, world!"
-substring = "world"
+# #Using the find() Method
+# main_string = "Hello, world!"
+# substring = "world"
 
-# Check if substring exists in the main string using find()
-position = main_string.find(substring)
+# # Check if substring exists in the main string using find()
+# position = main_string.find(substring)
 
-if position != -1:
-    print(f"Substring found at index {position}")
-else:
-    print("Substring not found.")
+# if position != -1:
+#     print(f"Substring found at index {position}")
+# else:
+#     print("Substring not found.")
     
 
-#Using the index() Method
-main_string = "Hello, world!"
-substring = "world"
+# #Using the index() Method
+# main_string = "Hello, world!"
+# substring = "world"
 
-try:
-    # Check if substring exists in the main string using index()
-    position = main_string.index(substring)
-    print(f"Substring found at index {position}")
-except ValueError:
-    print("Substring not found.")
+# try:
+#     # Check if substring exists in the main string using index()
+#     position = main_string.index(substring)
+#     print(f"Substring found at index {position}")
+# except ValueError:
+#     print("Substring not found.")
     
-#Using Regular Expressions (with the re module)    
-import re
+# #Using Regular Expressions (with the re module)    
+# import re
 
-main_string = "Hello, World!"
-substring = "world"
+# main_string = "Hello, World!"
+# substring = "world"
 
-# Check if substring exists in the main string using regular expressions (case-insensitive)
-if re.search(substring, main_string, re.IGNORECASE):
-    print("Substring found!")
-else:
-    print("Substring not found.")
+# # Check if substring exists in the main string using regular expressions (case-insensitive)
+# if re.search(substring, main_string, re.IGNORECASE):
+#     print("Substring found!")
+# else:
+#     print("Substring not found.")
     
-# Example with lowercase letter 'a'
-ascii_value = 97
-character = chr(ascii_value)
-print(character)
+# # Example with lowercase letter 'a'
+# ascii_value = 97
+# character = chr(ascii_value)
+# print(character)
+
+
+print(len("Python"))
+
+
 
