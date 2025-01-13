@@ -1,0 +1,18 @@
+[
+    {
+        "question": "How do you convert a set into a frozen set?",
+        "answer": "Use frozenset(my_set)."
+    },
+    {
+        "question": "How do you convert a set into a frozen set?",
+        "answer": "Use `frozenset(my_set)`."
+    },
+    {
+        "question": "How do you convert a set to a frozen set?",
+        "answer": "Use `frozenset(my_set)`."
+    },
+    {
+        "question": "What is the purpose of the `frozenset` type?",
+        "answer": "A `frozenset` is an immutable version of a set."
+    }
+]

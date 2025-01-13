@@ -1,0 +1,258 @@
+[
+    {
+        "question": "Can a tuple contain a list?",
+        "answer": "Yes, a tuple can contain a list: (1, [2, 3])."
+    },
+    {
+        "question": "Can a tuple contain mutable objects like lists?",
+        "answer": "Yes, but the tuple itself is immutable, so the objects inside can still be modified/"
+    },
+    {
+        "question": "Can a tuple contain mutable objects like lists?",
+        "answer": "Yes, but the tuple itself is immutable, so the objects inside can still be modified."
+    },
+    {
+        "question": "Can tuples have duplicate elements?",
+        "answer": "Yes, tuples can have duplicate elements."
+    },
+    {
+        "question": "Can you change the value of a tuple after it\u2019s created?",
+        "answer": "No, tuples are immutable."
+    },
+    {
+        "question": "Can you change the values in a tuple?",
+        "answer": "No, you cannot change the values in a tuple after it\u2019s created."
+    },
+    {
+        "question": "Can you use a tuple as a dictionary key?",
+        "answer": "Yes, because tuples are hashable (if they contain only immutable elelments)."
+    },
+    {
+        "question": "Can you use a tuple as a dictionary key?",
+        "answer": "Yes, because tuples are hashable (if they contain only immutable elements)."
+    },
+    {
+        "question": "How can you check if a value exists in a tuple?",
+        "answer": "You check for existence in a tuple with in: 5 in (1, 2, 3) results in False."
+    },
+    {
+        "question": "How do you access elements in a tuple?",
+        "answer": "You access elements in a tuple using indexing: my_tuple[0]."
+    },
+    {
+        "question": "How do you check if a tuple contains a specific element?",
+        "answer": "Use element in my_tuple."
+    },
+    {
+        "question": "How do you check if a tuple contains a specific element?",
+        "answer": "Use `element in my_tuple`."
+    },
+    {
+        "question": "How do you check if two tuples are equal?",
+        "answer": "Use == to compare: tuple1 == tuple2."
+    },
+    {
+        "question": "How do you check if two tuples are equal?",
+        "answer": "Use `==` to compare: `tuple1 == tuple2`."
+    },
+    {
+        "question": "How do you check the number of occurrences of an element in a tuple?",
+        "answer": "Use the count() method: my_tuple.count(element)."
+    },
+    {
+        "question": "How do you check the number of occurrences of an element in a tuple?",
+        "answer": "Use the `count()` method: `my_tuple.count(element)`."
+    },
+    {
+        "question": "How do you concatenate two tuples?",
+        "answer": "You can concatenate two tuples using +: (1, 2) + (3, 4) results in (1, 2, 3, 4)."
+    },
+    {
+        "question": "How do you concatenate two tuples?",
+        "answer": "Use the + operator: tuple1 + tuple2."
+    },
+    {
+        "question": "How do you concatenate two tuples?",
+        "answer": "Use the `+` operator: `tuple1 + tuple2`."
+    },
+    {
+        "question": "How do you convert a list into a tuple?",
+        "answer": "You can convert a list to a tuple using tuple(): tuple([1, 2, 3]) results in (1, 2, 3)."
+    },
+    {
+        "question": "How do you convert a set to a tuple?",
+        "answer": "Use tuple(): tuple(my_set)."
+    },
+    {
+        "question": "How do you convert a tuple to a list?",
+        "answer": "Use the list() function: list(my_tuple)."
+    },
+    {
+        "question": "How do you convert a tuple to a list?",
+        "answer": "Use the `list()` function: `list(my_tuple)`."
+    },
+    {
+        "question": "How do you count the number of occurrences of an element in a tuple?",
+        "answer": "You can count occurrences using the count() method: my_tuple.count(3)."
+    },
+    {
+        "question": "How do you create a tuple with multiple elements?",
+        "answer": "You create it by using parentheses: (1, 2, 3)."
+    },
+    {
+        "question": "How do you create a tuple with multiple elements?",
+        "answer": "You create it by using parentheses: `(1, 2, 3)`."
+    },
+    {
+        "question": "How do you create a tuple with one element?",
+        "answer": "You create a tuple with one element by adding a trailing comma: (5,)."
+    },
+    {
+        "question": "How do you create a tuple with one element?",
+        "answer": "Use a trailing comma: (5,)."
+    },
+    {
+        "question": "How do you create a tuple with one element?",
+        "answer": "Use a trailing comma: `(5,)`."
+    },
+    {
+        "question": "How do you create an empty tuple?",
+        "answer": "An empty tuple is created using () or tuple()."
+    },
+    {
+        "question": "How do you find the index of an element in a tuple?",
+        "answer": "Use my_tuple.index(element)."
+    },
+    {
+        "question": "How do you find the index of an element in a tuple?",
+        "answer": "Use `my_tuple.index(element)`."
+    },
+    {
+        "question": "How do you find the length of a tuple?",
+        "answer": "Use len(my_tuple)."
+    },
+    {
+        "question": "How do you find the length of a tuple?",
+        "answer": "Use `len(my_tuple)`."
+    },
+    {
+        "question": "How do you reverse a tuple?",
+        "answer": "Use slicing: my_tuple[::-1]."
+    },
+    {
+        "question": "How do you reverse a tuple?",
+        "answer": "Use slicing: `my_tuple[::-1]`."
+    },
+    {
+        "question": "How do you unpack a tuple into variables?",
+        "answer": "Use assignment: a, b = my_tuple."
+    },
+    {
+        "question": "How do you unpack a tuple into variables?",
+        "answer": "Use assignment: `a, b = my_tuple`."
+    },
+    {
+        "question": "How do you unpack a tuple?",
+        "answer": "You can unpack a tuple by assigning its elements to variables: x, y = (1, 2)."
+    },
+    {
+        "question": "What happens when you try to append to a tuple?",
+        "answer": "Trying to append to a tuple results in an error because tuples are immutable."
+    },
+    {
+        "question": "What is a tuple?",
+        "answer": "A tuple in Python is an ordered collection of elements, similar to a list but immutable."
+    },
+    {
+        "question": "What is the difference between a tuple and a list?",
+        "answer": "The main difference is that tuples are immutable (cannot be modified) while lists are mutable."
+    },
+    {
+        "question": "What is the immutability property of tuples?",
+        "answer": "Tuples are immutable, meaning their values cannot be modified after creation."
+    },
+    {
+        "question": "What is the result of slicing a tuple like my_tuple[1:3]?",
+        "answer": "The result of slicing a tuple like my_tuple[1:3] is a subtuple: (2, 3)."
+    },
+    {
+        "question": "How do you concatenate two tuples?",
+        "answer": "Use the + operator: tuple1 + tuple2."
+    },
+    {
+        "question": "What happens if you try to assign a value to an element in a tuple?",
+        "answer": "It raises a TypeError since tuples are immutable."
+    },
+    {
+        "question": "How do you find the length of a tuple?",
+        "answer": "Use len(tuple)."
+    },
+    {
+        "question": "How do you create a tuple with a single element?",
+        "answer": "Use a trailing comma: (5,)."
+    },
+    {
+        "question": "How do you unpack a tuple into variables?",
+        "answer": "a, b = my_tuple."
+    },
+    {
+        "question": "How do you reverse a tuple?",
+        "answer": "Use slicing: tuple[::-1]."
+    },
+    {
+        "question": "Can a tuple contain different data types?",
+        "answer": "Yes, a tuple can contain any combination of data types."
+    },
+    {
+        "question": "How do you check if a tuple is empty?",
+        "answer": "Use if not my_tuple:."
+    },
+    {
+        "question": "How do you convert a tuple to a list?",
+        "answer": "Use list(my_tuple)."
+    },
+    {
+        "question": "How do you find the maximum element in a tuple?",
+        "answer": "Use max(): max(my_tuple)."
+    },
+    {
+        "question": "How do you find the minimum element in a tuple?",
+        "answer": "Use min(): min(my_tuple)."
+    },
+    {
+        "question": "How do you count the number of occurrences of an element in a tuple?",
+        "answer": "Use my_tuple.count(element)."
+    },
+    {
+        "question": "How do you check if a tuple contains a specific element?",
+        "answer": "Use element in my_tuple."
+    },
+    {
+        "question": "How do you compare two tuples for equality?",
+        "answer": "Use the == operator: tuple1 == tuple2."
+    },
+    {
+        "question": "How do you iterate over the elements of a tuple?",
+        "answer": "Use a for loop: for element in my_tuple:."
+    },
+    {
+        "question": "What is the result of (1, 2) * 3?",
+        "answer": "(1, 2, 1, 2, 1, 2)\u2014it repeats the tuple three times."
+    },
+    {
+        "question": "Can you add elements to a tuple?",
+        "answer": "No, tuples are immutable."
+    },
+    {
+        "question": "How do you convert a tuple into a set?",
+        "answer": "Use set(my_tuple)."
+    },
+    {
+        "question": "Can you use a tuple as a dictionary key?",
+        "answer": "Yes, as long as the tuple is immutable."
+    },
+    {
+        "question": "How do you find the index of an element in a tuple?",
+        "answer": "Use my_tuple.index(element)."
+    }
+]

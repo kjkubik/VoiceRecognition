@@ -1,0 +1,46 @@
+[
+    {
+        "question": "What does append(x) when using a deque?",
+        "answer": "append(x): Adds x to the right end of the deque."
+    },
+    {
+        "question": "What does appendleft(x) when using a deque?",
+        "answer": "appendleft(x): Adds x to the left end of the deque."
+    },
+    {
+        "question": "What does extend(iterable) when using a deque?",
+        "answer": "extend(iterable): Extends the deque by appending elements from an iterable."
+    },
+    {
+        "question": "What does extendleft(iterable) when using a deque?",
+        "answer": "extendleft(iterable): Extends the deque by appending elements from an iterable to the left end (the elements are added in reverse order)."
+    },
+    {
+        "question": "What does pop() when using a deque?",
+        "answer": "pop(): Removes and returns an element from the right end of the deque."
+    },
+    {
+        "question": "What does popleft() when using a deque?",
+        "answer": "popleft(): Removes and returns an element from the left end of the deque."
+    },
+    {
+        "question": "What does rotate(n) when using a deque?",
+        "answer": "rotate(n): Rotates the deque n steps to the right (positive n) or to the left (negative n)."
+    },
+    {
+        "question": "What is a `deque`?",
+        "answer": "A `deque` is a double-ended queue from the `collections` module, optimized for appending and popping from both ends."
+    },
+    {
+        "question": "What is a deque?",
+        "answer": "data structure from the collections module that allows fast appends and pops from both ends"
+    },
+    {
+        "question": "When do you use a deque?",
+        "answer": "When you need to efficiently add or remove elements from both ends (like implementing a queue or stack)"
+    },
+    {
+        "question": "When to Use deque?",
+        "answer": "If you need a queue that supports both FIFO (First-In-First-Out) and LIFO (Last-In-First-Out) operations efficiently or \r\nwhen you need a sliding window over a sequence of data. Deques are often used in algorithms like breadth-first search (BFS) where you need to access and process elements from both ends."
+    }
+]

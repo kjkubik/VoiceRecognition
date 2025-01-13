@@ -1,0 +1,314 @@
+[
+    {
+        "question": "Can a Python list contain a dictionary as an element?",
+        "answer": "Yes, lists can contain any data type, including dictionaries."
+    },
+    {
+        "question": "How can you check if an element is present in a list?",
+        "answer": "Use the in keyword: element in my_list."
+    },
+    {
+        "question": "How can you check if an element is present in a list?**",
+        "answer": "Use the `in` keyword: `element in my_list`."
+    },
+    {
+        "question": "How can you merge two lists using the `extend()` method?",
+        "answer": "`list1.extend(list2)` adds all elements of `list2` to `list1`."
+    },
+    {
+        "question": "How can you merge two lists using the extend() method?",
+        "answer": "list1.extend(list2) adds all elements of list2 to list1."
+    },
+    {
+        "question": "How do you check if a list is empty?",
+        "answer": "Use if not my_list: or len(my_list) == 0."
+    },
+    {
+        "question": "How do you check if a list is empty?",
+        "answer": "Use `if not my_list:` or `len(my_list) == 0`."
+    },
+    {
+        "question": "How do you convert a string to a list of words?",
+        "answer": "Use split(): Hello world\".split().\""
+    },
+    {
+        "question": "How do you create a list from a string?",
+        "answer": "Use list(). It will create a list of characters."
+    },
+    {
+        "question": "How do you create a list of integers from 0 to 9?",
+        "answer": "Use list(range(10))."
+    },
+    {
+        "question": "How do you create a list of integers from 0 to 9?",
+        "answer": "Use `list(range(10))`."
+    },
+    {
+        "question": "How do you create a list with repeated elements?",
+        "answer": "Use multiplication: [1] * 5 creates [1, 1, 1, 1, 1]."
+    },
+    {
+        "question": "How do you create a list with repeated elements?",
+        "answer": "Use multiplication: `[1] * 5` creates `[1, 1, 1, 1, 1]`."
+    },
+    {
+        "question": "How do you create a shallow copy of a list?",
+        "answer": "Use my_list.copy() or my_list[:]."
+    },
+    {
+        "question": "How do you create a shallow copy of a list?",
+        "answer": "Use `my_list.copy()` or `my_list[:]`."
+    },
+    {
+        "question": "How do you find the smallest element in a list?",
+        "answer": "Use the min() function: min(my_list)."
+    },
+    {
+        "question": "How do you find the smallest element in a list?",
+        "answer": "Use the `min()` function: `min(my_list)`."
+    },
+    {
+        "question": "How do you find the sum of elements in a list?",
+        "answer": "Use the sum() function: sum(my_list)."
+    },
+    {
+        "question": "How do you find the sum of elements in a list?",
+        "answer": "Use the `sum()` function: `sum(my_list)`."
+    },
+    {
+        "question": "How do you remove all occurrences of a specific element from a list?",
+        "answer": "Use a loop or a list comprehension: [x for x in my_list if x != 3] to remove all 3s."
+    },
+    {
+        "question": "How do you remove all occurrences of a specific element from a list?",
+        "answer": "Use a loop or a list comprehension: `[x for x in my_list if x != 3]` to remove all `3`s."
+    },
+    {
+        "question": "How do you remove the last element of a list without using `pop()`?",
+        "answer": "You can use slicing: `my_list[:-1]`."
+    },
+    {
+        "question": "How do you remove the last element of a list without using pop()?",
+        "answer": "You can use slicing: my_list[:-1]."
+    },
+    {
+        "question": "What does max() do when applied to a list of strings?",
+        "answer": "It returns the lexicographically largest string."
+    },
+    {
+        "question": "What does the `clear()` method do in a list?",
+        "answer": "It removes all elements from the list: `my_list.clear()`."
+    },
+    {
+        "question": "What does the clear() method do in a list?",
+        "answer": "It removes all elements from the list: my_list.clear()."
+    },
+    {
+        "question": "What happens if you try to access an out-of-bounds index in a list?",
+        "answer": "It raises an IndexError."
+    },
+    {
+        "question": "What happens if you try to access an out-of-bounds index in a list?",
+        "answer": "It raises an `IndexError`."
+    },
+    {
+        "question": "What is the `sorted()` function used for?",
+        "answer": "It returns a sorted list of elements from any iterable."
+    },
+    {
+        "question": "What is the difference between `append()` and `extend()` in a list?",
+        "answer": "`append()` adds a single element to the end of a list, while `extend()` adds each element of an iterable to the end of a list."
+    },
+    {
+        "question": "What is the difference between `list.sort()` and `sorted(list)`?",
+        "answer": "`list.sort()` sorts the list in place (modifies the original list), while `sorted(list)` returns a new sorted list."
+    },
+    {
+        "question": "What is the difference between append() and extend() in a list?",
+        "answer": "append() adds a single element to the end of a list, while extend() adds each element of an iterable (like a list) to the end of a list."
+    },
+    {
+        "question": "What is the difference between list.sort() and sorted(list)?",
+        "answer": "list.sort() sorts the list in place (modifies the original list), while stored(list) returns a new sorted list."
+    },
+    {
+        "question": "What is the result of [1, 2, 3] * 2?",
+        "answer": "It results in [1, 2, 3, 1, 2, 3] because multiplying a list repeats its elements"
+    },
+    {
+        "question": "What is the result of `[1, 2, 3] * 2`?",
+        "answer": "It results in `[1, 2, 3, 1, 2, 3]` because multiplying a list repeats its elements."
+    },
+    {
+        "question": "What is the sorted() function used for?",
+        "answer": "It returns a sorted list of elements from any iterable."
+    },
+    {
+        "question": "What is the result of [10, 20] + [30, 40]?",
+        "answer": "[10, 20, 30, 40]\u2014this concatenates two lists."
+    },
+    {
+        "question": "How do you create a list with elements ranging from 1 to 10 (inclusive)?",
+        "answer": "Use list(range(1, 11))."
+    },
+    {
+        "question": "How do you remove an element by its index in a list?",
+        "answer": "Use pop(index)."
+    },
+    {
+        "question": "How can you insert an element at a specific position in a list?",
+        "answer": "Use insert(index, element)."
+    },
+    {
+        "question": "How do you replace an element in a list?",
+        "answer": "Assign the new value to the index: my_list[index] = new_value."
+    },
+    {
+        "question": "How do you find the index of the first occurrence of an element in a list?",
+        "answer": "Use index() method: my_list.index(element)."
+    },
+    {
+        "question": "Can a list contain other lists as elements?",
+        "answer": "Yes, lists can contain nested lists."
+    },
+    {
+        "question": "How do you concatenate multiple lists?",
+        "answer": "Use the + operator: list1 + list2 + list3."
+    },
+    {
+        "question": "How do you check the number of elements in a list?",
+        "answer": "Use len()."
+    },
+    {
+        "question": "What is the time complexity of appending an element to a list?",
+        "answer": "It is O(1) on average."
+    },
+    {
+        "question": "How do you remove duplicates from a list?",
+        "answer": "Convert it to a set: list(set(my_list))."
+    },
+    {
+        "question": "How do you check if a list contains multiple elements?",
+        "answer": "Use if all(element in my_list for element in other_elements):."
+    },
+    {
+        "question": "How do you find the most frequent element in a list?",
+        "answer": "Use collections.Counter: Counter(my_list).most_common(1)."
+    },
+    {
+        "question": "How do you make a shallow copy of a list?",
+        "answer": "Use my_list.copy() or my_list[:]."
+    },
+    {
+        "question": "How do you convert a list to a string?",
+        "answer": "Use ''.join(my_list) (for lists of strings)."
+    },
+    {
+        "question": "How do you find the common elements between two lists?",
+        "answer": "Use set(list1) & set(list2)."
+    },
+    {
+        "question": "What is the difference between list sort() and sorted(list)?",
+        "answer": "list.sort() sorts in place, modifying the original list. sorted(list) returns a new sorted list."
+    },
+    {
+        "question": "How do you check if a list is a subset of another list?",
+        "answer": "Use set(list1).issubset(list2)."
+    },
+    {
+        "question": "How do you make all elements of a list uppercase?",
+        "answer": "Use a list comprehension: [x.upper() for x in my_list]."
+    },
+    {
+        "question": "How do you count how many times a specific value appears in a list?",
+        "answer": "Use my_list.count(value)."
+    },
+    {
+        "question": "What does the join() method do?",
+        "answer": "It concatenates a list of strings into a single string."
+    },
+    {
+        "question": "How do you create a set from a list with duplicates?",
+        "answer": "Use set(my_list) to remove duplicates."
+    },
+    {
+        "question": "Can listscontain elements of different data types?",
+        "answer": "Yes, lists can contain elements of different types (e.g., [1, 'apple', 3.14])."
+    },
+    {
+        "question": "Can you have duplicate elements in a Python list?",
+        "answer": "Yes, lists can have duplicate elements (e.g., [1, 1, 2])."
+    },
+    {
+        "question": "How can you find the maximum element in a list?",
+        "answer": "You can find the maximum element using the max() function: max([1, 5, 3]) returns 5."
+    },
+    {
+        "question": "How can you remove the first occurrence of an element from a list?",
+        "answer": "You can remove the first occurrence of an element using the remove() method: my_list.remove(3)."
+    },
+    {
+        "question": "How do you access the last element of a list?",
+        "answer": "You can access the last element of a list using negative indexing: my_list[-1]."
+    },
+    {
+        "question": "How do you append an element to a list?",
+        "answer": "You can append an element to a list using the append() method: my_list.append(5)."
+    },
+    {
+        "question": "How do you count the number of occurrences of an element in a list?",
+        "answer": "You can count occurrences using the count() method: my_list.count(3) counts how many times 3 appears."
+    },
+    {
+        "question": "How do you create a sublist (slice)?",
+        "answer": "A sublist is created using slicing: my_list[1:3] extracts elements at indices 1 and 2."
+    },
+    {
+        "question": "How do you create an empty list?",
+        "answer": "An empty list is created using []."
+    },
+    {
+        "question": "How do you find the index of an element in a list?",
+        "answer": "You can find the index of an element using the index() method: my_list.index(3)."
+    },
+    {
+        "question": "How do you insert an element at a specific index in a list?",
+        "answer": "You insert an element at a specific index using insert(): my_list.insert(1, 10) inserts 10 at index 1."
+    },
+    {
+        "question": "How do you merge two lists?",
+        "answer": "You merge two lists using the + operator: [1, 2] + [3, 4] results in [1, 2, 3, 4]."
+    },
+    {
+        "question": "How do you reverse the order of elements in a list?",
+        "answer": "You can reverse a list using the reverse() method: my_list.reverse()."
+    },
+    {
+        "question": "How do you sort a list?",
+        "answer": "You can sort a list using the sort() method: my_list.sort()."
+    },
+    {
+        "question": "What does the pop() method do?lists?",
+        "answer": "pop() removes and returns the last element of a list: my_list.pop() removes the last element."
+    },
+    {
+        "question": "What is a list?",
+        "answer": "A list in Python is an ordered collection of elements that can be of any type."
+    },
+    {
+        "question": "What is a nested list?",
+        "answer": "A nested list is a list that contains other lists, e.g., [[1, 2], [3, 4]]."
+    },
+    {
+        "question": "What is the difference between remove() and pop()lists?",
+        "answer": "remove() removes the first occurrence of an element, while pop() removes the last element."
+    },
+    {
+        "question": "What will be the output of len([1, 2, 3, 4])?",
+        "answer": "len([1, 2, 3, 4]) returns 4 because there are four elements in the list."
+    },
+    {
+        "question": "What will list([1, 2, 3]) return?",
+        "answer": "list([1, 2, 3]) returns the list [1, 2, 3]."
+    }
+]

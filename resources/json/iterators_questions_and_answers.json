@@ -1,0 +1,50 @@
+[
+    {
+        "question": "What is the purpose of 'enumerate()'?",
+        "answer": "It adds a counter to an iterable and returns it as an enumerate object."
+    },
+    {
+        "question": "What is an iterator in Python?",
+        "answer": "An iterator in Python is an object that allows you to traverse through all the items in a collection, like a list or tuple, one at a time. It implements two main methods: '__iter__()' to return the iterator object itself, and '__next__()' to fetch the next item in the collection."
+    },
+    {
+        "question": "How does an iterator differ from a list in Python?",
+        "answer": "An iterator is an object that generates items one at a time and is typically used in a loop, while a list is a collection that stores all its elements in memory. Iterators don’t store data; they just provide access to it as you need it."
+    },
+    {
+        "question": "What does the '__next__()' method do in an iterator?",
+        "answer": "The '__next__()' method in an iterator returns the next item in the sequence. If there are no more items to return, it raises the 'StopIteration' exception."
+    },
+    {
+        "question": "Can you explain the 'iter()' function in Python?",
+        "answer": "The 'iter()' function is used to return an iterator object from an iterable, such as a list, tuple, or string. It is commonly used when you need to explicitly work with an iterator rather than using a 'for' loop."
+    },
+    {
+        "question": "How can you use an iterator in a 'for' loop?",
+        "answer": "In a 'for' loop, Python automatically calls the 'iter()' function on an iterable to get an iterator, and then uses the '__next__()' method to retrieve the next item from the iterator until the 'StopIteration' exception is raised."
+    },
+    {
+        "question": "What happens when an iterator is exhausted?",
+        "answer": "When an iterator is exhausted, meaning it has no more items to return, it raises the 'StopIteration' exception to signal that there are no more items left to iterate over."
+    },
+    {
+        "question": "What is the purpose of the 'StopIteration' exception?",
+        "answer": "The 'StopIteration' exception is raised to indicate that an iterator has no more items to return. It helps control the flow of loops, like 'for', by telling Python to stop iterating."
+    },
+    {
+        "question": "What is the difference between an iterator and a generator in Python?",
+        "answer": "An iterator is any object that implements the '__iter__()' and '__next__()' methods. A generator, on the other hand, is a special type of iterator created using a function with the 'yield' keyword. Generators are more memory efficient because they generate values one at a time instead of storing them in memory."
+    },
+    {
+        "question": "How can you convert an iterator to a list?",
+        "answer": "You can convert an iterator to a list by passing the iterator to the 'list()' function. This will consume all the items from the iterator and return them as a list."
+    },
+    {
+        "question": "What is the 'next()' function in Python?",
+        "answer": "The 'next()' function in Python is used to get the next item from an iterator. You can also provide a default value that will be returned if the iterator is exhausted, preventing the 'StopIteration' exception."
+    },
+    {
+        "question": "What does reversed() do?",
+        "answer": "It returns an iterator that accesses the given sequence in the reverse order"
+    }
+]

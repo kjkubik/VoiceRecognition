@@ -1,0 +1,130 @@
+[
+    {
+        "question": "How do you check if two objects are the same in memory?",
+        "answer": "Use is keyword: object1 is object2."
+    },
+    {
+        "question": "What is the id() function?",
+        "answer": "It returns the memory address of an object."
+    },
+    {
+    "question": "What is memory addressing management in Python?",
+    "answer": "Memory addressing management in Python is the process of managing the memory used by Python objects and variables. It involves allocating and freeing memory, tracking object references, and ensuring efficient use of memory. Python handles memory addressing management automatically through reference counting and garbage collection techniques."
+    },
+    {
+    "question": "How does memory addressing management work in Python?",
+    "answer": "Memory addressing management in Python is the process of managing the memory used by Python objects and variables. It involves allocating and freeing memory, tracking object references, and ensuring efficient use of memory. Python handles memory addressing management automatically through reference counting and garbage collection techniques."
+    },
+    {
+    "question": "What does memory addressing management mean in Python?",
+    "answer": "Memory addressing management in Python is the process of managing the memory used by Python objects and variables. It involves allocating and freeing memory, tracking object references, and ensuring efficient use of memory. Python handles memory addressing management automatically through reference counting and garbage collection techniques."
+    },
+    {
+    "question": "What is the difference between mutable and immutable objects in Python in terms of memory addressing?",
+    "answer": "Mutable objects, like lists and dictionaries, can be modified after creation, and their memory may be reallocated if their size changes. Immutable objects, like strings and tuples, cannot be changed once created. Any operation on them creates a new object, without altering their existing memory allocation."
+    },
+    {
+    "question": "How does memory addressing differ between mutable and immutable objects in Python?",
+    "answer": "Mutable objects, like lists and dictionaries, can be modified after creation, and their memory may be reallocated if their size changes. Immutable objects, like strings and tuples, cannot be changed once created. Any operation on them creates a new object, without altering their existing memory allocation."
+    },
+    {
+    "question": "What happens to memory addressing when using mutable vs immutable objects in Python?",
+    "answer": "Mutable objects, like lists and dictionaries, can be modified after creation, and their memory may be reallocated if their size changes. Immutable objects, like strings and tuples, cannot be changed once created. Any operation on them creates a new object, without altering their existing memory allocation."
+    },
+    {
+    "question": "What is the Python memory addressing model and how does it affect object creation?",
+    "answer": "Python uses the stack and the heap for memory addressing. The stack stores local variables and function calls, while the heap is used for dynamically allocated memory for objects. Python manages objects in the heap, allocating memory when objects are created and releasing it when they are no longer referenced, using garbage collection."
+    },
+    {
+    "question": "Can you explain Python's memory addressing model for object creation?",
+    "answer": "Python uses the stack and the heap for memory addressing. The stack stores local variables and function calls, while the heap is used for dynamically allocated memory for objects. Python manages objects in the heap, allocating memory when objects are created and releasing it when they are no longer referenced, using garbage collection."
+    },
+    {
+    "question": "How does Python manage memory addressing when objects are created?",
+    "answer": "Python uses the stack and the heap for memory addressing. The stack stores local variables and function calls, while the heap is used for dynamically allocated memory for objects. Python manages objects in the heap, allocating memory when objects are created and releasing it when they are no longer referenced, using garbage collection."
+    },
+    {
+    "question": "What is the purpose of Python’s garbage collection?",
+    "answer": "Python's garbage collection automatically frees memory by removing objects that are no longer in use. It uses reference counting to track the number of references to an object. When the reference count drops to zero, the object is deleted. Additionally, cycle detection helps manage circular references that reference each other."
+    },
+    {
+    "question": "Why does Python use garbage collection?",
+    "answer": "Python's garbage collection automatically frees memory by removing objects that are no longer in use. It uses reference counting to track the number of references to an object. When the reference count drops to zero, the object is deleted. Additionally, cycle detection helps manage circular references that reference each other."
+    },
+    {
+    "question": "How does Python's garbage collection help manage memory?",
+    "answer": "Python's garbage collection automatically frees memory by removing objects that are no longer in use. It uses reference counting to track the number of references to an object. When the reference count drops to zero, the object is deleted. Additionally, cycle detection helps manage circular references that reference each other."
+    },
+    {
+    "question": "What is the role of the id() function in Python?",
+    "answer": "The id() function in Python returns a unique identifier for an object, which typically represents its memory address. This function helps identify whether two variables point to the same object in memory."
+    },
+    {
+    "question": "How does the id() function work in Python?",
+    "answer": "The id() function in Python returns a unique identifier for an object, which typically represents its memory address. This function helps identify whether two variables point to the same object in memory."
+    },
+    {
+    "question": "What does the id() function return in Python?",
+    "answer": "The id() function in Python returns a unique identifier for an object, which typically represents its memory address. This function helps identify whether two variables point to the same object in memory."
+    },
+    {
+    "question": "What is a memory addressing leak in Python, and how can it occur?",
+    "answer": "A memory addressing leak in Python occurs when memory that is no longer in use is not released. This usually happens when references to objects are unintentionally kept, such as in the case of circular references that the garbage collector fails to detect."
+    },
+    {
+    "question": "How can a memory addressing leak happen in Python?",
+    "answer": "A memory addressing leak in Python occurs when memory that is no longer in use is not released. This usually happens when references to objects are unintentionally kept, such as in the case of circular references that the garbage collector fails to detect."
+    },
+    {
+    "question": "What causes memory addressing leaks in Python?",
+    "answer": "A memory addressing leak in Python occurs when memory that is no longer in use is not released. This usually happens when references to objects are unintentionally kept, such as in the case of circular references that the garbage collector fails to detect."
+    },
+    {
+    "question": "How does Python handle memory addressing for large data structures like lists or dictionaries?",
+    "answer": "Python dynamically manages memory for large data structures. Lists and dictionaries grow in size as needed. When their current capacity is exceeded, Python reallocates memory and moves the data to a new location, ensuring sufficient space for new elements."
+    },
+    {
+    "question": "What happens to memory when Python handles large data structures?",
+    "answer": "Python dynamically manages memory for large data structures. Lists and dictionaries grow in size as needed. When their current capacity is exceeded, Python reallocates memory and moves the data to a new location, ensuring sufficient space for new elements."
+    },
+    {
+    "question": "How does memory allocation work for large objects in Python?",
+    "answer": "Python dynamically manages memory for large data structures. Lists and dictionaries grow in size as needed. When their current capacity is exceeded, Python reallocates memory and moves the data to a new location, ensuring sufficient space for new elements."
+    },
+    {
+    "question": "What are weak references in Python?",
+    "answer": "Weak references are references to objects that do not prevent them from being garbage collected. They are typically used when you need to reference an object without increasing its reference count, such as in caching scenarios. The weakref module in Python provides tools for managing weak references."
+    },
+    {
+    "question": "Can you explain weak references in Python?",
+    "answer": "Weak references are references to objects that do not prevent them from being garbage collected. They are typically used when you need to reference an object without increasing its reference count, such as in caching scenarios. The weakref module in Python provides tools for managing weak references."
+    },
+    {
+    "question": "What is the use of weak references in Python?",
+    "answer": "Weak references are references to objects that do not prevent them from being garbage collected. They are typically used when you need to reference an object without increasing its reference count, such as in caching scenarios. The weakref module in Python provides tools for managing weak references."
+    },
+    {
+    "question": "How does Python’s memory addressing usage differ between small and large integers?",
+    "answer": "Python pre-allocates and caches small integers (from -5 to 256) to optimize memory usage. These integers are stored in a special region and reused whenever possible. Larger integers are dynamically allocated and use more memory because they can represent larger values."
+    },
+    {
+    "question": "What’s the difference in memory usage for small vs large integers in Python?",
+    "answer": "Python pre-allocates and caches small integers (from -5 to 256) to optimize memory usage. These integers are stored in a special region and reused whenever possible. Larger integers are dynamically allocated and use more memory because they can represent larger values."
+    },
+    {
+    "question": "How does Python handle memory for small and large integers?",
+    "answer": "Python pre-allocates and caches small integers (from -5 to 256) to optimize memory usage. These integers are stored in a special region and reused whenever possible. Larger integers are dynamically allocated and use more memory because they can represent larger values."
+    },
+    {
+    "question": "What is the memory addressing layout of a Python object?",
+    "answer": "Python objects have a specific memory layout consisting of: 1) Object header, containing reference, type, and metadata; 2) Data area, which stores the object's actual data (e.g., list elements); 3) Memory overhead, which stores size and other management data. This layout varies based on the object type."
+    },
+    {
+    "question": "Can you describe the memory layout of a Python object?",
+    "answer": "Python objects have a specific memory layout consisting of: 1) Object header, containing reference, type, and metadata; 2) Data area, which stores the object's actual data (e.g., list elements); 3) Memory overhead, which stores size and other management data. This layout varies based on the object type."
+    },
+    {
+    "question": "How is memory structured for Python objects?",
+    "answer": "Python objects have a specific memory layout consisting of: 1) Object header, containing reference, type, and metadata; 2) Data area, which stores the object's actual data (e.g., list elements); 3) Memory overhead, which stores size and other management data. This layout varies based on the object type."
+    }
+]

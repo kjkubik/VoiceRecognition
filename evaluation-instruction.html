@@ -236,7 +236,7 @@
             // Get the URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const fileName = urlParams.get('file'); // Get the file name from the URL
-            fetch('resources/json/string_questions_and_answers.json')
+            fetch('resources/json/interview_questions_answers.json')
             //fetch('resources/json/string_questions_and_answers.json')
                 .then(response => response.json())
                 .then(data => {

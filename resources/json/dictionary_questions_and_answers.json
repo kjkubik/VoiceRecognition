@@ -1,0 +1,330 @@
+[
+    {
+        "question": "Can a Python list contain a dictionary as an element?",
+        "answer": "Use `chr()`: `chr(65)` returns `'A'`."
+    },
+    {
+        "question": "Can dictionaries store mutable objects as values?",
+        "answer": "Yes, dictionaries can store mutable objects like lists or sets as values."
+    },
+    {
+        "question": "Can dictionarieshave multiple keys with the same value?",
+        "answer": "Dictionaries cannot have multiple keys with the same name; each key must be unique."
+    },
+    {
+        "question": "Can dictionary keys be mutable types like lists?",
+        "answer": "No, keys must be immutable types like strings, integers, or tuples."
+    },
+    {
+        "question": "Can you slice a dictionary?",
+        "answer": "No, dictionaries do not support slicing."
+    },
+    {
+        "question": "How can you add a new key-value pair to a dictionary?",
+        "answer": "You add a new key-value pair using my_dict[key] = value."
+    },
+    {
+        "question": "How can you check if a key exists in a dictionary?",
+        "answer": "You check if a key exists using key in my_dict."
+    },
+    {
+        "question": "How can you iterate over both keys and values in a dictionary?",
+        "answer": "Use for key, value in my_dict.items():."
+    },
+    {
+        "question": "How can you iterate over both keys and values in a dictionary?",
+        "answer": "Use `for key, value in my_dict.items():`."
+    },
+    {
+        "question": "How can you update the value of a key in a dictionary?",
+        "answer": "You can update a value by assigning a new value to the key: my_dict[key] = new_value."
+    },
+    {
+        "question": "How do you access the value of a specific key in a dictionary?",
+        "answer": "You access the value of a specific key using my_dict[key]."
+    },
+    {
+        "question": "How do you add a key-value pair if the key does not exist?",
+        "answer": "Use my_dict.setdefault(key, value)."
+    },
+    {
+        "question": "How do you add a key-value pair if the key does not exist?",
+        "answer": "Use `my_dict.setdefault(key, value)`."
+    },
+    {
+        "question": "How do you check if a dictionary contains a specific key?",
+        "answer": "Use key in my_dict."
+    },
+    {
+        "question": "How do you check if a dictionary contains a specific key?",
+        "answer": "Use `key in my_dict`."
+    },
+    {
+        "question": "How do you check if a dictionary contains a specific value?",
+        "answer": "Use value in my_dict.values()."
+    },
+    {
+        "question": "How do you check if a dictionary contains a specific value?",
+        "answer": "Use `value in my_dict.values()`."
+    },
+    {
+        "question": "How do you check if a dictionary is empty?",
+        "answer": "Use if not my_dict:."
+    },
+    {
+        "question": "How do you check if a dictionary is empty?",
+        "answer": "Use `if not my_dict:`."
+    },
+    {
+        "question": "How do you clear all key-value pairs in a dictionary?",
+        "answer": "To clear a dictionary, use clear(): my_dict.clear()."
+    },
+    {
+        "question": "How do you convert a list of tuples into a dictionary?",
+        "answer": "You can convert a list of tuples into a dictionary using dict(): dict([('a', 1), ('b', 2)]) results in {'a': 1, 'b': 2}."
+    },
+    {
+        "question": "How do you copy a dictionary?",
+        "answer": "You copy a dictionary using the copy() method: my_dict.copy()."
+    },
+    {
+        "question": "How do you create a dictionary from two lists (keys and values)?",
+        "answer": "Use zip() and dict(): dict(zip(keys, values))."
+    },
+    {
+        "question": "How do you create a dictionary from two lists (keys and values)?",
+        "answer": "Use `zip()` and `dict()`: `dict(zip(keys, values))`."
+    },
+    {
+        "question": "How do you create a dictionary with default values for missing keys?",
+        "answer": "Use collections.defaultdict()."
+    },
+    {
+        "question": "How do you create a dictionary with default values for missing keys?",
+        "answer": "Use defaultdict()."
+    },
+    {
+        "question": "How do you create a dictionary with default values for missing keys?",
+        "answer": "Use `collections.defaultdict()`."
+    },
+    {
+        "question": "How do you create a dictionary with default values for missing keys?",
+        "answer": "Use `defaultdict()`."
+    },
+    {
+        "question": "How do you create a dictionary with default values using `defaultdict()`?",
+        "answer": "use defaultdict with something like int (giving you a 0), set (giving you an empty set), list (giving you an empty list)"
+    },
+    {
+        "question": "How do you create a dictionary with default values using defaultdict()?",
+        "answer": "from collections import defaultdict; d = defaultdict(int)."
+    },
+    {
+        "question": "How do you create an empty dictionary?",
+        "answer": "You create an empty dictionary using {} or dict()."
+    },
+    {
+        "question": "How do you delete all items in a dictionary?",
+        "answer": "Use my_dict.clear()."
+    },
+    {
+        "question": "How do you delete all items in a dictionary?",
+        "answer": "Use `my_dict.clear()`."
+    },
+    {
+        "question": "How do you find the number of items in a dictionary?",
+        "answer": "Use len(my_dict)."
+    },
+    {
+        "question": "How do you find the number of items in a dictionary?",
+        "answer": "Use `len(my_dict)`."
+    },
+    {
+        "question": "How do you get all values from a dictionary?",
+        "answer": "Use my_dict.values()."
+    },
+    {
+        "question": "How do you get all values from a dictionary?",
+        "answer": "Use `my_dict.values()`."
+    },
+    {
+        "question": "How do you get the key for a given value in a dictionary?",
+        "answer": "Use a loop or dictionary comprehension: [k for k, v in my_dict.items() if v == 'value']."
+    },
+    {
+        "question": "How do you get the key for a given value in a dictionary?",
+        "answer": "Use a loop or dictionary comprehension: `[k for k, v in my_dict.items() if v == 'value']`."
+    },
+    {
+        "question": "How do you iterate through both keys and values in a dictionary?",
+        "answer": "You iterate through both keys and values using for key, value in my_dict.items():."
+    },
+    {
+        "question": "How do you iterate through the keys of a dictionary?",
+        "answer": "You can iterate through keys using a for loop: for key in my_dict:."
+    },
+    {
+        "question": "How do you make a copy of a dictionary?",
+        "answer": "Use my_dict.copy()."
+    },
+    {
+        "question": "How do you make a copy of a dictionary?",
+        "answer": "Use `my_dict.copy()`."
+    },
+    {
+        "question": "How do you merge two dictionaries in Python 3.9 and later?",
+        "answer": "Use the | operator: dict1 | dict2."
+    },
+    {
+        "question": "How do you merge two dictionaries in Python 3.9 or later?",
+        "answer": "Use the `|` operator: `dict1 | dict2`."
+    },
+    {
+        "question": "How do you merge two dictionaries?",
+        "answer": "You merge two dictionaries using {**dict1, **dict2}."
+    },
+    {
+        "question": "How do you remove a key-value pair from a dictionary?",
+        "answer": "You can remove a key-value pair using del my_dict[key]."
+    },
+    {
+        "question": "How do you remove a key-value pair from a dictionary?",
+        "answer": "Use del my_dict[key] or my_dict.pop(key)."
+    },
+    {
+        "question": "How do you remove a key-value pair from a dictionary?",
+        "answer": "Use `del my_dict[key]` or `my_dict.pop(key)`."
+    },
+    {
+        "question": "How do you retrieve all keys or all values from a dictionary?",
+        "answer": "You can retrieve all keys with my_dict.keys() and all values with my_dict.values()."
+    },
+    {
+        "question": "How do you update an existing key in a dictionary?",
+        "answer": "Use my_dict[key] = new_value."
+    },
+    {
+        "question": "How do you update an existing key in a dictionary?",
+        "answer": "Use `my_dict[key] = new_value`."
+    },
+    {
+        "question": "What does the `get()` method do in a dictionary?",
+        "answer": "It returns the value for a key if it exists, otherwise returns `None` or a default value."
+    },
+    {
+        "question": "What does the `popitem()` method do in a dictionary?",
+        "answer": "It removes and returns a random key-value pair from the dictionary."
+    },
+    {
+        "question": "What does the get() method do in a dictionary?",
+        "answer": "It returns the value for a key if it exists, otherwise returns None or a default value."
+    },
+    {
+        "question": "What does the get() method do in a Python dictionary?",
+        "answer": "get() retrieves the value for a key or returns None if the key doesn\u2019t exist."
+    },
+    {
+        "question": "What does the popitem() method do in a dictionary?",
+        "answer": "It removes and returns a random key-value pair from the dictionary."
+    },
+    {
+        "question": "What happens if you try to access a key that doesn\u2019t exist in a dictionary?",
+        "answer": "If the key doesn\u2019t exist, it raises a KeyError unless you use the get() method, which returns None if the key doesn\u2019t exist."
+    },
+    {
+        "question": "What is a dictionary?",
+        "answer": "A dictionary is an unordered collection of key-value pairs."
+    },
+    {
+        "question": "What is the result of calling `my_dict.key()?",
+        "answer": "It returns a view object that displays a list of all keys in the dictionary."
+    },
+    {
+        "question": "What is the result of calling my_dict.keys()?",
+        "answer": "It returns a view object that displays a list of all keys in the dictionary."
+    },
+    {
+        "question": "What will the output of len({key\": \"value\"}) be?\"",
+        "answer": "len({key\": \"value\"}) returns 1 because there is one key-value pair.\""
+    },
+    {
+        "question": "What is the syntax for creating an empty dictionary?",
+        "answer": "Use {} or dict()."
+    },
+    {
+        "question": "How do you access a value in a dictionary by its key?",
+        "answer": "Use my_dict[key]."
+    },
+    {
+        "question": "How do you add a new key-value pair to a dictionary?",
+        "answer": "Use my_dict[key] = value."
+    },
+    {
+        "question": "How do you remove a key-value pair from a dictionary?",
+        "answer": "Use del my_dict[key]."
+    },
+    {
+        "question": "How do you check if a key exists in a dictionary?",
+        "answer": "Use key in my_dict."
+    },
+    {
+        "question": "How do you get all keys from a dictionary?",
+        "answer": "Use my_dict.keys()."
+    },
+    {
+        "question": "How do you get all values from a dictionary?",
+        "answer": "Use my_dict.values()."
+    },
+    {
+        "question": "How do you remove a key from a dictionary without raising an error if the key doesn\u2019t exist?",
+        "answer": "Use my_dict.pop(key, None)."
+    },
+    {
+        "question": "How do you merge two dictionaries in Python?",
+        "answer": "Use update(): dict1.update(dict2)."
+    },
+    {
+        "question": "How do you iterate over a dictionary\u2019s keys and values?",
+        "answer": "Use my_dict.items()."
+    },
+    {
+        "question": "How do you get a default value for a key that may not exist in a dictionary?",
+        "answer": "Use get() method: my_dict.get(key, default)."
+    },
+    {
+        "question": "How do you clear all key-value pairs from a dictionary?",
+        "answer": "Use my_dict.clear()."
+    },
+    {
+        "question": "What is the output of dict1 == dict2 when comparing dictionaries?",
+        "answer": "It returns True if both dictionaries have the same keys and values, otherwise False."
+    },
+    {
+        "question": "How do you create a dictionary from two lists (keys and values)?",
+        "answer": "Use zip() and dict(): dict(zip(keys, values))."
+    },
+    {
+        "question": "What is a defaultdict in Python?",
+        "answer": "A defaultdict is a dictionary that provides default values for missing keys."
+    },
+    {
+        "question": "What is the time complexity of looking up a value in a dictionary?",
+        "answer": "It is O(1) on average."
+    },
+    {
+        "question": "How do you remove all items with a specific value in a dictionary?",
+        "answer": "Use a loop or dictionary comprehension: {k: v for k, v in my_dict.items() if v != value}."
+    },
+    {
+        "question": "Can dictionary keys be mutable types like lists?",
+        "answer": "No, dictionary keys must be immutable."
+    },
+    {
+        "question": "How do you check the number of items in a dictionary?",
+        "answer": "Use len(my_dict)."
+    },
+    {
+        "question": "How do you find the most frequent value in a dictionary?",
+        "answer": "Use collections.Counter() to find the most common value."
+    }
+]
