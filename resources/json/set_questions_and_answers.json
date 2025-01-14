@@ -64,116 +64,48 @@
         "answer": "Use list(): list(my_set)."
     },
     {
-        "question": "How do you convert a set to a list?",
-        "answer": "Use 'list()': 'list(my_set)'."
-    },
-    {
-        "question": "How do you create a set from a list?",
-        "answer": "You can create a set from a list using set(): set([1, 2, 3])."
-    },
-    {
-        "question": "How do you create a set with multiple elements from a string?",
-        "answer": "Use set(string\").\""
-    },
-    {
-        "question": "How do you create a set with multiple elements from a string?",
-        "answer": "Use 'set(string\")'.\""
-    },
-    {
-        "question": "How do you create a set with unique elements from a list?",
-        "answer": "Use set(): set([1, 2, 2, 3]) results in {1, 2, 3}."
-    },
-    {
-        "question": "How do you create a set with unique elements from a list?",
-        "answer": "Use 'set()': 'set([1, 2, 2, 3])' results in '{1, 2, 3}'."
-    },
-    {
         "question": "How do you create an empty set?",
-        "answer": "You create an empty set using set()."
+        "answer": "Use set()."
     },
     {
         "question": "How do you find the difference of two sets?",
-        "answer": "Use the - operator or the difference() method: set1 - set2."
+        "answer": "Use the - operator or the difference() method."
     },
     {
-        "question": "How do you find the difference of two sets?",
-        "answer": "Use the '-' operator or the 'difference()' method: 'set1 - set2'."
-    },
-    {
-        "question": "How do you find the intersection of two sets?",
+        "question": "How do you find what elements are in two sets?",
         "answer": "You find the intersection of two sets using the & operator or intersection() method."
     },
     {
-        "question": "How do you find the intersection of two sets?",
-        "answer": "Use the & operator or the intersection() method: set1 & set2."
-    },
-    {
-        "question": "How do you find the intersection of two sets?",
-        "answer": "Use the '&' operator or the 'intersection()' method: 'set1 & set2'."
-    },
-    {
         "question": "How do you find the largest element in a set?",
-        "answer": "Use max() function: max(my_set)."
-    },
-    {
-        "question": "How do you find the largest element in a set?",
-        "answer": "Use 'max()' function: 'max(my_set)'."
+        "answer": "Use max()"
     },
     {
         "question": "How do you find the length of a set?",
-        "answer": "You find the length of a set using len()."
-    },
-    {
-        "question": "How do you find the length of a set?",
-        "answer": "Use len()."
-    },
-    {
-        "question": "How do you find the length of a set?",
-        "answer": "Use 'len()'."
+        "answer": "You find the length of a set using len function."
     },
     {
         "question": "How do you find the smallest element in a set?",
-        "answer": "Use min() function: min(my_set)."
-    },
-    {
-        "question": "How do you find the smallest element in a set?",
-        "answer": "Use 'min()' function: 'min(my_set)'."
+        "answer": "Use min() function"
     },
     {
         "question": "How do you find the symmetric difference of two sets?",
-        "answer": "Use the ^ operator or the symmetric_difference() method: set1 ^ set2"
-    },
-    {
-        "question": "How do you find the symmetric difference of two sets?",
-        "answer": "Use the '^' operator or the 'symmetric_difference()' method: 'set1 ^ set2'."
+        "answer": "Use the '^' operator or the symmetric_difference() method"
     },
     {
         "question": "How do you find the union of two sets?",
-        "answer": "Use the | operator or the union() method: set1 | set2."
-    },
-    {
-        "question": "How do you find the union of two sets?",
-        "answer": "Use the '|' operator or the 'union()' method: 'set1 | set2'."
+        "answer": "Use the '|' operator or the union() method."
     },
     {
         "question": "How do you iterate over all elements of a set?",
-        "answer": "Use a for loop: for element in my_set:."
+        "answer": "Use a any type of for loop or while loop."
     },
     {
-        "question": "How do you iterate over all elements of a set?",
-        "answer": "Use a 'for' loop: 'for element in my_set:'."
-    },
-    {
-        "question": "How do you perform a set difference?",
-        "answer": "You perform a set difference using - or difference()."
+        "question": "How do you find what element(s) are in setA that are not in setB?",
+        "answer": "Using - or difference()."
     },
     {
         "question": "How do you remove a random element from a set?",
-        "answer": "Use pop()."
-    },
-    {
-        "question": "How do you remove a random element from a set?",
-        "answer": "Use 'pop()'."
+        "answer": "Use the pop method."
     },
     {
         "question": "How do you remove an arbitrary element from a set?",
@@ -181,15 +113,7 @@
     },
     {
         "question": "How do you remove an element from a set?",
-        "answer": "You remove an element using remove(): my_set.remove(3)."
-    },
-    {
-        "question": "How do you remove an element from a set?",
-        "answer": "Use remove() or discard()."
-    },
-    {
-        "question": "How do you remove an element from a set?",
-        "answer": "Use 'remove()' or 'discard()'."
+        "answer": "Use either the remove() or discard() method."
     },
     {
         "question": "What happens if you try to add a mutable element (like a list) to a set?",
@@ -201,7 +125,7 @@
     },
     {
         "question": "What is the difference between 'remove()' and 'discard()' in sets?",
-        "answer": "Each removes the element. But remove raises and error, discard does not."
+        "answer": "remove raises an error if the element you are attempting to remove doesn't exist, discard does not."
     },
     {
         "question": "What is the difference between a set and a list?",
@@ -220,16 +144,12 @@
         "answer": "A frozenset is an immutable set, meaning its elements cannot be modified."
     },
     {
-        "question": "What is the result of set([1, 2, 3]) & set([2, 3, 4])?",
-        "answer": "{2, 3}\u2014this is the intersection of the two sets."
+        "question": "What is the result of 'set([1, 2, 3]) & set([2, 3, 4])'?",
+        "answer": "'{2, 3}' this is the intersection of the two sets."
     },
     {
         "question": "How do you find the union of two sets?",
         "answer": "Use the | operator: set1 | set2."
-    },
-    {
-        "question": "How do you find the difference of two sets?",
-        "answer": "Use the - operator: set1 - set2."
     },
     {
         "question": "What does set([1, 2, 2, 3]) return?",
@@ -249,7 +169,7 @@
     },
     {
         "question": "Can a set contain mutable elements like lists?",
-        "answer": "No, sets cannot contain mutable elements, only immutable ones."
+        "answer": "No, sets cannot contain mutable elements, only immutable ones because they are not hashable."
     },
     {
         "question": "How do you remove a random element from a set?",

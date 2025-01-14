@@ -1,8 +1,22 @@
 # what is a set? how do you initialize a set?
 # we use '{}' to define a set
 # we name an empty set like this:
-set1 = set();
-print (set1)
+# set1 = set()
+# print (set1) 
+# print(type(set1)) # <class 'set'>
+# set2 = {}
+# print(set2)
+# print(type(set2)) # <class 'dict'>
+# tuple = ()
+# print(type(tuple)) # <class 'tuple'>
+# list = []
+# print(type(list)) # <class 'list'>
+# b = 0
+# a = 1
+# a = b
+# print(type(a))
+# print(a)
+# print(b)
 # considered unordered, cannot access with an index
 #            ---------
 # unique items are only processed, ignoring duplicate elements
@@ -179,7 +193,7 @@ print (set1)
 # set4 = set1 | set2 | set3
 # print(set4)
 
-# intersection (inner join - what is in both sets)
+# intersection (what element(s) are in both sets)
 # set1 = {1, 2, 3}
 # set2 = {3, 4, 5}
 # set3 = set1.intersection(set2)  # {3}
@@ -188,17 +202,30 @@ print (set1)
 
 # print(set3)
 
-# difference (what isn't in both, in SQL: LEFT outer join)
+# difference ("What is the difference between set1 and set2?")
+# what is in set1 that is not in set2
 # set1 = {1, 2, 3}; set2 = {3, 4, 5}
 # set3 = set1.difference(set2)  
-# # Or using the `-` operator:
-# set3 = set1 - set2
+# # # Or using the `-` operator:
+# # set3 = set1 - set2
 # print(set3)
-# # right outer join
+# what is in set2 that is not in set1?
 # set3 = set2 - set1  
 # print (set3)
 
-# symmetric difference (like SQL's outer join)
+# Why doesn't this work?
+# print ((set1-set2 & set2-set1))
+
+# why does this work?
+# print ((set1-set2 | set2-set1))
+
+# a = set1 - set2
+# b = set2 - set1
+# print(a|b)
+
+
+# symmetric difference ("give me everything except for what is in both"
+# or "how do you get what is not in set1 that is in set2 and not in set2 that is in set1?"
 # set1 = {1, 2, 3}; set2 = {3, 4, 5}
 # set3 = set1.symmetric_difference(set2)
 # print (set3)
@@ -226,30 +253,59 @@ print (set1)
 # set2 = {4, 5, 6}
 # print(set1.isdisjoint(set2))  # True
 
-# length
-set1 = {1, 2, 3}
-set2 = {}
-print(len(set1)) 
+# length function
+# set1 = {1, 2, 3}
+# set2 = {}
+# print(len(set1)) 
 
-if len(set2) == 0 :
-    print("empty set") 
+# if len(set2) == 0 :
+#     print("empty set") 
 
-# OR
+# # OR
 
-if not set2:
-    print("The set is empty")
+# if not set2:
+#     print("The set is empty")
     
     
 # in
-my_set = {1, 2, 3, 4, 5}
+# my_set = {1, 2, 3, 4, 5}
 
 # Check if an element is in the set
-if 3 in my_set:
-    print("3 is in the set.")
-else:
-    print("3 is not in the set.")
+# if 3 in my_set:
+#     print("3 is in the set.")
+# else:
+#     print("3 is not in the set.")
 
-if 6 in my_set:
-    print("6 is in the set.")
-else:
-    print("6 is not in the set.")
+# if 6 in my_set:
+#     print("6 is in the set.")
+# else:
+#     print("6 is not in the set.")
+
+# what is the output of a string to a set?    
+# aString = "this is a string that I want to be a set"
+# stringSet = set(aString)
+# print(stringSet)
+
+# # list to a set output
+# list = ["frank", "judy", "mark", "john", "seth", "sid", "mary", "kim", "kendra", "judy"]
+# numList = [1,8,10,7,3,9] 
+# set = set(list)
+# print(set)
+
+# finding the largest element in a set
+# print(max(list))
+# print(max(numList))
+
+stringSet = {"frank", "judy", "mark", "john", "seth", "sid", "mary", "kim", "kendra", "judy"}
+# numSet = {1,8,10,7,3,9}
+# print(max(stringSet))
+# print(max(numSet))
+
+# print(min(stringSet))
+# print(min(numSet))
+
+# since a set is an iterative data type, how do we iterate over it.
+
+for x in stringSet: 
+    print(x)
+    
