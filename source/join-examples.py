@@ -1,57 +1,49 @@
 # Joining a List of Strings with a Separator
 You can use str.join() to join a list of strings with a specific separator, such as a space, comma, or any other string.
 
-Example (with a space separator):
-python
-Copy code
+
+
 words = ["Hello", "world", "from", "Python"]
 result = ' '.join(words)
 print(result)  # Output: "Hello world from Python"
-Example (with a comma separator):
-python
-Copy code
+
+
+
 words = ["apple", "banana", "cherry"]
 result = ', '.join(words)
 print(result)  # Output: "apple, banana, cherry"
-Example (with a dash separator):
-python
-Copy code
+
 words = ["2025", "01", "10"]
 result = '-'.join(words)
 print(result)  # Output: "2025-01-10"
+
 2. Joining a Tuple of Strings
 You can use str.join() on a tuple, just like a list.
 
-Example (with a space separator):
-python
-Copy code
+
 words = ("Python", "is", "great")
 result = ' '.join(words)
 print(result)  # Output: "Python is great"
+
 3. Joining a Set of Strings
 Since sets are unordered collections, when using str.join() on a set, the order of the elements may not be preserved. However, it still concatenates the elements with the separator you provide.
 
-Example (with a comma separator):
-python
-Copy code
 words = {"apple", "banana", "cherry"}
 result = ', '.join(words)
 print(result)  # Output: "banana, apple, cherry" (order may vary)
+
 4. Joining a String with an Empty Separator
 You can use str.join() without a separator by providing an empty string (''). This concatenates the elements directly without any space or other character in between.
 
-Example (without separator):
-python
-Copy code
+
 letters = ["H", "e", "l", "l", "o"]
 result = ''.join(letters)
 print(result)  # Output: "Hello"
+
 5. Joining with a Newline Character (\n)
 You can use str.join() to join lines of text with a newline separator, which is particularly useful when working with multiple lines.
 
-Example (with newline separator):
-python
-Copy code
+
 lines = ["First line", "Second line", "Third line"]
 result = '\n'.join(lines)
 print(result)
@@ -62,18 +54,13 @@ print(result)
 6. Joining a List of Non-String Elements (Converting to Strings First)
 If the list contains elements that aren’t strings (e.g., integers), you can use map(str, iterable) to convert them to strings before joining them.
 
-Example (with integers):
-python
-Copy code
 numbers = [1, 2, 3, 4, 5]
 result = ', '.join(map(str, numbers))
 print(result)  # Output: "1, 2, 3, 4, 5"
+
 7. Using join() to Create a String with Repeated Elements
 You can also use str.join() to create a string by repeating a separator.
 
-Example (with a repeated separator):
-python
-Copy code
 result = '*'.join([''] * 5)  # Creates a string with 5 '*' symbols
 print(result)  # Output: "****"
 Summary of str.join():
