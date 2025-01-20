@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    height: 100%; /* Full screen height */
+    overflow-y: scroll; /* Allow scrolling */
+}
+svg {
+    width: 100%;
+    height: 2000px; /* Increased height for the scrollable area */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    transition: transform 1s ease-in-out; /* Add a smooth zoom-out transition */
+}
+path {
+    fill: none;
+    stroke: blue;
+    stroke-width: 2;
+}
+.lesson {
+    fill: red;
+    stroke: black;
+    stroke-width: 2;
+    cursor: pointer;
+}
+.lesson:hover {
+    fill: green;
+}
