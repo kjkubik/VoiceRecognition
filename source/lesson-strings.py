@@ -11,8 +11,8 @@
 # Why doesn't Python only use double or single quotes?
 
 #  - A title is in your text 
-#book = 'The name of the book is "How The West Was Won".'
-#print (book)
+book = 'The name of the book is "How The West Was Won".'
+print (book)
 
 #  - you have an apostrophe within
 # response = "Let's go to the garden area."
@@ -83,6 +83,7 @@
 # # 8) What is a variable name that is only uses capital letters?
 # # 9) What is the difference between a constant and a variable?
 # # 10) Try using 'while' as a variable name? What can you conclude?
+# # 11) How do you find the length of a string?
 
 
 # Here are the answers: 
@@ -108,17 +109,17 @@
 # print(string.lower())
 
 #5)
-name = "Bob"
-NAME = "Bob"
-# NAME = "Sue"
-# print (name, NAME)
+# name = "Bob"
+# NAME = "Bob"
+# # NAME = "Sue"
+# # print (name, NAME)
 
-if name == NAME :
+# if name == NAME :
     
-    print(name)
-    print(NAME)
-    print(type(name))
-    print(type(NAME))
+#     print(name)
+#     print(NAME)
+#     print(type(name))
+#     print(type(NAME))
 
 
 #6)

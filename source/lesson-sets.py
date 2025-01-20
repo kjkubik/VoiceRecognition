@@ -1,16 +1,35 @@
 # what is a set? how do you initialize a set?
-# we use '{}' to define a set
-# we name an empty set like this:
-# set1 = set()
-# print (set1) 
-# print(type(set1)) # <class 'set'>
-# set2 = {}
-# print(set2)
-# print(type(set2)) # <class 'dict'>
-# tuple = ()
-# print(type(tuple)) # <class 'tuple'>
-# list = []
-# print(type(list)) # <class 'list'>
+# we use '{}' to define a set. like this:
+
+set1 = {1,2,3,4,5}
+print(type(set1)) # <class 'set'>
+
+# An empty string is defined like this:
+string = ''
+print(string)
+print("String: ", type(string))
+
+# An empty tuple is defined like this: 
+tuple = ()
+print(tuple)
+print("Tuple: ", type(tuple)) # <class 'tuple'>
+
+# An empty list is defined like this: 
+list = []
+print(list)
+print("List: ", type(list)) # <class 'list'>
+
+# BUT an empty set is NOT defined like this: 
+set = {}
+print(set)
+print(type(set)) # <class 'dict'>
+
+# This is how an empty set is defined:
+set = set()
+print (set) 
+print (type(set))
+
+
 # b = 0
 # a = 1
 # a = b
@@ -48,10 +67,27 @@
 # putting None in the set?
 # stringset = {"cherry", None, "banana",  "apple"}
 # numberset = {9,3,1,None, 2,3}
-# print(stringset)
+# # print(stringset)
 # print(numberset)
-# Why does this happen? This is because None is considered a "smaller" element than other types, so it gets printed first, followed by the other elements in ascending order.
-#Sets in Python are unordered, but when the set is printed or converted to a list, Python places None at the start and sorts the other elements in ascending order.
+# is a set reordered after adding None?
+# numberset = {9,3,1,2,3}
+# print(numberset)
+# print(numberset.add(None))
+# print(numberset.remove(None))
+# print(numberset)
+
+# Why does this happen? This is because None is considered a "smaller" element than other types, so it gets printed first, 
+# followed by the other elements in ascending order. Sets in Python are unordered, but when the set is printed or 
+# converted to a list, Python places None at the start and sorts the other elements in ascending order.
+
+# # using sorted
+# my_set = {5, 2, 8, 1, 3}
+
+# # Convert set to list and sort
+# sorted_list = sorted(my_set)
+
+# # Print the sorted list
+# print(sorted_list)
 
 # The add method
 # set = {1, 2, 3}
@@ -296,7 +332,7 @@
 # print(max(list))
 # print(max(numList))
 
-stringSet = {"frank", "judy", "mark", "john", "seth", "sid", "mary", "kim", "kendra", "judy"}
+# stringSet = {"frank", "judy", "mark", "john", "seth", "sid", "mary", "kim", "kendra", "judy"}
 # numSet = {1,8,10,7,3,9}
 # print(max(stringSet))
 # print(max(numSet))
@@ -306,6 +342,6 @@ stringSet = {"frank", "judy", "mark", "john", "seth", "sid", "mary", "kim", "ken
 
 # since a set is an iterative data type, how do we iterate over it.
 
-for x in stringSet: 
-    print(x)
+# for x in stringSet: 
+#     print(x)
     

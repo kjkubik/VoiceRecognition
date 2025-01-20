@@ -1,7 +1,6 @@
 [
     {
-        "question": "How do you check if a variable is of type bool?",
-        "answer": "use is instance with variable and bool in parentheses"
+        "question" : "How do you check if a variable is of type bool?", "answer" : "use is instance with variable and bool in parentheses"
     },
     {
         "question": "What are the boolean values?",

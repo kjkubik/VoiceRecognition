@@ -77,7 +77,7 @@ df = pd.read_json('resources/json/school_data.json')
 # filtered_grades_less_60_df = df[df['grade'] < 60.00]
 # print(filtered_grades_less_60_df)
 
-filtered_grades_higher_class4 = df[(df['grade'] >= 60.00) & (df['class'] == 4) | (df['class'] == 3)]
+# filtered_grades_higher_class4 = df[(df['grade'] >= 60.00) & (df['class'] == 4) | (df['class'] == 3)]
 # print(filtered_grades_higher_class4)
 
 # Select rows where City is either "New York" or "Phoenix"
@@ -104,55 +104,43 @@ filtered_grades_higher_class4 = df[(df['grade'] >= 60.00) & (df['class'] == 4) |
 # print(selected_df)
 
 # 2. Sorting: Arranging data in ascending or descending order.
-sorted_df = filtered_grades_higher_class4.sort_values(by='grade')
-print(sorted_df)
+# sorted_df = filtered_grades_higher_class4.sort_values(by='grade')
+# print(sorted_df)
 
-#descending order
-sorted_df = sorted_df.sort_values(by='grade', ascending=False)
-print(sorted_df)
+# descending order
+# sorted_df = sorted_df.sort_values(by='grade', ascending=False)
+# print(sorted_df)
 
 # Sorting by Multiple Columns
+sorted_df = df.sort_values(by=['class', 'grade'])
+print(sorted_df)
 
+# sort the above data in ascending class order and descending grade order
 
+# 3. groupby and agg, aggregating data by one or more columns.
+# sum(): To sum the values within each group.
+# mean(): To find the average within each group.
+# count(): To count the number of entries in each group.
+# min() / max(): To find the minimum or maximum value in each group.
+# agg(): To apply multiple aggregation functions at once.
 
-# 3. Grouping: Aggregating data by one or more columns.
-# 4. Merging: Combining DataFrames based on common columns.
-# 5. Pivoting: Rotating data from rows to columns or vice versa.
+# count the number of students in each class: 
+count_by_class_df = df.groupby('class').agg(total_students=('id', 'count')).reset_index()
+print(count_by_class_df)
 
+# what is the average grade in each class: 
+mean_by_class_df = df.groupby('class').agg(average_grade = ('grade','mean')).reset_index()
+print(mean_by_class_df)
 
+# what is the max grade in each class: 
+max_grade_class_df = df.groupby('class').agg(highest_grade = ('grade', 'max')).reset_index()
+print(max_grade_class_df)
 
-# Common DataFrame Functions
+# aggregation for each class, student count, mean grade, max grade.
+agg_count_mean_max_df = df.groupby('class').agg(
+    total_students=('id', 'count'),
+    average_grade=('grade', 'mean'),
+    max_grade=('grade', 'max')
+).reset_index()
+print(agg_count_mean_max_df)
 
-# 1. head(): Displays the first few rows.
-# 2. tail(): Displays the last few rows.
-# 3. info(): Provides a concise summary of the DataFrame.
-# 4. describe(): Generates descriptive statistics.
-# 5. shape: Returns the number of rows and columns.
-
-
-# Data Manipulation
-
-# 1. Adding columns: Using the assignment operator 😊) to add new columns.
-# 2. Dropping columns: Using the drop() function to remove columns.
-# 3. Renaming columns: Using the rename() function to change column names.
-
-
-# Data Types and Handling Missing Values
-
-# 1. Data types: Understanding numeric, string, and datetime data types.
-# 2. Missing values: Handling NaN (Not a Number) values using dropna(), fillna(), and interpolate().
-
-
-# Data Analysis and Visualization
-
-# 1. Data aggregation: Using groupby() and aggregate functions (e.g., sum, mean).
-# 2. Data visualization: Using libraries like Matplotlib and Seaborn to create plots and charts.
-
-
-# Best Practices
-
-# 1. Use meaningful column names: Avoid using generic names like "Column1".
-# 2. Keep DataFrames tidy: Avoid duplicate or unnecessary columns.
-# 3. Use comments and documentation: Explain your code and DataFrame structure.
-
-# Mastering these concepts will help you work efficiently with DataFrames and perform various data analysis tasks!
