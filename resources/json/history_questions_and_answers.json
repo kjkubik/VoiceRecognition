@@ -1,7 +1,7 @@
 [
     {
         "question":  "Tell us about your experience designing and implementing data solutions. Can you give examples of your past projects?",
-        "answer":  "In my 20 years of experience, I have worked on a variety of projects involved in designing, testing, and maintaining of robust data pipelines. For instance, in my role at Walmart, I led a team that created a sophisticated software solution to analyze vendor contracts, which saved the company $325M annually. I have also created projects like the Amazon Vine Analysis utilizing AWS, Spark, Python. In most recent months, I have create several data pipelines utilizing APIs, PostgreSQL, SQLite, SQL, Python (and several of its libraries), JavaScript, HTML5. "
+        "answer":  "In my 20 years of experience, I have worked on a variety of projects involved in designing, testing, and maintaining of robust data pipelines. For instance, in my role at Walmart, I led a team that created a sophisticated software solution to analyze vendor contracts, which saved the company $325M annually. I have also created projects like the Amazon Vine Analysis utilizing AWS, Spark, Python. In most recent months, I have create several data pipelines utilizing APIs, PostgreSQL, SQLite, SQL, Python (and several of its libraries), JavaScript, HTML5."
     },
     {
         "question":  "How have you utilized cloud technologies like AWS or Azure in your past work?",
@@ -29,7 +29,6 @@
     },
     {
         "question":  "Why are you interested in working at InSearch-IT and what excites you about this position?",
-        "answer":  "I’m excited about the opportunity to work at InSearch-IT because I have a strong passion for data and data engineering, and the technologies you’re using, like Snowflake, AWS, and DBT, align perfectly with my skill set."
+        "answer":  "I am excited about the opportunity to work at InSearch-IT because I have a strong passion for data and data engineering, and the technologies you’re using, like Snowflake, AWS, and DBT, align perfectly with my skill set."
     }
-    
 ]
