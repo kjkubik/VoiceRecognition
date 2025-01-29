@@ -116,6 +116,12 @@
                 const titleToGive = 'Set Data Type'
                 window.location.href = `evaluation-template.html?file=${fileName}&title=${titleToGive}`; // Pass the file name as a query parameter
             }
+            if (lessonNumber === 6){
+                // After the zoom-out, navigate to a new page (e.g., lesson1.html)
+                const fileName = 'history_questions_and_answers.json'; // You can dynamically change this based on user input
+                const titleToGive = 'History Questions'
+                window.location.href = `evaluation-template.html?file=${fileName}&title=${titleToGive}`; // Pass the file name as a query parameter
+            }
             
         }, 1000); // 1000ms (1 second) delay to match the zoom-out duration
     }

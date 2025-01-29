@@ -197,8 +197,9 @@
         let allAnswers = [];                    // collecting all users answers temporarily
         let answersCorrect = 0;                 // number of answers user got correct
         let userScore = 0;                          // calculate score, displayed on screen
-        let expectedCorrectAnswers = 20;        // required number user must get right
-        let expectedConsecutiveCorrect = 10;    // required 
+        let maxQuestions = 15;                  // max questions that can be asked during a single evaluation
+        //let expectedCorrectAnswers = 20;        // required number user must get right
+        let expectedCorrect = 10;    // required 
         let thresholdScore = 80;                // lowest possible score user can have to move on
         let perfectScore = 100;                 // used to check if user has perfect score
         let isRunning = false;
@@ -249,7 +250,7 @@
         // This is added to initialize the event listener when the page is loaded or when the test starts.
         nextButton.addEventListener('click', function() {
             nextButton.disabled = true;  // Disable the next button so it can't be pressed again until the next question
-            answerButton.disabled = false;  // Enable the answer button
+            answerButton.disabled = true;  // Enable the answer button
             getQuestionReady(testQuestions);  // Load the next question
         });
 
@@ -277,7 +278,7 @@
                     console.error("Error loading questions:", error);
                 }
             } else {
-                console.error("No file parameter provided.");
+                console.error("File name given is either invalid or is incorrectly named.");
             }
         }
     
@@ -442,13 +443,10 @@
 
         function stageAnswer(userResponse, correctAnswer){
             console.log("stageAnswer()");
-
             console.log("Questions Asked: ", questionsAsked);
             console.log("userScore: ", userScore);
-            
-            
             console.log("Perfect Score: ", perfectScore);
-            console.log("expectedConsecutiveCorrect:", expectedConsecutiveCorrect);
+            console.log("expectedCorrect:", expectedCorrect);
             
 
             // Convert both to lowercase for case-insensitive comparison
@@ -476,82 +474,60 @@
         function evaluateAnswer(userResponse, correctAnswer) {
             console.log("evaluateAnswer()");
             
-            // Is the answer correct? (returns Boolean value)
+            // Is user's answer correct? (returns Boolean value)
             if (checkAnswer(userResponse, correctAnswer)) {
                 answersCorrect++;  // Increment the number of correct answers
                 updateProgress();
 
                 console.log("questionsAsked:", questionsAsked);
                 console.log("answersCorrect: ", answersCorrect);
-                console.log("expectedConsecutiveCorrect: ", expectedConsecutiveCorrect);
+                console.log("expectedCorrect: ", expectedCorrect);
                 console.log("userScore: ", userScore);
                 console.log("thresholdScore: ", thresholdScore);
 
-                // Check if the user has answered enough questions correctly
-                if (answersCorrect === expectedConsecutiveCorrect) {
+                // DOES THE USER HAVE 10 QUESTIONS RIGHT?
+                if (answersCorrect === expectedCorrect) {
+                    // YES - PASS, MOVE ON
                     console.log("TEST: the student has answered enough questions to move to next exam.");
                     triggerConfetti();
-                    statusContainer.innerText = "You Passed. Going to next exam. See you there!";
-                } else {
-                    console.log("TEST: the student has not answer enough questions to move to next exam.");
-                    // Has the user answered 10 questions correctly?
-                    if (questionsAsked === expectedConsecutiveCorrect) {
-                        console.log("TEST: the student has answered 10 questions.");
-                        if (userScore === perfectScore) {
-                            console.log("TEST: the student has a perfect score.");
-                            triggerConfetti();
-                            statusContainer.innerText = "You have mastered X concepts. Going to next exam. See you there!";
-                        } else {
-                            console.log("TEST: the student does not have a perfect score.");
-                            //if (userScore >= thresholdScore) {
-                            //    console.log("TEST: the student's score is high enough to continue.");
-                            nextQuestion();  // Proceed to the next question
-                            //} else {
-                            //    console.log("TEST: the student's score is not high enough to continue.");
-                            //    
-                            //    // Display all answers and notify the user they need more practice
-                            //    answersList.innerText = "Here are all your answers: " + allAnswers.join(', ') + ".";
-                            //    statusContainer.innerText = "More practice is needed. We'll get you there! We're going to X Lesson.";
-                            //}
-                        }
-                    } else {
-                        console.log("TEST: 10 questions have not been asked yet");
-                        //if (userScore >= thresholdScore) {
-                        //    console.log("TEST: the student's score is high enough to continue.");
-                        //    statusContainer.innerText = "Press Next Question.";
-                            
-                            nextQuestion();  // Proceed to the next question
-                        //} else {
-                        //    console.log("TEST: the student's score is not high enough to continue.");
-                        //    
-                        //    // Display all answers and notify the user they need more practice
-                        //    answersList.innerText = "Here are all your answers: " + allAnswers.join(', ') + ".";
-                        //    statusContainer.innerText = "More practice is needed. We'll get you there! We're going to X Lesson.";
-                        //}
+                    statusContainer.innerText = "You Passed! Going to next exam. See you there!";
+                    // TODO: THE NEXT EXAM WILL EVENTUALLY COME UP
+                } else { // not enough answered correctly
+                    // NO - HAS THE PERSON BEEN ASKED 15 QUESTIONS?
+                    if (questionsAsked === maxQuestions ) {
+                        // YES - FAIL, MUST TAKE LESSON
+                        console.log("TEST: the student has been asked the max number of questions.")
+                        statusContainer.innerText = "You must complete "+ titleToGive + "lesson. See you there!";
+                        // TODO: THE LESSON WILL EVENTUALLY COME UP
+
+                    }else{ // 15 questions haven't been asked
+                        // NO - GO TO THE NEXT QUESTION AFTER DISPLAYING SCORE AND BAR AND MESSAGE CORRECTLY    
+                        // Note: answersCorrect is NOT incremented so there is no reason to ask whether the 
+                        //       student has met the expected 10 correct answers
+                        console.log("TEST: the student must continue answering questions; they haven't attempted 15 questions.");
+                        updateProgress(); // do display the users new score and progress bar
+                        nextQuestion();  // Proceed to the next question
                     }
                 }
-            } else {
-                // do not increment answersCorrect
-                updateProgress();
-                
-                
-                // Has the user answered 10 questions correctly?
-                //if (userScore >= thresholdScore) {
-                console.log("TEST: the student's score can not be considered at this point because they haven't been asked 10 questions.");
-                statusContainer.innerText = "Press Next Question.";
-                nextQuestion();  // Proceed to the next question
-                //} else {
-                //    console.log("TEST: the student's score is not high enough to continue.");
-                //    
-                //    // Display all answers and notify the user they need more practice
-                //    answersList.innerText = "Here are all your answers: " + allAnswers.join(', ') + ".";
-                //    statusContainer.innerText = "More practice is needed. We'll get you there! We're going to X Lesson.";
-                //}
-                console.log("TEST: question is wrong.");    
-                
-            } 
-            
+            } else { // THE QUESTION WASN'T ANSWERED CORRECTLY
+                // NO - HAS THE PERSON BEEN ASKED 15 QUESTIONS?
+                if (questionsAsked === maxQuestions ) {
+                    // YES - FAIL, MUST TAKE LESSON
+                    console.log("TEST: the student has been asked the max number of questions.")
+                    statusContainer.innerText = "You must complete "+ titleToGive + "lesson. See you there!";
+                    // TODO: THE LESSON WILL EVENTUALLY COME UP
+
+                }else{ // 15 questions haven't been asked
+                    // NO - GO TO THE NEXT QUESTION AFTER DISPLAYING SCORE AND BAR AND MESSAGE CORRECTLY    
+                    // Note: answersCorrect is NOT incremented so there is no reason to ask whether the 
+                    //       student has met the expected 10 correct answers
+                    console.log("TEST: the student must continue answering questions; they haven't attempted 15 questions.");
+                    updateProgress(); // do display the users new score and progress bar
+                    nextQuestion();  // Proceed to the next question
+                }
+            }
         }
+ 
 
         // Compare user answer with correct answer using NLP
         function checkAnswer(userResponse, correctAnswer) {
@@ -574,20 +550,19 @@
                 const matchRatio = commonTokens.length / correctTokens.length;
                 console.log("NLP resulting Ratio: ", matchRatio);
 
-            // returns Boolean value
-            return matchRatio >= 0.30;  // Match ratio threshold for correctness (60%)
+            // returns Boolean value 1 if matchRatio is greater or equal to 30%
+            return matchRatio >= 0.30;  
             }
             
         }
 
-        // Update the progress bar
+        
         function updateProgress() {
-
+            //compute and display user's score
             userScore = (answersCorrect * 100) / questionsAsked;
-            // Score display update
             document.getElementById('score-container').innerText = `Correct: ${answersCorrect}/${questionsAsked}`;
             
-            // Progress bare update
+            // update progress bar
             console.log("updateProgress()");
             const progress = (answersCorrect / numberOfChances) * 100;
             document.getElementById('progress').style.width = `${progress}%`;
@@ -599,12 +574,13 @@
             console.log("triggerConfetti()");
 
             clearInterval(countdown);  // Stop the timer when the answer button is clicked
-            // do this for 5 seconds
+
+            // set duration of animation
             var duration = .2 * 1000;
             var end = Date.now() + duration;
 
+            // set confetti frame
             (function frame() {
-            // launch a few confetti from the left edge
             confetti({
                 particleCount: 7,
                 angle: 60,

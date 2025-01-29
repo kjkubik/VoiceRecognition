@@ -1,0 +1,70 @@
+[
+    {
+        "question": "What is a DataFrame in Python?",
+        "answer": "A DataFrame is a 2-dimensional labeled data structure in Python, typically used with the pandas library. It is similar to a table in a database, having rows and columns."
+    },
+    {
+        "question": "What are some ways to create a DataFrame in Pandas?",
+        "answer": "A dataFrame can be created from any two dimensional data structure"
+    },
+    {
+        "question": "How do you select a column in a DataFrame?",
+        "answer": "use either dot notations or using the '[]' operator"
+    },
+    {
+        "question": "When selecting a column, why shouldn't dot notation be used?",
+        "answer": "It conflicts with python's methods for dataFrames (filter, sum, mean)."
+        },
+    {
+        "question": "How do you select rows based on a condition in a DataFrame?",
+        "answer": "Using bracket notation, for example contact_df[contact_df['lastName'] >= 'N']."
+    },
+    {
+        "question": "What is one of the first things you should do with data once you get it?",
+        "answer": "Get to know your data. use head and tail to get your initial look at the data.  .shape, .dtypes, One of the first things you should do is look at You can handle missing values in several ways:\n- To check for missing values:\n```python\ndf.isnull().sum()  # Counts missing values per column\n```\n- To remove rows with missing values:\n```python\ndf.dropna()\n```\n- To fill missing values with a specific value:\n```python\ndf.fillna(0)  # Replace missing values with 0\n```"
+    },
+    {
+        "question": "What can you do if you suspect the data is going to be large?",
+        "answer": "Check its size using shape. If you do have a large dataset, you may need to use chunking or libraries that are used for big data processing: Dask, Vaex, Pyspark." You can handle missing values in several ways:\n- To check for missing values:\n```python\ndf.isnull().sum()  # Counts missing values per column\n```\n- To remove rows with missing values:\n```python\ndf.dropna()\n```\n- To fill missing values with a specific value:\n```python\ndf.fillna(0)  # Replace missing values with 0\n```"
+    },
+    {
+        "question": "Is the data going to be worth a shit to use?",
+        "answer": "One of the first things you should do is look at You can handle missing values in several ways:\n- To check for missing values:\n```python\ndf.isnull().sum()  # Counts missing values per column\n```\n- To remove rows with missing values:\n```python\ndf.dropna()\n```\n- To fill missing values with a specific value:\n```python\ndf.fillna(0)  # Replace missing values with 0\n```"
+    },
+    {
+        "question": "How can you handle missing values in a DataFrame?",
+        "answer": "One of the first things you should do is look at You can handle missing values in several ways:\n- To check for missing values:\n```python\ndf.isnull().sum()  # Counts missing values per column\n```\n- To remove rows with missing values:\n```python\ndf.dropna()\n```\n- To fill missing values with a specific value:\n```python\ndf.fillna(0)  # Replace missing values with 0\n```"
+    },
+    {
+    "question": "How can you handle missing values in a DataFrame?",
+    "answer": "You can handle missing values in several ways:\n- To check for missing values:\n```python\ndf.isnull().sum()  # Counts missing values per column\n```\n- To remove rows with missing values:\n```python\ndf.dropna()\n```\n- To fill missing values with a specific value:\n```python\ndf.fillna(0)  # Replace missing values with 0\n```"
+    },
+    {
+    "question": "What are some common operations you can perform on a DataFrame?",
+    "answer": "Common operations include:\n- Column selection and modification: You can modify values in a specific column or add new columns.\n- Aggregation: Using functions like `sum()`, `mean()`, `groupby()`, and `agg()`.\n```python\ndf.groupby('A').sum()\n```\n- Sorting: Sorting rows by one or more columns.\n```python\ndf.sort_values(by='A', ascending=False)\n```"
+    },
+    {
+    "question": "How can you join or merge two DataFrames?",
+    "answer": "You can use the `merge()` function to join two DataFrames:\n```python\ndf1 = pd.DataFrame({'key': [1, 2, 3], 'A': [4, 5, 6]})\ndf2 = pd.DataFrame({'key': [1, 2, 4], 'B': [7, 8, 9]})\nmerged_df = pd.merge(df1, df2, on='key', how='inner')  # Inner join by default\n```\nOther join types include 'left', 'right', and 'outer'."
+    },
+    {
+    "question": "What is the difference between `loc[]` and `iloc[]` in pandas?",
+    "answer": "- `loc[]`: Label-based indexing. You can select rows and columns by their labels.\n```python\ndf.loc[0, 'A']  # Row 0, column 'A'\n```\n- `iloc[]`: Integer-location based indexing. You select by the row/column index position.\n```python\ndf.iloc[0, 0]  # First row, first column\n```"
+    },
+    {
+    "question": "How do you rename columns or index labels in a DataFrame?",
+    "answer": "You can rename columns or index labels using the `rename()` method:\n```python\ndf.rename(columns={'A': 'Alpha', 'B': 'Beta'}, inplace=True)\ndf.rename(index={0: 'Row1', 1: 'Row2'}, inplace=True)\n```"
+    },
+    {
+    "question": "What is the `apply()` function used for in pandas?",
+    "answer": "The `apply()` function is used to apply a function along the axis of the DataFrame (either row-wise or column-wise). For example:\n```python\ndf['A'] = df['A'].apply(lambda x: x * 2)  # Multiply each value in column 'A' by 2\n```"
+    },
+    {
+    "question": "How do you concatenate two DataFrames?",
+    "answer": "You can use `pd.concat()` to concatenate DataFrames along rows or columns:\n- Concatenate along rows (vertical):\n```python\npd.concat([df1, df2], axis=0)\n```\n- Concatenate along columns (horizontal):\n```python\npd.concat([df1, df2], axis=1)\n```"
+    },
+    {
+    "question": "What is the `pivot_table()` function used for in pandas?",
+    "answer": "The `pivot_table()` function is used to summarize data by reshaping it. It aggregates data by applying a specified function like mean, sum, etc., based on the values of specified columns.\n```python\ndf.pivot_table(values='B', index='A', aggfunc='sum')\n```"
+    }
+]

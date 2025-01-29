@@ -174,12 +174,12 @@ print (book)
 # print(book.capitalize())
 # print(book.title())
 
-# string1 = "I have"
-# string2 = "a mind of"
-# string3 = "my own."
+string1 = "I have"
+string2 = "a mind of"
+string3 = "my own."
 
-# result = ''.join([string1, string2, string3])
-# print(result)
+result = ' '.join([string1, string2, string3])
+print(result)
 
 # result = ', '.join({string1, string2, string3})
 # print(result)
