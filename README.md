@@ -2,6 +2,9 @@
 
 Deploy at https://kjkubik.github.io/VoiceRecognition
 
+
+![alt text](image.png)
+
 ## Vision Statement: 
 
 As engineers, we often times internalize the things we learn, rarely sharing the thought processes behind the solutions we create. We receive business requirements, produce a solution amd deliver them. No one (except for our trusty team members) ever cares to know how we came up with the solution. The end-users are grateful. We just made their lives a wee-bit easier.
