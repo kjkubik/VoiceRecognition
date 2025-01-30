@@ -1,26 +1,41 @@
 # Strings
+# What is a string literal?
+# sequence of characters enclosed in quotation marks representing a constant value of type string
 
 # String literals are create by either using single or double quotes
 # "This is a string."
 # 'This is a string.'
-
 # These strings have the same value
+
+# Is a string mutable or immutable?
+# A string is immutable. It cannot be changed after it is created.
 
 # to use them, we assign them to a variable 
 
-# Why doesn't Python only use double or single quotes?
+# Explain why Python doesn't use either double quotes or single quotes?
+# Sometimes in a string literal will be necessary to use either single or double quotes within the string.
+# For example, for clarity's sake we enclose a book title in double quotes.
+# If that title is found within a string, Python will be unable to interpret what you mean. 
+# An invalid syntax error will be displayed.
 
-#  - A title is in your text 
-book = 'The name of the book is "How The West Was Won".'
-print (book)
+# book = 'The name of the book is 'How The West Was Won'.'
+# print (book)
+ 
+# book = 'The name of the book is "How The West Was Won".'
+# print (book)
 
-#  - you have an apostrophe within
-# response = "Let's go to the garden area."
-# print (response)
+# Another example would be the use of an apostrophe within string. Python will be unable to interpret.
+# producing an unterminated string literal error
+# response = 'Let's go to the garden area.'
+# print (response) 
 
-# # What happens if you attempt to use one or the other?
-# book = 'The name of the book is 'How The West Was Won'.'  # <- "Statements must be separated by newlines or semicolons"
-# print(book)
+response = "Let's go to the garden area."
+print (response)
+
+# Escape sequence: 
+# - all begin with a backslash (\)
+
+# "Statements must be separated by newlines or semicolons"
 
 # text = "Hello,\nWorld!"
 # print(text)

@@ -1,0 +1,218 @@
+[
+    {
+        "question": "What are the key differences between OLAP and OLTP systems?",
+        "answer": ""
+    },
+    {
+        "question": "Can you explain the difference between a relational database and a NoSQL database?",
+        "answer": ""
+    },
+    {
+        "question": "What is denormalization, and when would you use it?",
+        "answer": ""
+    },
+    {
+        "question": "How do you handle schema evolution in large-scale data pipelines?",
+        "answer": ""
+    },
+    {
+        "question": "Can you describe the ETL pipeline you have worked on in the past? What technologies did you use?",
+        "answer": ""
+    },
+    {
+        "question": "How do you ensure data quality in an ETL process?",
+        "answer": "It returns two comma two the quotient and the remainder."
+    },
+    {
+        "question": "Explain how you would design an ETL pipeline to handle real-time streaming data.",
+        "answer": ""
+    },
+    {
+        "question": "What is the difference between batch processing and stream processing? Can you give examples of each?",
+        "answer": ""
+    },
+    {
+        "question": "What are some common challenges you have faced when building or maintaining ETL pipelines, and how did you overcome them?",
+        "answer": ""
+    },
+    {
+        "question": "What are some big data frameworks you have worked with (e.g., Hadoop, Spark, Kafka)? How do you decide which one to use for a particular task?",
+        "answer": ""
+    },
+    {
+        "question": "Explain how Spark performs distributed data processing.",
+        "answer": ""
+    },
+    {
+        "question": "How does Kafka work in a data pipeline, and how would you implement a Kafka-based system?",
+        "answer": ""
+    },
+    {
+        "question": "How do you design a scalable data architecture in a cloud environment (e.g., AWS, GCP, Azure)?",
+        "answer": ""
+    },
+    {
+        "question": "Explain the role of cloud storage systems like Amazon S3 or Google Cloud Storage in data engineering.",
+        "answer": ""
+    },
+    {
+        "question": "How do you implement data security in cloud-based data solutions?",
+        "answer": ""
+    },
+    {
+        "question": "What are some of the differences between using a managed cloud data warehouse (e.g., Redshift, BigQuery) versus self-managed solutions?",
+        "answer": ""
+    },
+    {
+        "question": "Describe your experience with containerization (e.g., Docker, Kubernetes) in deploying data solutions.",
+        "answer": ""
+    },
+    {
+        "question": "How would you design a data warehouse architecture for a large company with multiple data sources?",
+        "answer": ""
+    },
+    {
+        "question": "What is a star schema and a snowflake schema? When would you choose one over the other?",
+        "answer": "It returns two comma two the quotient and the remainder."
+    },
+    {
+        "question": "What is your experience with database optimization? How would you optimize SQL queries for large datasets?",
+        "answer": ""
+    },
+    {
+        "question": "How do you handle database migrations, and what tools do you use for data migration?",
+        "answer": ""
+    },
+    {
+        "question": "Can you explain what a slowly changing dimension (SCD) is, and how would you handle it in a data warehouse?",
+        "answer": ""
+    },
+    {
+        "question": "How do you approach data normalization and what is its importance?",
+        "answer": ""
+    },
+    {
+        "question": "What are the different types of joins in SQL, and when would you use each?",
+        "answer": ""
+    },
+    {
+        "question": "How would you design a data model for a recommendation system?",
+        "answer": ""
+    },
+    {
+        "question": "What programming languages are you proficient in for data engineering tasks? How have you used them in your previous work?",
+        "answer": ""
+    },
+    {
+        "question": "How would you write a Python script to read data from a database and load it into a data warehouse?",
+        "answer": ""
+    }, 
+    {
+        "question": "How do you handle errors and retries in data pipelines?",
+        "answer": ""
+    },
+    {
+        "question": "What’s your approach to handling large datasets in memory, and how do you prevent memory issues?",
+        "answer": ""
+    },
+    {
+        "question": "How do you handle performance issues in large-scale data pipelines?",
+        "answer": ""
+    },
+    {
+        "question": "What are some techniques to optimize data processing speed and reduce latency in data pipelines?",
+        "answer": ""
+    },
+    {
+        "question": "How would you scale a data pipeline to handle increasing amounts of data over time?",
+        "answer": ""
+    },
+    {
+        "question": "How do you monitor the performance of a data pipeline in production?",
+        "answer": ""
+    },
+    {
+        "question": "How do you manage version control for data pipelines and code?",
+        "answer": ""
+    },
+    {
+        "question": "Can you describe your experience implementing CI/CD for data engineering workflows?",
+        "answer": ""
+    },
+    {
+        "question": "What tools have you used for automating the deployment of data pipelines?",
+        "answer": ""
+    },
+    {
+        "question": "Design a system that can process petabytes of log data from millions of users in real-time. How would you approach it?",
+        "answer": ""
+    },
+    {
+        "question": "Given a set of requirements, how would you design a data pipeline from source to reporting?",
+        "answer": ""
+    },
+    {
+        "question": "How would you handle data deduplication in a distributed system?",
+        "answer": ""
+    },
+    {
+        "question": "Explain how you would handle a scenario where data quality is inconsistent across different data sources.",
+        "answer": ""
+    },
+    {
+        "question": "Explain the role of cloud storage systems like Amazon S3 or Google Cloud Storage in data engineering.",
+        "answer": ""
+    },
+    {
+        "question": "How do you implement data security in cloud-based data solutions?",
+        "answer": ""
+    },
+    {
+        "question": "What are some of the differences between using a managed cloud data warehouse (e.g., Redshift, BigQuery) versus self-managed solutions?",
+        "answer": ""
+    },
+    {
+        "question": "Describe your experience with containerization (e.g., Docker, Kubernetes) in deploying data solutions.",
+        "answer": ""
+    },
+    {
+        "question": "How would you design a data warehouse architecture for a large company with multiple data sources?",
+        "answer": ""
+    },
+    {
+        "question": "What is a star schema and a snowflake schema? When would you choose one over the other?",
+        "answer": "It returns two comma two the quotient and the remainder."
+    },
+    {
+        "question": "What is your experience with database optimization? How would you optimize SQL queries for large datasets?",
+        "answer": ""
+    },
+    {
+        "question": "How do you handle database migrations, and what tools do you use for data migration?",
+        "answer": ""
+    },
+    {
+        "question": "Can you explain what a slowly changing dimension (SCD) is, and how would you handle it in a data warehouse?",
+        "answer": ""
+    },
+    {
+        "question": "How do you approach data normalization and what is its importance?",
+        "answer": ""
+    },
+    {
+        "question": "What are the different types of joins in SQL, and when would you use each?",
+        "answer": ""
+    },
+    {
+        "question": "How would you design a data model for a recommendation system?",
+        "answer": ""
+    },
+    {
+        "question": "What programming languages are you proficient in for data engineering tasks? How have you used them in your previous work?",
+        "answer": ""
+    },
+    {
+        "question": "How would you write a Python script to read data from a database and load it into a data warehouse?",
+        "answer": ""
+    }
+]
